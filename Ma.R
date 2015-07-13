@@ -1,6 +1,30 @@
-## This is only a test file.
-## Get a histogram of 100 draws from a normal distribution w/ mean 
-## of 10 and sd of 0.1 and meaningful x-axis
+speeds <- read.table('car-speeds.csv', sep = ",", header = TRUE)
 
-v <- rnorm(100, mean = 10, sd = 0.1)
-hist(v, xlab = 'population')
+## mean / sd of cars in Utah by color
+
+moments <- function(vec) {
+  mvec <- mean(vec)
+  sdvec <- sd(vec)
+  lenvec <- length(vec)
+  ret <- data.frame(mean = mvec,sd = sdvec, length = lenvec)
+  return(ret)
+}
+
+speed_summary <- ddply(speeds, c('Color', 'State'), function(df){moments(df$Speed)})
+
+library(lattice)
+histogram(~Speed|State, speeds)
+
+library(latticeExtra)
+useOuterStrips(histogram(~Speed|State*Color, speeds))
+useOuterStrips(densityplot(~Speed|State*Color, speeds))
+
+## use ldply to make a dataframe that has 10 draws of normal distn
+## each w/ mean = 1:10 then use bwplot to plot results
+
+generate <- function(m,n = 10){
+  x <- data.frame(mean = m, draw = rnorm(n, mean = m))
+  return(x)
+}
+data <- ldply((1:10), generate)
+bwplot(mean~draw, data)
