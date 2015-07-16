@@ -1,16 +1,17 @@
-\documentclass[10pt]{article}
-\usepackage[final]{graphicx}
-\usepackage{amsfonts}
+\documentclass[10pt]{article} 
+\usepackage[final]{graphicx} 
+\usepackage{amsfonts} 
+ 
+\topmargin-.5in 
+\textwidth6.6in 
+\textheight9in 
+\oddsidemargin0in 
+ 
+\def\ds{\displaystyle} 
+\def\d{\partial} 
+ 
+\begin{document} 
 
-\topmargin-.5in
-\textwidth6.6in
-\textheight9in
-\oddsidemargin0in
-
-\def\ds{\displaystyle}
-\def\d{\partial}
-
-\begin{document}
 
 \centerline{\large \bf Wine, Ebola and Terrorism}
 
@@ -22,7 +23,7 @@
   Anzhelika Lyubenko\footnote{Department of Mathematical and Statistical Sciences, University of Colorado Denver},
   Yuhang Ma\footnote{Department of Operations Research and Information Engineering, Cornell University},
   Emily Meissen\footnote{Department of Applied Mathematics, University of Arizona},
-  Daniela Velez-Rendon\footnote{Department of Bio-engineering, University of Illinois at Chicago}
+  Daniela Velez-Rendon\footnote{Department of Bio-engineering, University of Illinois at Chicago},
     Nara Yoon\footnote{
 Department of Mathematics, Applied Mathematics and Statistics, Case Western Reserve University}
 \end{center}
@@ -30,10 +31,7 @@ Department of Mathematics, Applied Mathematics and Statistics, Case Western Rese
 %\vspace{.1truein}
 
 \begin{center}
-Faculty Mentors:John Peach \footnote{MIT Lincoln Laboratory}, Cammey 
-Cole 
-Manning\footnote{Meredith 
-College},
+Faculty Mentors: John Peach \footnote{MIT Lincoln Labs}, Cammey Cole Manning\footnote{Meredith College},
 Christian Gunning\footnote{NCSU}
 \end{center}
 
@@ -50,8 +48,37 @@ understand the abstract.
 
 \item Keep it short and to the point.
 \end{itemize}
-
+%
+%
+%
+%
+% INTRODUCTION
+%
+%
+%
+%
+%
 \section{Introduction}
+Bacteria growth during wine making, spread of infectious diseases and recruitment to extremists organizations can be modeled in a similar way - either by exponential or logistic growth models. For the purposes of this paper we focus solely on modeling the spread of Ebola through the West African region that contains Guinea, Sierra Leone, Liberia and Nigeria throughout 2014 - 2015 outbreak. \\
+%
+%
+%
+Ebola was first discovered in 1976. Since then, there were a few minor cases as well as a few outbreaks reported by the Center for Disease Control and Prevention. However, until 2014 all outbreaks had a reported number of deaths that did not exceed 500. The outbreak of 2014 is considered different. It already took thousands of lives and received an extensive media coverage over the past 2 years.
+%
+%
+%
+It has been reasoned that the current outbreak is different because it was the first time Ebola was contracted in the West Africa as opposed to Central Africa where it was first discovered. Early symptoms are flu-like: fever, headache, fatigue and joint pain. Diseases like HIV and Malaria, which are common to the region, have the same symptoms. As Ebola progresses, the infected experiences abdominal pain, diarrhea, vomiting and rashes. The virus is contracted through direct contact with bodily fluids and secretion: blood, saliva, urine, fecal matter. Once virus is contracted, the incubation period may last up to 2 weeks making intervention measures like tracking difficult. 
+%
+%
+%
+\\A variety of cultural and economic factors have contributed to the spread of the disease: lack of medical centers in some regions and poor sensitization practices in such centers, distrust in the western medicine, poverty, traditional burial ceremony which includes physical contact with the diseased. \\
+%
+%
+%
+Traditionally, infectious diseases are modeled by an SIR model with possible modifications. In the case of Ebola, Lekone and Finkenstäd \cite{Lekone2006} consider a four compartment model, inserting an "Exposed" state between "Susceptible" and "Infected". A variety of authors present a five-compartment model \textbf{what do they include}. Examples of such papers are \textbf{BLAH! CITE}. A six-compartment model, presented by Legrand \cite{Legrand2007} differentiates between the modes of transition of the disease, i.e. a virus can be transmitted in the community, at hospitals and medical centers or at funerals. Agent-based models include Siettos et al \cite{Siettos2015} and Merler et al\cite{Merler2015}. A variety of models examine the effectiveness of intervention measures: contact tracing by Webb et al \cite{Webb2015}, travel restrictions by Poletto et al \cite{Poletto2014},     \\\\
+Somewhere later: We used InsightMaker platform to build our model and simulate stepping forward through time. More details about the platform and its functionality can be found in Fortmann-Roe's review \cite{FortmannRoe}. The platform uses fourth order Runge-Kutta differential equation solver for the system dynamics model and  first order Euler approximation for the Agent-Based model.
+\\\\
+
 It should be written as much as possible in non-technical terms, so that a
 lay reader can understand the context and the contribution of the paper.
 
@@ -89,6 +116,9 @@ applied normalizations).
 Don't just say: ``I did this, then I did this, and at last I did this''.
 \end{itemize}
 
+\section{Data}
+The United Nation reports that the last Census for the countries of Guinea, Sierra Leone, Liberia and Nigeria  was conducted in 2014, 2004, 2008 and 2006 respectively. Due to the need for estimating more current demographic data, we used CIA Factbook estimates. 
+
 \section{Computational Experiments}
 Give enough details so that readers can duplicate your experiments.
 
@@ -118,7 +148,8 @@ impact on the field (but don't just repeat the abstract or introduction).
 \item Outline open problems.
 \end{itemize}
 
-
+\bibliography{references}
+\bibliographystyle{plain}
 
 \end{document}
 
