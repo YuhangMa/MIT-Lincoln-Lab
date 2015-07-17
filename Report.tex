@@ -108,18 +108,122 @@ applied normalizations).
 \end{itemize}
 
 \section{The Approach}
-\begin{itemize}
-\item Present and justify your approach for solving the problem. 
-\item Explain the advantages of your approach over existing ones.
 
-\item Tell a story.
-Don't just say: ``I did this, then I did this, and at last I did this''.
+\subsection{Strategy}
+In order to propose a more accurate model and compare the results among different programming  languages, the compartment flow model of the Ebola Epidemic in West Africa, 2014, was modeled with a System Dynamics (SD) and Agent Based Model (ABM) approaches.  Insight Maker and Mathematica was utilized  for the SD, and Insight Maker and Python for the ABM.
+
+\subsection{Assumptions}
+\begin{itemize}
+\item For the present study, it was considered information of two countries that experienced the Ebola Outbreak, Liberia and Sierra Leone.
+\item Time frame: It was divided into stages, first, beginning from the Ebola Outbreak in March 2014 to the International Intervention in September 2014, and second, from the International Intervention to the present.
+\item It was ignored all the possible births and natural deaths ocurred during the chosen timelime, because our simulation is for short period of time, our model was considered as a closed system.
 \end{itemize}
 
+\subsection{Factors Considered}
+\begin{itemize}
+\item Transmission method.
+\item Probability of transfer.
+\item Population size/density.
+\item Amount of travel (length of time, destinations, mode of travel, local travel).
+\item Connectedness.
+\item Length of time Ebola virus remains in deceased.
+\item Rate of recovery.
+\item Rate of death.
+\item Rate of diagnosis and accuracy.
+\item Rate of hospitalization.
+\item Hospital capacity.
+\item Wealth of the region, local government involment.
+\item Interaction with infected animals.
+\item Household size.
+\item "Belief" rate.
+\item Cleanliness.
+\item International help.
+\item Following protocols.
+\item Access to healthcare, lack of ambulances.
+\item Cummunity/hospital/burial have different transfer rates.
+\end{itemize}
+
+\subsection{Software}
+\begin{itemize}
+\item Insight Maker: SD and ABM
+\item Mathematica: SD
+\item Python: ABM
+
+\end{itemize}
 \section{Data}
 The United Nation reports that the last Census for the countries of Guinea, Sierra Leone, Liberia and Nigeria  was conducted in 2014, 2004, 2008 and 2006 respectively. Due to the need for estimating more current demographic data, we used CIA Factbook estimates. 
 
 \section{Computational Experiments}
+
+\subsection{Compartment Model: System Dynamics}
+Based on the compartmental model and parameters published by Rivers et al. in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could turn into Exposed (E), if they were in contact with an infections individual, initiating a trantition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed from the individual (R), or the patients may recover, at this stage, it can be cosidered equivalently removed. Figure  \ref{fig:compartment} depicts the implemented compartment model. \\
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{compartment}
+  \caption{\bf Compartment Model of the Ebola Epidemic in Liberia and Sierra Leone \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral and R: Removed/Recovered. All the possible flows are specified by the arrows and the parameters that direct them. Note that $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, being a combination of all the $\beta$ transmission terms shown in Table \ref{tab:parameters}} 
+\label{fig:compartment} 
+\end{figure}
+
+ 
+
+ The governing equations of the system described above are the following: \\
+
+\begin{eqnarray} 
+\frac{dS}{dt} = - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}\\
+\frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\alpha E\\
+\frac{dI}{dt} =  \alpha E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I\\
+\frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{DH}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H\\
+\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F\\
+\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{IH}(1-\delta_{2}) H-\gamma_{F} F
+\end{eqnarray}\\
+
+Where each of the parameters are defined on Table \ref{tab:parameters} \\
+
+
+\begin{table}[ht]
+\caption{Model Parameters for Ebola Epidemic in Liberia and Sierra Leone Before the International Intervention (September 2014)} % title of Table
+\centering % used for centering table
+\begin{tabular}{c c c } 
+\hline\hline %inserts double horizontal lines
+Parameter & Liberia & Sierra Leone \\ [0.5ex] % inserts table
+%heading
+\hline % inserts single horizontal line
+Contact Rate, Community  ($\beta_{I}$) & 0.160 & 0.128  \\ 
+Contact Rate, Hospital  ($\beta_{H}$) & 0.062 & 0.080  \\
+Contact Rate, Funeral  ($\beta_{F}$) & 0.489 & 0.111 \\
+Incubation Period (${1}/{\alpha}$) & 12 days & 10 days  \\
+Time until Hospitalization (${1}/{\gamma_{H}}$) & 3.24 days & 4.12 days  \\
+Time froml Hospitalization to Death (${1}/{\gamma_{DH}}$) & 10.07 days & 6.26 days  \\ 
+Duration of Traditional Funeral (${1}/{\gamma_{F}}$) & 2.01 days & 4.50 days  \\
+Duration of Infection (${1}/{\gamma_{I}}$) & 15.00 days & 20.00 days  \\
+Time from Infection to Death (${1}/{\gamma_{D}}$) & 13.31 days & 10.38 days  \\
+Time from Hospitalization to Recovery (${1}/{\gamma_{IH}}$) & 15.88 days & 15.88 days  \\
+Probablity a Case is Hospitalized ($\theta$) & 0.197 & 0.197  \\
+Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500 & 0.750  \\
+Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.750  \\ [1ex] 
+\hline 
+\end{tabular}
+\label{tab:parameters}
+\end{table}
+
+
+\subsubsection{Insight Maker}
+bdv
+
+\subsubsection{Mathematica}
+vxzv
+
+\subsection{Compartment Model: Agent Based Model}
+vzx
+
+\subsubsection{Insight Maker}
+czc
+
+\subsubsection{Python}
+zcx
+
+
 Give enough details so that readers can duplicate your experiments.
 
 \begin{itemize}
@@ -138,6 +242,8 @@ and what is being plotted.
 
 \item Describe the conclusions you can draw from your experiments
 \end{itemize}
+
+
 
 \section{Summary and Future Work}
 \begin{itemize}
