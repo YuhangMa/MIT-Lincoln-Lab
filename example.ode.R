@@ -49,10 +49,10 @@ sir$mod <- sim(sir$mod)
 ## simulation results stored in
 ## slot 'out' in list member 'mod' in list sir
 ## see str(sir$mod) for details
-sir$result <- as.data.frame(sir$mod@out)
+sir$result_wide <- as.data.frame(sir$mod@out)
 ## use tidyr to reshape for lattice 
 sir$result <- gather(
-    data=sir$result, key='state', value='value', -time
+    data=sir$result_wide, key='state', value='value', -time
 )
 
 
@@ -66,6 +66,22 @@ sir$plot.ts <- {
     #theme_bw() +
     theme(legend.position=c(x=0.95,y=0.90))
 }
+
+
+sir$plot.phase <- { 
+    ggplot(sir$result_wide,
+        aes(x=S, y=I, color=time)
+    ) + 
+    #geom_line(size=1.5) +
+    geom_point() +
+    xlab('Susceptible') + ylab('Infected') +
+    ## plotting options, see ?theme and ?theme_bw
+    #theme_bw() +
+    theme(legend.position=c(x=0.95,y=0.90)) +
+    scale_color_gradient(low='blue', high='red')
+}
+    
     
 
 plot(sir$plot.ts )
+plot(sir$plot.phase )
