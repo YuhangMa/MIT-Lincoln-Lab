@@ -61,15 +61,8 @@ Christian Gunning\footnote{NCSU}
 \vspace{.3truein}
 \centerline{\bf Abstract}
 
-\begin{itemize}
-\item Summarize the results presented in the report, and the contributions
-of your research.
+We present a new model of Ebola outbreak in Liberia during 2014-2015. We approach the problem from both systematic and agent perspective and compare the results. We show that if the outbreak is not contained in the early stages and the individuals do not change their behavior as the virus prevails, between 60 and 80 percent of population get the disease. 
 
-\item Readers should not have to look at the rest of the paper in order to 
-understand the abstract.
-
-\item Keep it short and to the point.
-\end{itemize}
 %
 %
 %
@@ -81,23 +74,26 @@ understand the abstract.
 %
 %
 \section{Introduction}
-Bacteria growth during wine making, spread of infectious diseases and recruitment to extremists organizations can be modeled in a similar way - either by exponential or logistic growth models. For the purposes of this paper we focus solely on modeling the spread of Ebola through the West African region that contains Guinea, Sierra Leone, Liberia and Nigeria throughout 2014 - 2015 outbreak. \\
+Bacteria growth during wine making, spread of infectious diseases and recruitment to extremists organizations can be modeled in a similar way - either by exponential or logistic growth models. For the purposes of this paper we focus solely on modeling the spread of Ebola through Liberia throughout 2014 - 2015 outbreak. We chose to focus on Liberia because most of the data needed for the model was available in the literature. While the model allows one to consider other countries affected by the outbreak we did not calibrate the associated parameters. \\
 %
 %
 %
-Ebola was first discovered in 1976. Since then, there were a few minor cases as well as a few outbreaks reported by the Center for Disease Control and Prevention. However, until 2014 all outbreaks had a reported number of deaths that did not exceed 500. The outbreak of 2014 is considered different. It already took thousands of lives and received an extensive media coverage over the past 2 years.
+Ebola was first discovered in 1976. Since then, there were 34 records of Ebola reported by the Center for Disease Control and Prevention. However, until 2014 all outbreaks had a reported number of deaths that did not exceed 500; 11 of them did not exceed 10 individuals and 15 records did not exceed 65 individuals.  The outbreak of 2014 is considered different. It took thousands of lives over the past two and received an extensive media coverage.
 %
 %
 %
-It has been reasoned that the current outbreak is different because it was the first time Ebola was contracted in the West Africa as opposed to Central Africa where it was first discovered. Early symptoms are flu-like: fever, headache, fatigue and joint pain. Diseases like HIV and Malaria, which are common to the region, have the same symptoms. As Ebola progresses, the infected experiences abdominal pain, diarrhea, vomiting and rashes. The virus is contracted through direct contact with bodily fluids and secretion: blood, saliva, urine, fecal matter. Once virus is contracted, the incubation period may last up to 2 weeks making intervention measures like tracking difficult. 
+The current outbreak may be different because it was the first time Ebola was contracted in the West Africa as opposed to Central Africa where it was first discovered. Early symptoms are flu-like: fever, headache, fatigue and joint pain. Diseases like HIV and Malaria, which are common to the region, have the same symptoms. As Ebola progresses, the infected experiences abdominal pain, diarrhea, vomiting and rashes. The virus is contracted through direct contact with bodily fluids and secretion: blood, saliva, urine, fecal matter. Once virus is contracted, the incubation period may last up to two weeks making intervention measures like tracking difficult. 
 %
 %
 %
-\\A variety of cultural and economic factors have contributed to the spread of the disease: lack of medical centers in some regions and poor sensitization practices in such centers, distrust in the western medicine, poverty, traditional burial ceremony which includes physical contact with the diseased. \\
+\\A variety of cultural and economic factors have contributed to the spread of the disease: lack of medical centers in some regions and poor sensitization practices in such centers, distrust in the western medicine, poverty and traditional burial ceremony which includes physical contact with the diseased. \\
 %
 %
 %
-Traditionally, infectious diseases are modeled by an SIR model with possible modifications. In the case of Ebola, Lekone and Finkenstäd \cite{Lekone2006} consider a four compartment model, inserting an "Exposed" state between "Susceptible" and "Infected". A variety of authors present a five-compartment model \textbf{what do they include}. Examples of such papers are \textbf{BLAH! CITE}. A six-compartment model, presented by Legrand \cite{Legrand2007} and Rivers\cite{Rivers2014} differentiates between the modes of transition of the disease, i.e. a virus can be transmitted in the community, at hospitals and medical centers or at funerals. Agent-based models include Siettos et al \cite{Siettos2015} and Merler et al\cite{Merler2015}. A variety of models examine the effectiveness of intervention measures: contact tracing by Webb et al \cite{Webb2015}, travel restrictions by Poletto et al \cite{Poletto2014},     Rivers et al did something else \cite{Rivers2014}\\\\
+One may look at the spread of the infectious diseases from two perspectives: system based and agent based. In the system based model the entire population is divided into compartments with a certain proportion of the population in each. As time progresses certain amount of people flow from one compartment into another. Naturally, such relationship is described either through a difference equation or a differential equation. One of the most well-known equation-based models involves three states: susceptible, infected, recovered. Such model is called an SIR model; each letter in the abbreviation represents one of the compartments in the population. This model has multiple modifications as various compartments can be added. In the case of Ebola, Lekone and Finkenstäd \cite{Lekone2006} consider a four compartment model, inserting an "Exposed" state between "Susceptible" and "Infected". A variety of authors present a five-compartment model \textbf{what do they include}. Examples of such papers are \textbf{BLAH! CITE}. A six-compartment model, presented by Legrand \cite{Legrand2007} and Rivers\cite{Rivers2014} differentiates between the modes of transition of the disease, i.e. a virus can be transmitted in the community, at hospitals and medical centers or at funerals.\\
+In contrast to system based models, agent-based models are concerned with the behavior of a typical individual rather than the system as a whole. In such models every individual in the system is assigned certain characteristics, i.e. states. Individual's behavior is probabilistic at each unit of time and causes him either to transition to a different state or stay in his current state. Agent-based models for Ebola include Siettos et al \cite{Siettos2015} and Merler et al\cite{Merler2015}. A variety of models examine the effectiveness of intervention measures. Examples include contact tracing by Webb et al \cite{Webb2015} and travel restrictions by Poletto et al \cite{Poletto2014}.\\
+In this paper we consider a seven compartment system based model as well as agent-based modification of the same model. We show \textbf{What did we show?!} \textbf{What about the model with spatial component?}\\
+The rest of the paper is organized as follows. In section~\ref{sec:Model} we present our model. Section~\ref{sec:Data} describes our data and parameters. Section~\ref{sec:Results} discusses the results of numerical experiments. Section~\ref{sec:Summary} concludes.\\\\
 Somewhere later: We used InsightMaker platform to build our model and simulate stepping forward through time. More details about the platform and its functionality can be found in Fortmann-Roe's review \cite{FortmannRoe}. The platform uses fourth order Runge-Kutta differential equation solver for the system dynamics model and  first order Euler approximation for the Agent-Based model.
 \\\\
 
@@ -112,8 +108,6 @@ you took, and summarize your contribution and results.
 
 \item Give an outline of the rest of the paper.
 \end{itemize}
-
-The rest of the paper is organized as follows. In section 2 we present technical description of the problem. Section 3 describes our mathematical model. Section 4 presents the results of numerical experiments. Section 5 concludes.
 
 \section{The Problem}
 \begin{itemize}
@@ -139,17 +133,17 @@ applied normalizations).
 %
 %
 
-\section{Model}
+\section{Model}\label{sec:Model}
 %
 % SYSTEM BASED
 %
 \subsection{System Based}
-Based on the compartmental model and parameters published by Rivers et al.\cite{Rivers2014} in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could turn into Exposed (E), if they were in contact with an infections individual, initiating a trantition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed from the individual (R), or the patients may recover, at this stage, it can be cosidered equivalently removed. Figure  \ref{fig:compartment} depicts the implemented compartment model. \\
+Based on the compartmental model and parameters published by Rivers et al.\cite{Rivers2014} in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could turn into Exposed (E), if they were in contact with an infections individual, initiating a trantition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed from the individual (R), or the patients may recover, at this stage, it can be cosidered equivalently removed. Figure ~\ref{fig:compartment} depicts the implemented compartment model. \\
 
 \begin{figure}
   \centering
   \includegraphics[width=0.7\textwidth]{compartment}
-  \caption{\bf Compartment Model of the Ebola Epidemic in Liberia and Sierra Leone \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral and R: Removed/Recovered. All the possible flows are specified by the arrows and the parameters that direct them. Note that $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, being a combination of all the $\beta$ transmission terms shown in Table \ref{tab:parameters}} 
+  \caption{Compartment Model of the Ebola Epidemic in Liberia and Sierra Leone \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral and R: Removed/Recovered. All the possible flows are specified by the arrows and the parameters that direct them. Note that $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, being a combination of all the $\beta$ transmission terms shown in Table~\ref{tab:parameters}} 
 \label{fig:compartment} 
 \end{figure}
 
@@ -193,43 +187,43 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.750  \\ [1ex]
 \end{tabular}
 \label{tab:parameters}
 \end{table}
-\begin{figure}
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
-  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
-
-  \node[main node] (1) {S};
-  \node[main node] (2) [right of=1] {E};
-  \node[main node] (3) [right of=2] {I};
-  \node[main node] (4) [right of=3] {R};
-    \node[main node] (5) [below left of=3] {D};
-      \node[main node] (6) [below right of=3] {F};
-        \node[main node] (7) [right of=6] {H};
-
-  \path[every node/.style={font=\sffamily\small}]
-    (1)
-        edge node {$f_{SE}$} (2)
- 
-    (2) edge node {$f_{EI}$} (3)
-        
-    (3) 
-       edge node {$f_{IR}$} (4)
-       edge node[left] {$f_{IF}$} (6)
-       edge node {$f_{IH}$} (7)
-  
-    (4)
-       
-(6) edge node{$f_{FD}$} (5) 
-
-(7) edge node[right]{$f_{HR}$} (4) 
-
-  (7) edge node{$f_{HF}$} (6)      
-
-        ;
-        
-\end{tikzpicture}
-\caption{Model}
-\label{SM}
-\end{figure}
+%\begin{figure}
+%\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+%  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+%
+%  \node[main node] (1) {S};
+%  \node[main node] (2) [right of=1] {E};
+%  \node[main node] (3) [right of=2] {I};
+%  \node[main node] (4) [right of=3] {R};
+%    \node[main node] (5) [below left of=3] {D};
+%      \node[main node] (6) [below right of=3] {F};
+%        \node[main node] (7) [right of=6] {H};
+%
+%  \path[every node/.style={font=\sffamily\small}]
+%    (1)
+%        edge node {$f_{SE}$} (2)
+% 
+%    (2) edge node {$f_{EI}$} (3)
+%        
+%    (3) 
+%       edge node {$f_{IR}$} (4)
+%       edge node[left] {$f_{IF}$} (6)
+%       edge node {$f_{IH}$} (7)
+%  
+%    (4)
+%       
+%(6) edge node{$f_{FD}$} (5) 
+%
+%(7) edge node[right]{$f_{HR}$} (4) 
+%
+%  (7) edge node{$f_{HF}$} (6)      
+%
+%        ;
+%        
+%\end{tikzpicture}
+%\caption{Model}
+%\label{SM}
+%\end{figure}
 %
 % AGENT BASED
 %
@@ -376,7 +370,7 @@ In order to propose a more accurate model and compare the results among differen
 %
 %
 %
-\section{Data}
+\section{Data}\label{sec:Data}
 The United Nation reports that the last Census for the countries of Guinea, Sierra Leone, Liberia and Nigeria  was conducted in 2014, 2004, 2008 and 2006 respectively. Due to the need for estimating more current demographic data, we used CIA Factbook estimates. 
 
 \section{Computational Experiments}
@@ -454,7 +448,7 @@ and what is being plotted.
 %
 %
 %
-\section{Results}
+\section{Results}\label{sec:Results}
 %
 %
 %
@@ -467,7 +461,7 @@ and what is being plotted.
 %
 
 
-\section{Summary and Future Work}
+\section{Summary and Future Work}\label{sec:Summary}
 \begin{itemize}
 \item Briefly summarize your contributions, and their possible
 impact on the field (but don't just repeat the abstract or introduction).
