@@ -1,7 +1,9 @@
 \documentclass[10pt]{article} 
 \usepackage[final]{graphicx} 
 \usepackage{amsfonts} 
- 
+ \usepackage{amsmath}
+\usepackage{tikz, flowchart}
+\usetikzlibrary{arrows}
 \topmargin-.5in 
 \textwidth6.6in 
 \textheight9in 
@@ -9,6 +11,7 @@
  
 \def\ds{\displaystyle} 
 \def\d{\partial} 
+
  
 \begin{document} 
 
@@ -215,7 +218,93 @@ bdv
 vxzv
 
 \subsection{Compartment Model: Agent Based Model}
-vzx
+The next model we consider is an agent-based model. Each individual in the population can be in either of 7 states discussed above: susceptible, exposed, infected, hospitalized, funeral, recovered or dead. The flow between two states is a  probability of transition from one state to another for a typical individual. We represent our model in Figure~\ref{ABM}. In each time step individuals who are susceptible to contracting a virus can either transition to exposed state with probability $p_{SE}$ or stay susceptible with probability $1-p_{SE}$. An individuals in the exposed state transitions to infected with probability $p_{EI}$ and stays exposed with probability $1-p_{EI}$. An individual who is infected can stay infected, recover, go to a hospital or die and transition to funeral state with probabilities $p_{II},\, p_{IR},\, p_{IH}$ and $p_{IF}$ respectively. Recovery is considered a terminal state so individuals in this state remain in it for the remaining duration of the simulation. Hospitalized individuals may stay hospitalized, transition to recovered or funeral with probabilities $p_{HH}, \, p_{HR}$ and $p_{HF}$.   We assume that the individual who dies from Ebola remains infectious through the duration of the entire burial ceremony and no precautions are taken against disease transmission. Safely buried individuals are considered dead and noninfectious and remain in this state for the remaining time of the simulation.  Probability of transition for each state are as follows: \\\\
+For duration of the simulation we ignore deaths of other causer and focus only on those individuals who died due to Ebola virus. We assume that every individual who dies has a funeral.
+\begin{itemize}
+ \item g
+\end{itemize}
+%  \begin{tikzpicture}[node distance=2cm, font=\tiny]
+%        \node [draw, terminal]  (start) at (0,0) {Start};
+%        \node [draw, predproc, right of= start] (acquire)(write) {Acquire Image};
+%
+%%% paths
+%    \draw[->](work) -- node[above]{yes}(end);
+%    \end{tikzpicture}
+\begin{figure}[h!]
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {S};
+  \node[main node] (2) [right of=1] {E};
+  \node[main node] (3) [right of=2] {I};
+  \node[main node] (4) [right of=3] {R};
+    \node[main node] (5) [below left of=3] {D};
+      \node[main node] (6) [below right of=3] {F};
+        \node[main node] (7) [right of=6] {H};
+
+  \path[every node/.style={font=\sffamily\small}]
+    (1) %edge node [left] {0.6} (4)
+        edge node {$p_{SE}$} (2)
+        edge [loop above] node {$p_{SS}$} (1)
+    (2) %edge node [right] {0.4} (1)
+        edge node {$p_{EI}$} (3)
+         edge [loop above] node {$p_{EE}$} (2)
+        %edge [loop left] node {0.4} (2)
+       % edge [bend right] node[left] {0.1} (3)
+    (3) %edge node [right] {0.8} (2)
+       % edge [bend right] node[right] {0.2} (4)
+       edge node {$p_{IR}$} (4)
+       edge node[left] {$p_{IF}$} (6)
+       edge node {$p_{IH}$} (7)
+        edge [loop above] node {$p_{II}$} (3)
+    (4)% edge node [left] {0.2} (3)
+        %edge [loop right] node {0.6} (4)
+        %edge [bend left] node[right] {0.2} (1);
+         edge [loop above] node {$p_{RR}$} (4)
+       
+(6) edge node{$p_{FD}$} (5) 
+edge [loop below] node {$p_{FF}$} (6)     
+(7) edge node[right]{$p_{HR}$} (4) 
+edge [loop below] node {$p_{HH}$} (7)
+  (7) edge node{$p_{HF}$} (6)      
+ (5) edge [loop below] node {$p_{DD}$} (5)
+        ;
+        
+\end{tikzpicture}
+\caption{Spread of the disease: Agent-based model. Each node represents an individual's state; each link is a possible transition}
+\label{ABM}
+\end{figure}
+
+\begin{align*}
+&t_{IP}\, \text{be the incubation period, i.e. time during which the individual has the virus in his body but does not yet show severe symptoms}\\
+&t_{ID} \,\text{infection duration time ater the onset of severe symptoms}\\
+&t_{H} \, \text{time to hospitalization after manifistation of severe symptoms}\\
+& t_{IF} \, \text{time from the onset of severe symptoms to funeral}\\
+& t_{HF} \, \text{time from patient's arrival at the hospital to fueral}\\
+& t_{HR} \, \text{time from patient's arrival at the hospital to recovery}\\
+& t_{DF} \, \text{duration of traditional funeral}
+\end{align*}
+
+
+\begin{subequations}
+\begin{alignat}{1}
+&p_{SE}=\beta_I\cdot I/N+\beta_H\cdot H/N+\beta_F\cdot F/N\\
+&p_{SS}=1-p_{SE}\\
+&p_{EE}=1-\frac{1}{t_{IP}}\\
+&p_{EI}=\frac{1}{t_{IP}}\\
+&p_{II}=\frac{1}{t_{ID}}\\
+&p_{IH}=\frac{1}{t_{H}}\\
+&p_{IF}= \frac{1}{t_{IF}}\\
+&p_{IR}=1-p_{II}-p_{IH}-p_{IF}\\
+&p_{HF}=\frac{1}{t_{HF}}\\
+&p_{HR}=\frac{1}{t_{HR}}\\
+&p_{HH}=1-p_{HF}-p_{HR}\\
+&p_{FF}=\frac{1}{t_{DF}}\\
+&p_{FD}=1-p_{FF}\\
+&p_{RR}=1\\
+&p_{DD}=1
+\end{alignat}
+\end{subequations}
 
 \subsubsection{Insight Maker}
 czc
