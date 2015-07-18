@@ -15,6 +15,16 @@
  
 \begin{document} 
 
+%
+%
+%
+%
+% PARTICIPANTS, MENTORS, AFFILIATIONS
+%
+%
+%
+%
+%
 
 \centerline{\large \bf Wine, Ebola and Terrorism}
 
@@ -37,7 +47,16 @@ Department of Mathematics, Applied Mathematics and Statistics, Case Western Rese
 Faculty Mentors: John Peach \footnote{MIT Lincoln Labs}, Cammey Cole Manning\footnote{Meredith College},
 Christian Gunning\footnote{NCSU}
 \end{center}
-
+%
+%
+%
+%
+% ABSTRACT
+%
+%
+%
+%
+%
 
 \vspace{.3truein}
 \centerline{\bf Abstract}
@@ -109,57 +128,23 @@ and whether you did
 anything to them (removed noise, filled in missing data, 
 applied normalizations).
 \end{itemize}
+%
+%
+%
+%
+% MODEL
+%
+%
+%
+%
+%
 
-\section{The Approach}
-
-\subsection{Strategy}
-In order to propose a more accurate model and compare the results among different programming  languages, the compartment flow model of the Ebola Epidemic in West Africa, 2014, was modeled with a System Dynamics (SD) and Agent Based Model (ABM) approaches.  Insight Maker and Mathematica was utilized  for the SD, and Insight Maker and Python for the ABM.
-
-\subsection{Assumptions}
-\begin{itemize}
-\item For the present study, it was considered information of two countries that experienced the Ebola Outbreak, Liberia and Sierra Leone.
-\item Time frame: It was divided into stages, first, beginning from the Ebola Outbreak in March 2014 to the International Intervention in September 2014, and second, from the International Intervention to the present.
-\item It was ignored all the possible births and natural deaths ocurred during the chosen timelime, because our simulation is for short period of time, our model was considered as a closed system.
-\end{itemize}
-
-\subsection{Factors Considered}
-\begin{itemize}
-\item Transmission method.
-\item Probability of transfer.
-\item Population size/density.
-\item Amount of travel (length of time, destinations, mode of travel, local travel).
-\item Connectedness.
-\item Length of time Ebola virus remains in deceased.
-\item Rate of recovery.
-\item Rate of death.
-\item Rate of diagnosis and accuracy.
-\item Rate of hospitalization.
-\item Hospital capacity.
-\item Wealth of the region, local government involment.
-\item Interaction with infected animals.
-\item Household size.
-\item "Belief" rate.
-\item Cleanliness.
-\item International help.
-\item Following protocols.
-\item Access to healthcare, lack of ambulances.
-\item Cummunity/hospital/burial have different transfer rates.
-\end{itemize}
-
-\subsection{Software}
-\begin{itemize}
-\item Insight Maker: SD and ABM
-\item Mathematica: SD
-\item Python: ABM
-
-\end{itemize}
-\section{Data}
-The United Nation reports that the last Census for the countries of Guinea, Sierra Leone, Liberia and Nigeria  was conducted in 2014, 2004, 2008 and 2006 respectively. Due to the need for estimating more current demographic data, we used CIA Factbook estimates. 
-
-\section{Computational Experiments}
-
-\subsection{Compartment Model: System Dynamics}
-Based on the compartmental model and parameters published by Rivers et al. in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could turn into Exposed (E), if they were in contact with an infections individual, initiating a trantition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed from the individual (R), or the patients may recover, at this stage, it can be cosidered equivalently removed. Figure  \ref{fig:compartment} depicts the implemented compartment model. \\
+\section{Model}
+%
+% SYSTEM BASED
+%
+\subsection{System Based}
+Based on the compartmental model and parameters published by Rivers et al.\cite{Rivers2014} in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could turn into Exposed (E), if they were in contact with an infections individual, initiating a trantition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed from the individual (R), or the patients may recover, at this stage, it can be cosidered equivalently removed. Figure  \ref{fig:compartment} depicts the implemented compartment model. \\
 
 \begin{figure}
   \centering
@@ -208,6 +193,195 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.750  \\ [1ex]
 \end{tabular}
 \label{tab:parameters}
 \end{table}
+\begin{figure}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {S};
+  \node[main node] (2) [right of=1] {E};
+  \node[main node] (3) [right of=2] {I};
+  \node[main node] (4) [right of=3] {R};
+    \node[main node] (5) [below left of=3] {D};
+      \node[main node] (6) [below right of=3] {F};
+        \node[main node] (7) [right of=6] {H};
+
+  \path[every node/.style={font=\sffamily\small}]
+    (1)
+        edge node {$f_{SE}$} (2)
+ 
+    (2) edge node {$f_{EI}$} (3)
+        
+    (3) 
+       edge node {$f_{IR}$} (4)
+       edge node[left] {$f_{IF}$} (6)
+       edge node {$f_{IH}$} (7)
+  
+    (4)
+       
+(6) edge node{$f_{FD}$} (5) 
+
+(7) edge node[right]{$f_{HR}$} (4) 
+
+  (7) edge node{$f_{HF}$} (6)      
+
+        ;
+        
+\end{tikzpicture}
+\caption{Model}
+\label{SM}
+\end{figure}
+%
+% AGENT BASED
+%
+\subsection{Agent Based} 
+The next model we consider is an agent-based model. Each individual in the population can be in either of 7 states discussed above: susceptible, exposed, infected, hospitalized, funeral, recovered or dead. The flow between two states is a  probability of transition from one state to another for a typical individual. We represent our model in Figure~\ref{ABM}. In each time step a typical individual who is susceptible to contracting a virus can either transition to exposed state with probability $p_{SE}$ or stay susceptible with probability $p_{SS}$. An individuas in the exposed state transitions to infected with probability $p_{EI}$ and stays exposed with probability $p_{EE}$. An individual who is infected can stay infected, recover, go to a hospital or die and transition to funeral state with probabilities $p_{II},\, p_{IR},\, p_{IH}$ and $p_{IF}$ respectively. Recovery is considered a terminal state so individuals in this state stay in it for the remaining duration of the simulation. Hospitalized individuals may stay hospitalized, transition to recovered or funeral with probabilities $p_{HH}, \, p_{HR}$ and $p_{HF}$. We assume that the individual who dies from Ebola remains infectious through the duration of the entire burial ceremony and no precautions are taken against disease transmission. Safely buried individuals are considered dead and noninfectious and remain in this state for the remaining time of the simulation. We assume that every individual who dies has a funeral.Because we are interested in the number of individuals who died specifically due to Ebola virus we ignore deaths due to other causes.  
+
+%  \begin{tikzpicture}[node distance=2cm, font=\tiny]
+%        \node [draw, terminal]  (start) at (0,0) {Start};
+%        \node [draw, predproc, right of= start] (acquire)(write) {Acquire Image};
+%
+%%% paths
+%    \draw[->](work) -- node[above]{yes}(end);
+%    \end{tikzpicture}
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {S};
+  \node[main node] (2) [right of=1] {E};
+  \node[main node] (3) [right of=2] {I};
+  \node[main node] (4) [right of=3] {R};
+    \node[main node] (5) [below left of=3] {D};
+      \node[main node] (6) [below right of=3] {F};
+        \node[main node] (7) [right of=6] {H};
+
+  \path[every node/.style={font=\sffamily\small}]
+    (1)
+        edge node {$p_{SE}$} (2)
+        edge [loop above] node {$p_{SS}$} (1)
+    (2) 
+        edge node {$p_{EI}$} (3)
+         edge [loop above] node {$p_{EE}$} (2)
+      
+    (3) 
+       edge node {$p_{IR}$} (4)
+       edge node[left] {$p_{IF}$} (6)
+       edge node {$p_{IH}$} (7)
+        edge [loop above] node {$p_{II}$} (3)
+    (4)
+         edge [loop above] node {$p_{RR}$} (4)
+       
+(6) edge node{$p_{FD}$} (5) 
+edge [loop below] node {$p_{FF}$} (6)     
+(7) edge node[right]{$p_{HR}$} (4) 
+edge [loop below] node {$p_{HH}$} (7)
+  (7) edge node{$p_{HF}$} (6)      
+ (5) edge [loop below] node {$p_{DD}$} (5)
+        ;
+        
+\end{tikzpicture}
+\end{center}
+\caption{Spread of the disease: Agent-based model. Each node represents a typical individual's state. An individual can transition to a state to which he is connected by a directed arc with a probability specified on an arc}
+\label{ABM}
+\end{figure}
+Let
+
+\begin{itemize}
+\item[]$t_{IP}$ be the incubation period, i.e. time during which the individual has the virus in his body but does not yet show severe symptoms
+\item[] $t_{ID}$ infection duration time ater the onset of severe symptoms
+\item[] $t_{H}$ time to hospitalization after manifistation of severe symptoms
+\item[] $t_{IF}$ time from the onset of severe symptoms to funeral
+\item[] $t_{HF}$ time from patient's arrival at the hospital to fueral
+\item[] $t_{HR}$ time from patient's arrival at the hospital to recovery
+\item[] $t_{DF}$ duration of traditional funeral
+\item[] $N$  total number of individuals in a population
+\item[] $N_{I}$  total number of individuals in the infected state
+\item[] $N_{H}$  total number of individuals in the hospitalized state
+\item[] $N_{F}$  total number of individuals in the funeral state
+\item[] $\beta_{I}$ rate at which the disease spreads during an interaction with an infected person
+\item[] $\beta_{H}$ rate at which the disease spreads during an interaction with a hospitalized person
+\item[] $\beta_{F}$ rate at which the disease spreads during an interaction with a person who is in the funeral state
+\end{itemize}
+We define the individual's probability ofl transition for each state as
+
+\begin{subequations}
+\begin{alignat}{1}
+&p_{SE}=\beta_I\cdot \frac{N_{I}}{N}+\beta_H\cdot \frac{N_{H}}{N}+\beta_F\cdot\frac{ N_F}{N}\\
+&p_{SS}=1-p_{SE}\\
+&p_{EE}=1-\frac{1}{t_{IP}}\\
+&p_{EI}=\frac{1}{t_{IP}}\\
+&p_{II}=\frac{1}{t_{ID}}\\
+&p_{IH}=\frac{1}{t_{H}}\\
+&p_{IF}= \frac{1}{t_{IF}}\\
+&p_{IR}=1-p_{II}-p_{IH}-p_{IF}\\
+&p_{HF}=\frac{1}{t_{HF}}\\
+&p_{HR}=\frac{1}{t_{HR}}\\
+&p_{HH}=1-p_{HF}-p_{HR}\\
+&p_{FF}=\frac{1}{t_{DF}}\\
+&p_{FD}=1-p_{FF}\\
+&p_{RR}=1\\
+&p_{DD}=1
+\end{alignat}
+\end{subequations}
+\subsection{Strategy}
+In order to propose a more accurate model and compare the results among different programming  languages, the compartment flow model of the Ebola Epidemic in West Africa, 2014, was modeled with a System Dynamics (SD) and Agent Based Model (ABM) approaches.  Insight Maker and Mathematica was utilized  for the SD, and Insight Maker and Python for the ABM.
+
+\subsection{Assumptions}
+\begin{itemize}
+\item For the present study, it was considered information of two countries that experienced the Ebola Outbreak, Liberia and Sierra Leone.
+\item Time frame: It was divided into stages, first, beginning from the Ebola Outbreak in March 2014 to the International Intervention in September 2014, and second, from the International Intervention to the present.
+\item It was ignored all the possible births and natural deaths ocurred during the chosen timelime, because our simulation is for short period of time, our model was considered as a closed system.
+\end{itemize}
+
+\subsection{Factors Considered}
+\begin{itemize}
+\item Transmission method.
+\item Probability of transfer.
+\item Population size/density.
+\item Amount of travel (length of time, destinations, mode of travel, local travel).
+\item Connectedness.
+\item Length of time Ebola virus remains in deceased.
+\item Rate of recovery.
+\item Rate of death.
+\item Rate of diagnosis and accuracy.
+\item Rate of hospitalization.
+\item Hospital capacity.
+\item Wealth of the region, local government involment.
+\item Interaction with infected animals.
+\item Household size.
+\item "Belief" rate.
+\item Cleanliness.
+\item International help.
+\item Following protocols.
+\item Access to healthcare, lack of ambulances.
+\item Cummunity/hospital/burial have different transfer rates.
+\end{itemize}
+
+\subsection{Software}
+\begin{itemize}
+\item Insight Maker: SD and ABM
+\item Mathematica: SD
+\item Python: ABM
+
+\end{itemize}
+
+%
+%
+%
+%
+% DATA
+%
+%
+%
+%
+%
+\section{Data}
+The United Nation reports that the last Census for the countries of Guinea, Sierra Leone, Liberia and Nigeria  was conducted in 2014, 2004, 2008 and 2006 respectively. Due to the need for estimating more current demographic data, we used CIA Factbook estimates. 
+
+\section{Computational Experiments}
+
+\subsection{Compartment Model: System Dynamics}
 
 \subsection{Compartment Model: Agent Dynamics}
 The agent-based model created in Insight Maker also used the data from Rivers et al. with the same states and parameter names as the System Dynamics model. The transitions between the states are described as:\\
@@ -243,93 +417,7 @@ bdv
 vxzv
 
 \subsection{Compartment Model: Agent Based Model}
-The next model we consider is an agent-based model. Each individual in the population can be in either of 7 states discussed above: susceptible, exposed, infected, hospitalized, funeral, recovered or dead. The flow between two states is a  probability of transition from one state to another for a typical individual. We represent our model in Figure~\ref{ABM}. In each time step individuals who are susceptible to contracting a virus can either transition to exposed state with probability $p_{SE}$ or stay susceptible with probability $1-p_{SE}$. An individuals in the exposed state transitions to infected with probability $p_{EI}$ and stays exposed with probability $1-p_{EI}$. An individual who is infected can stay infected, recover, go to a hospital or die and transition to funeral state with probabilities $p_{II},\, p_{IR},\, p_{IH}$ and $p_{IF}$ respectively. Recovery is considered a terminal state so individuals in this state remain in it for the remaining duration of the simulation. Hospitalized individuals may stay hospitalized, transition to recovered or funeral with probabilities $p_{HH}, \, p_{HR}$ and $p_{HF}$.   We assume that the individual who dies from Ebola remains infectious through the duration of the entire burial ceremony and no precautions are taken against disease transmission. Safely buried individuals are considered dead and noninfectious and remain in this state for the remaining time of the simulation.  Probability of transition for each state are as follows: \\\\
-For duration of the simulation we ignore deaths of other causer and focus only on those individuals who died due to Ebola virus. We assume that every individual who dies has a funeral.
-\begin{itemize}
- \item g
-\end{itemize}
-%  \begin{tikzpicture}[node distance=2cm, font=\tiny]
-%        \node [draw, terminal]  (start) at (0,0) {Start};
-%        \node [draw, predproc, right of= start] (acquire)(write) {Acquire Image};
-%
-%%% paths
-%    \draw[->](work) -- node[above]{yes}(end);
-%    \end{tikzpicture}
-\begin{figure}[h!]
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
-  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
 
-  \node[main node] (1) {S};
-  \node[main node] (2) [right of=1] {E};
-  \node[main node] (3) [right of=2] {I};
-  \node[main node] (4) [right of=3] {R};
-    \node[main node] (5) [below left of=3] {D};
-      \node[main node] (6) [below right of=3] {F};
-        \node[main node] (7) [right of=6] {H};
-
-  \path[every node/.style={font=\sffamily\small}]
-    (1) %edge node [left] {0.6} (4)
-        edge node {$p_{SE}$} (2)
-        edge [loop above] node {$p_{SS}$} (1)
-    (2) %edge node [right] {0.4} (1)
-        edge node {$p_{EI}$} (3)
-         edge [loop above] node {$p_{EE}$} (2)
-        %edge [loop left] node {0.4} (2)
-       % edge [bend right] node[left] {0.1} (3)
-    (3) %edge node [right] {0.8} (2)
-       % edge [bend right] node[right] {0.2} (4)
-       edge node {$p_{IR}$} (4)
-       edge node[left] {$p_{IF}$} (6)
-       edge node {$p_{IH}$} (7)
-        edge [loop above] node {$p_{II}$} (3)
-    (4)% edge node [left] {0.2} (3)
-        %edge [loop right] node {0.6} (4)
-        %edge [bend left] node[right] {0.2} (1);
-         edge [loop above] node {$p_{RR}$} (4)
-       
-(6) edge node{$p_{FD}$} (5) 
-edge [loop below] node {$p_{FF}$} (6)     
-(7) edge node[right]{$p_{HR}$} (4) 
-edge [loop below] node {$p_{HH}$} (7)
-  (7) edge node{$p_{HF}$} (6)      
- (5) edge [loop below] node {$p_{DD}$} (5)
-        ;
-        
-\end{tikzpicture}
-\caption{Spread of the disease: Agent-based model. Each node represents an individual's state; each link is a possible transition}
-\label{ABM}
-\end{figure}
-
-\begin{align*}
-&t_{IP}\, \text{be the incubation period, i.e. time during which the individual has the virus in his body but does not yet show severe symptoms}\\
-&t_{ID} \,\text{infection duration time ater the onset of severe symptoms}\\
-&t_{H} \, \text{time to hospitalization after manifistation of severe symptoms}\\
-& t_{IF} \, \text{time from the onset of severe symptoms to funeral}\\
-& t_{HF} \, \text{time from patient's arrival at the hospital to fueral}\\
-& t_{HR} \, \text{time from patient's arrival at the hospital to recovery}\\
-& t_{DF} \, \text{duration of traditional funeral}
-\end{align*}
-
-
-\begin{subequations}
-\begin{alignat}{1}
-&p_{SE}=\beta_I\cdot I/N+\beta_H\cdot H/N+\beta_F\cdot F/N\\
-&p_{SS}=1-p_{SE}\\
-&p_{EE}=1-\frac{1}{t_{IP}}\\
-&p_{EI}=\frac{1}{t_{IP}}\\
-&p_{II}=\frac{1}{t_{ID}}\\
-&p_{IH}=\frac{1}{t_{H}}\\
-&p_{IF}= \frac{1}{t_{IF}}\\
-&p_{IR}=1-p_{II}-p_{IH}-p_{IF}\\
-&p_{HF}=\frac{1}{t_{HF}}\\
-&p_{HR}=\frac{1}{t_{HR}}\\
-&p_{HH}=1-p_{HF}-p_{HR}\\
-&p_{FF}=\frac{1}{t_{DF}}\\
-&p_{FD}=1-p_{FF}\\
-&p_{RR}=1\\
-&p_{DD}=1
-\end{alignat}
-\end{subequations}
 
 \subsubsection{Insight Maker}
 czc
@@ -356,7 +444,27 @@ and what is being plotted.
 
 \item Describe the conclusions you can draw from your experiments
 \end{itemize}
-
+%
+%
+%
+%
+% RESULTS AND DISCUSSION
+%
+%
+%
+%
+%
+\section{Results}
+%
+%
+%
+%
+% SUMMARY AND FUTURE WORK
+%
+%
+%
+%
+%
 
 
 \section{Summary and Future Work}
