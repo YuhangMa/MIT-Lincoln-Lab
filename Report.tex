@@ -181,8 +181,7 @@ Based on the compartmental model and parameters published by Rivers et al. in Oc
 \frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{IH}(1-\delta_{2}) H-\gamma_{F} F
 \end{eqnarray}\\
 
-Where each of the parameters are defined on Table \ref{tab:parameters} \\
-
+where each of the parameters are defined on Table \ref{tab:parameters} \\
 
 \begin{table}[ht]
 \caption{Model Parameters for Ebola Epidemic in Liberia and Sierra Leone Before the International Intervention (September 2014)} % title of Table
@@ -210,6 +209,32 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.750  \\ [1ex]
 \label{tab:parameters}
 \end{table}
 
+\subsection{Compartment Model: Agent Dynamics}
+The agent-based model created in Insight Maker also used the data from Rivers et al. with the same states and parameter names as the System Dynamics model. The transitions between the states are described as:\\
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{c | l | l}
+{\bf Transition} & {\bf Type } & {\bf Value}\\\hline
+$S\rightarrow E$ & Probability & $\min(1,\xi_5\beta_{fam}+\xi_{100}\beta_{com}+\xi_{10}\beta_F)$\\
+$E\rightarrow I$ & Timeout & $1/\alpha$\\
+$I\rightarrow H$ & Probability & $\theta\gamma_H$\\
+$I\rightarrow F$ & Probability & $(1-\theta)\delta_1\gamma_D$\\
+$I\rightarrow R$ & Probability & $(1-\theta)(1-\delta_{1})\gamma_I$\\
+$F\rightarrow R$ & Timeout & ${1}/{\gamma_{F}}$\\
+$H\rightarrow R$ & Timeout & $\delta_{2}/{\gamma_{DH}} + (1-\delta_{2})/{\gamma_{IH}}$\\
+\end{tabular}
+\end{center}
+\end{table}
+\noindent where $\xi_{i}$ is the number of infected people within the individual's $i$ closest neighbors, $\beta_{fam}$ is the family contact rate, and $\beta_{com}$ is the community contact rate (maybe same?). The probability of contracting Ebola depends on the number of infected people within the individual's family or neighbors, and funerals are assumed to be attended by the deceased's 10 nearest neighbors.
+
+\begin{figure}
+\caption{The agent-based Insight Maker model.}
+\end{figure}
+
+\begin{figure}
+\caption{A simulation of the agent-based Insight Maker model with $\beta_{fam}=0.4$ and $\beta_{com}=0.01$.}
+\end{figure}
 
 \subsubsection{Insight Maker}
 bdv
