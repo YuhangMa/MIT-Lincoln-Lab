@@ -136,12 +136,12 @@ applied normalizations).
 % SYSTEM BASED
 %
 \subsection{System Based}
-Based on the compartmental model and parameters published by Rivers et al.\cite{Rivers2014} in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could turn into Exposed (E), if they were in contact with an infections individual, initiating a trantition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed from the individual (R), or the patients may recover, at this stage, it can be cosidered equivalently removed. Figure ~\ref{fig:compartment} depicts the implemented compartment model. \\
+Based on the compartmental model and parameters published by Rivers et al.\cite{Rivers2014} in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could turn into Exposed (E), if they were in contact with an infections individual, initiating a trantition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed from the individual (R), or the patients may recover, at this stage, it can be cosidered equivalently removed. However, for the present study was considered seven compartments in order to distinguish between the recovered (R) patients and the deceased (D) individuals. Figure ~\ref{fig:compartment} depicts the implemented compartment model. \\
 
 \begin{figure}
   \centering
   \includegraphics[width=0.7\textwidth]{compartment}
-  \caption{Compartment Model of the Ebola Epidemic in Liberia and Sierra Leone \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral and R: Removed/Recovered. All the possible flows are specified by the arrows and the parameters that direct them. Note that $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, being a combination of all the $\beta$ transmission terms shown in Table~\ref{tab:parameters}} 
+  \caption{Compartment Model of the Ebola Epidemic in Liberia and Sierra Leone \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral,  R: Recovered and D: Dead. All the possible flows are specified by the arrows and the parameters that direct them. Note that $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, being a combination of all the $\beta$ transmission terms shown in Table~\ref{tab:parameters}} 
 \label{fig:compartment} 
 \end{figure}
 
@@ -327,28 +327,10 @@ In order to propose a more accurate model and compare the results among differen
 \end{itemize}
 
 \subsection{Factors Considered}
-\begin{itemize}
-\item Transmission method.
-\item Probability of transfer.
-\item Population size/density.
-\item Amount of travel (length of time, destinations, mode of travel, local travel).
-\item Connectedness.
-\item Length of time Ebola virus remains in deceased.
-\item Rate of recovery.
-\item Rate of death.
-\item Rate of diagnosis and accuracy.
-\item Rate of hospitalization.
-\item Hospital capacity.
-\item Wealth of the region, local government involment.
-\item Interaction with infected animals.
-\item Household size.
-\item "Belief" rate.
-\item Cleanliness.
-\item International help.
-\item Following protocols.
-\item Access to healthcare, lack of ambulances.
-\item Cummunity/hospital/burial have different transfer rates.
-\end{itemize}
+There are several factors to take into account when analyzing how a virus may spread in a community. First of all the customs and beliefs of a society play an important role, it implies how the individuals interact among themselves, how often they visit their relatives or friends, the amount of travel to other villages, cities or countries to work or buy supplies, as well as the mode of transport.\\
+Having information about the local government and the wealth of the region, would help to determine the capacity of response when facing an epidemic; including the quantity and quality of hospitals and their capacity, as well as the amount of healthcare workers and their expertise.\\
+In the moment of a virus outbreak, goverments from other countries may intervent to help to control the disease, possibly decreasing the number of infected people and increased the number of recovered patients, by educating individuals about the virus, the ways of transmission and handling of the deceased family. \\
+Characteristics of the virus itself are also important, having an estimate of the incubation period, the rate of recovery, the time it remains in the deceased would help to predict the behavior of the virus.\\
 
 \subsection{Software}
 \begin{itemize}
