@@ -341,8 +341,23 @@ We used InsightMaker platform to prototype our model and simulate stepping forwa
 We used data reported by World Health Organization recorded by the Center for Disease Control and Prevention \cite{CDCData} to calibrate the parameters of the model. 
 %The United Nation reports that the last Census for the countries of Guinea, Sierra Leone, Liberia and Nigeria  was conducted in 2014, 2004, 2008 and 2006 respectively. Due to the need for estimating more current demographic data, we used CIA Factbook estimates. 
 
+%COMPUTATIONAL EXPERIMENTS
 \section{Computational Experiments}
+
 \subsection{Compartment Model: System Dynamics}
+\subsubsection{Insight Maker}
+ Insight Maker is a powerful online tool used to model and simulate utilizing different approaches, such as System Dynamics, Agent-Based Modeling and imperative programming. Insight Maker allows to construct a graphical model interface to forecast the system response \cite{FortmannRoe}. The implemented Insight Maker SD model is depicted in Figure \ref{fig:SD_IM}.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{SD_IM}
+  \caption{ \bf Compartment model of the system dynamics implemented on Insight Maker}
+\label{fig:SD_IM} 
+\end{figure}\\
+
+\noindent A normalized population fraction was simulated. The compartment S was initialized with a value of 999.999/1.000.000, and the compartment I with 1/1.000.000, meaning that there is a infected individual per every million of habitants, the rest of the compartments were set as 0. The flow between the compartments is specified in Figure \ref{fig:compartment.} and all the other parameters were initialized as shown in Table \ref{tab:parameters}.  As mention in Section CALIBRATION SECTION, the parameters were calibrated in two stages, before and after the international intervention. The change on these parameters according with the time frame, was also implemented in Insight Maker.\\
+
+
 \subsection{Agent-Based Model}
 We consider a population of size \textbf{100} with \textbf{99} individuals starting in a susceptible state and \textbf{1} individual in the exposed state. Numeric probabilities of an individual transitioning from each state are recorded in Table \textbf{CREATE A TABLE}. We simulate \textbf{176} days of disease progression without intervention and \textbf{306} days of post intervention disease progression. We repeat the process \textbf{100} times and record the average outcome.  
 
