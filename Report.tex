@@ -35,7 +35,7 @@
   Hsuan-Wei Lee\footnote{Department of Mathematics, UNC Chapel Hill},
   Anzhelika Lyubenko\footnote{Department of Mathematical and Statistical Sciences, University of Colorado Denver},
   Yuhang Ma\footnote{Department of Operations Research and Information Engineering, Cornell University},
-  Emily Meissen\footnote{Department of Applied Mathematics, University of Arizona},
+  Emily Meissen\footnote{Program of Applied Mathematics, University of Arizona},
   Daniela Velez-Rendon\footnote{Department of Bio-engineering, University of Illinois at Chicago},
     Nara Yoon\footnote{
 Department of Mathematics, Applied Mathematics and Statistics, Case Western Reserve University}
@@ -146,19 +146,16 @@ Based on the compartmental model and parameters published by Rivers et al.\cite{
 \end{figure}
 
  
-
- The governing equations of the system described above are the following: \\
-
-\begin{eqnarray} 
-\frac{dS}{dt} = - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}\\
-\frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\alpha E\\
-\frac{dI}{dt} =  \alpha E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I\\
-\frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{DH}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H\\
-\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F\\
-\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{IH}(1-\delta_{2}) H-\gamma_{F} F
-\end{eqnarray}\\
-
-where each of the parameters are defined on Table \ref{tab:parameters} \\
+The governing equations of the system described above are the following:
+\begin{align*} 
+\frac{dS}{dt} &= - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}\\
+\frac{dE}{dt} &=  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\alpha E\\
+\frac{dI}{dt} &=  \alpha E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I\\
+\frac{dH}{dt} &= \gamma_{H}\theta I - [\gamma_{DH}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H\\
+\frac{dF}{dt} &= \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F\\
+\frac{dR}{dt} &= \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{IH}(1-\delta_{2}) H-\gamma_{F} F
+\end{align*}
+where each of the parameters are defined on Table \ref{tab:parameters}
 
 
 \begin{table}[ht]
