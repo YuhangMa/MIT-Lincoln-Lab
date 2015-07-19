@@ -353,13 +353,54 @@ We used data reported by World Health Organization recorded by the Center for Di
   \includegraphics[width=0.7\textwidth]{SD_IM}
   \caption{ \bf Compartment model of the system dynamics implemented on Insight Maker}
 \label{fig:SD_IM} 
-\end{figure}\\
+\end{figure}
 
-\noindent A normalized population fraction was simulated. The compartment S was initialized with a value of 999.999/1.000.000, and the compartment I with 1/1.000.000, meaning that there is a infected individual per every million of habitants, the rest of the compartments were set as 0. The flow between the compartments is specified in Figure \ref{fig:compartment.} and all the other parameters were initialized as shown in Table \ref{tab:parameters}.  As mention in Section CALIBRATION SECTION, the parameters were calibrated in two stages, before and after the international intervention. The change on these parameters according with the time frame, was also implemented in Insight Maker.\\
+\noindent A normalized population fraction was simulated. The compartment S was initialized with a value of 999.999/1.000.000, and the compartment I with 1/1.000.000, meaning that there is a infected individual per every million of habitants, the rest of the compartments were set as 0. The flow between the compartments is specified in Figure \ref{fig:compartment} and all the other parameters were initialized as shown in Table \ref{tab:parameters}.  As mention in Section CALIBRATION SECTION, the parameters were calibrated in two stages, before and after the international intervention. The change on these parameters according with the time frame, was also implemented in Insight Maker.\\
 
 
 \subsection{Agent-Based Model}
-We consider a population of size \textbf{100} with \textbf{99} individuals starting in a susceptible state and \textbf{1} individual in the exposed state. Numeric probabilities of an individual transitioning from each state are recorded in Table \textbf{CREATE A TABLE}. We simulate \textbf{176} days of disease progression without intervention and \textbf{306} days of post intervention disease progression. We repeat the process \textbf{100} times and record the average outcome.  
+We consider a population of size \textbf{100} with \textbf{99} individuals starting in a susceptible state and \textbf{1} individual in the exposed state. Numeric probabilities of an individual transitioning from each state are recorded in Table~\ref{tab:probabilities}. We simulate \textbf{176} days of disease progression without intervention and \textbf{306} days of post intervention disease progression. We repeat the process \textbf{100} times and record the average outcome.  
+%
+%
+% HERE IS THE PROBABILITY TRANSITION TABLE
+%
+%
+%
+%
+\begin{table}[ht]
+\caption{Agent-Model Parameters for Ebola Epidemic in Liberia Before and After the International Intervention} % title of Table
+\centering % used for centering table
+\begin{tabular}{c c c } 
+\hline\hline %inserts double horizontal lines
+Parameter & Liberia Before Intervention  & Liberia After Intervention \\ [0.5ex] 
+ & (Mar/14 to Sept/14) &  (Sept/14 to Jul/15) \\ [0.5ex] % inserts table
+% inserts table
+%heading
+\hline % inserts single horizontal line
+$p_{SE}$ & \textbf{DYNAMIC} & \textbf{DYNAMIC} \\ 
+$p_{SS}$ & \textbf{COMPUTE}8 & \textbf{COMPUTE}  \\ 
+$p_{EE}$ & 0.9091 & 0.9091  \\ 
+$p_{EI}$ & 0.0909 & 0.0909  \\ 
+$p_{II}$ & 0.1 & 0.1  \\ 
+$p_{IH}$ & 0.2227 & 0.2160  \\ 
+$p_{IF}$ & 0.125 & 0.125  \\ 
+$p_{IR}$ & 0.5523 & 0.559  \\ 
+$p_{HF}$ & 0.2849 & 0.2849 \\ 
+$p_{HR}$ & 0.1815 & 0.1815 \\ 
+$p_{HH}$ & 0.5336& 0.5336  \\ 
+$p_{FF}$ & 0.5 & 0.5 \\ 
+$p_{FD}$ & 0.5 & 0.5  \\ 
+$p_{RR}$ & 1 & 1  \\ 
+$p_{DD}$ & 1 & 1 \\ [1ex] 
+\hline 
+\end{tabular}
+\label{tab:probabilities}
+\end{table}
+%
+%
+%
+%
+%
 
 \subsection{Compartment Model: Agent Dynamics}
 The agent-based model created in Insight Maker also used the data from Rivers et al. with the same states and parameter names as the System Dynamics model. The transitions between the states are described as:\\
