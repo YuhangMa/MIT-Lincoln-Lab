@@ -56,7 +56,7 @@ A variety of cultural and economic factors have contributed to the spread of the
 
 One may look at the spread of the infectious diseases from two perspectives: system based and agent based. In the system based model the entire population is divided into compartments with a certain proportion of the population in each. As time progresses certain amount of people flow from one compartment into another. Naturally, such relationship is described either by a difference or a differential equation. One of the most well-known equation-based models involves three states: susceptible, infected, recovered. Such model is called an SIR model; each letter in the abbreviation represents one of the compartments in the population. This model has multiple modifications because various compartments can be added. In the case of Ebola, Lekone and Finkenstäd \cite{Lekone2006} consider a four compartment model, inserting an "Exposed" state between "Susceptible" and "Infected". A six-compartment model, presented by Legrand \cite{Legrand2007} and Rivers\cite{Rivers2014} differentiates between the modes of transition of the disease, i.e. a virus can be transmitted in the community, at hospitals and medical centers or at funerals.
 
-In contrast to system based models, agent-based models are concerned with the behavior of a typical individual rather than the system as a whole. In such models every individual in the system is assigned certain characteristics, i.e. states. Individual's behavior is probabilistic at each unit of time and causes him either to transition to a different state or stay in his current state. Agent-based models for Ebola include Siettos et al \cite{Siettos2015} and Merler et al\cite{Merler2015}. A variety of models examine the effectiveness of intervention measures. Examples include contact tracing by Webb et al \cite{Webb2015} and travel restrictions by Poletto et al \cite{Poletto2014}.
+In contrast to system based models, agent-based models are concerned with the behavior of a typical individual rather than the system as a whole. In such models every individual in the system is assigned certain characteristics, i.e. states. Individual's behavior is probabilistic at each unit of time and causes him either to transition to a different state or stay in his current state. Agent-based models for Ebola include Siettos et al. \cite{Siettos2015} and Merler et al.\cite{Merler2015}. A variety of models examine the effectiveness of intervention measures. Examples include contact tracing by Webb et al. \cite{Webb2015} and travel restrictions by Poletto et al. \cite{Poletto2014}.
 
 In this paper we consider a seven compartment system based model as well as agent-based modification of the same model. We show \textbf{What did we show?!} \textbf{What about the model with spatial component?}
 
@@ -122,13 +122,13 @@ We examine the problem from two perspectives. We present a system based model fi
 \item [H] - Hospitalized. Individuals who are infectious and are in the hospital because they are experiencing severe symptoms of Ebola.
 \item[F] - Funeral. Diseased but still contagious victims of Ebola. 
 \item[D] - Dead. Individuals who died because of Ebola, were buried and are currently under ground. They are considered not to be contagious.
-\item [R] - Recovered. Individuals who had Ebola,survived and now are immune to the disease.
+\item [R] - Recovered. Individuals who had Ebola, survived and now are immune to the disease.
 \end{description}
 %
 % SYSTEM BASED
 %
 \subsection{System Based}
-Based on the compartmental model and parameters published by Rivers et al.\cite{Rivers2014} in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could turn into Exposed (E), if they were in contact with an infections individual, initiating a trantition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed from the individual (R), or the patients may recover, at this stage, it can be cosidered equivalently removed. However, for the present study was considered seven compartments in order to distinguish between the recovered (R) patients and the deceased (D) individuals. Figure ~\ref{fig:compartment} depicts the implemented compartment model. \\
+Based on the compartmental model and parameters published by Rivers et al.\cite{Rivers2014} in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could turn into Exposed (E), if they were in contact with an infections individual, initiating a transition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed from the individual (R), or the patients may recover, at this stage, it can be considered equivalently removed. However, for the present study was considered seven compartments in order to distinguish between the recovered (R) patients and the deceased (D) individuals. Figure ~\ref{fig:compartment} depicts the implemented compartment model. \\
 
 \begin{figure}[h!]
   \centering
@@ -165,12 +165,12 @@ Contact Rate, Hospital  ($\beta_{H}$) & 0.235 & 0.0877  \\
 Contact Rate, Funeral  ($\beta_{F}$) & 0.465 & 0.283 \\
 Incubation Period (${1}/{\alpha}$) & 11 days & 11 days  \\
 Time until Hospitalization (${1}/{\gamma_{H}}$) & 4.49 days & 4.63 days  \\
-Time froml Hospitalization to Death (${1}/{\gamma_{DH}}$) & 3.51 days & 3.51 days  \\ 
+Time from Hospitalization to Death (${1}/{\gamma_{DH}}$) & 3.51 days & 3.51 days  \\ 
 Duration of Traditional Funeral (${1}/{\gamma_{F}}$) & 2.00 days & 2.00 days  \\
 Duration of Infection (${1}/{\gamma_{I}}$) & 10.00 days & 10.00 days  \\
 Time from Infection to Death (${1}/{\gamma_{D}}$) & 8.00 days & 8.00 days  \\
 Time from Hospitalization to Recovery (${1}/{\gamma_{IH}}$) & 5.51 days & 5.51 days  \\
-Probablity a Case is Hospitalized ($\theta$) & 0.248 & 0.233 \\
+Probability a Case is Hospitalized ($\theta$) & 0.248 & 0.233 \\
 Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500  & 0.500  \\
 Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 \\ [1ex] 
 \hline 
@@ -219,7 +219,7 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 \\ [1ex]
 % AGENT BASED
 %
 \subsection{Agent Based} 
-The next model we consider is an agent-based model. Each individual in the population can be in either of 7 states discussed above: susceptible, exposed, infected, hospitalized, funeral, recovered or dead. The flow between two states is a  probability of transition from one state to another for a typical individual. We represent our model in Figure~\ref{ABM}. In each time step a typical individual who is susceptible to contracting a virus can either transition to exposed state with probability $p_{SE}$ or stay susceptible with probability $p_{SS}$. An individuas in the exposed state transitions to infected with probability $p_{EI}$ and stays exposed with probability $p_{EE}$. An individual who is infected can stay infected, recover, go to a hospital or die and transition to funeral state with probabilities $p_{II},\, p_{IR},\, p_{IH}$ and $p_{IF}$ respectively. Recovery is considered a terminal state so individuals in this state stay in it for the remaining duration of the simulation. Hospitalized individuals may stay hospitalized, transition to recovered or funeral with probabilities $p_{HH}, \, p_{HR}$ and $p_{HF}$. We assume that the individual who dies from Ebola remains infectious through the duration of the entire burial ceremony and no precautions are taken against disease transmission. Safely buried individuals are considered dead and noninfectious and remain in this state for the remaining time of the simulation.  
+The next model we consider is an agent-based model. Each individual in the population can be in either of 7 states discussed above: susceptible, exposed, infected, hospitalized, funeral, recovered or dead. The flow between two states is a  probability of transition from one state to another for a typical individual. We represent our model in Figure~\ref{ABM}. In each time step a typical individual who is susceptible to contracting a virus can either transition to exposed state with probability $p_{SE}$ or stay susceptible with probability $p_{SS}$. An individuals in the exposed state transitions to infected with probability $p_{EI}$ and stays exposed with probability $p_{EE}$. An individual who is infected can stay infected, recover, go to a hospital or die and transition to funeral state with probabilities $p_{II},\, p_{IR},\, p_{IH}$ and $p_{IF}$ respectively. Recovery is considered a terminal state so individuals in this state stay in it for the remaining duration of the simulation. Hospitalized individuals may stay hospitalized, transition to recovered or funeral with probabilities $p_{HH}, \, p_{HR}$ and $p_{HF}$. We assume that the individual who dies from Ebola remains infectious through the duration of the entire burial ceremony and no precautions are taken against disease transmission. Safely buried individuals are considered dead and noninfectious and remain in this state for the remaining time of the simulation.  
 
 %  \begin{tikzpicture}[node distance=2cm, font=\tiny]
 %        \node [draw, terminal]  (start) at (0,0) {Start};
@@ -274,10 +274,10 @@ Let
 
 \begin{itemize}
 \item[]$t_{IP}$ be the incubation period, i.e. time during which the individual has the virus in his body but does not yet show severe symptoms
-\item[] $t_{ID}$ infection duration time ater the onset of severe symptoms
-\item[] $t_{H}$ time to hospitalization after manifistation of severe symptoms
+\item[] $t_{ID}$ infection duration time after the onset of severe symptoms
+\item[] $t_{H}$ time to hospitalization after manifestation of severe symptoms
 \item[] $t_{IF}$ time from the onset of severe symptoms to funeral
-\item[] $t_{HF}$ time from patient's arrival at the hospital to fueral
+\item[] $t_{HF}$ time from patient's arrival at the hospital to funeral
 \item[] $t_{HR}$ time from patient's arrival at the hospital to recovery
 \item[] $t_{DF}$ duration of traditional funeral
 \item[] $N$  total number of individuals in a population
@@ -288,7 +288,7 @@ Let
 \item[] $\beta_{H}$ rate at which the disease spreads during an interaction with a hospitalized person
 \item[] $\beta_{F}$ rate at which the disease spreads during an interaction with a person who is in the funeral state
 \end{itemize}
-We define the individual's probability ofl transition for each state as
+We define the individual's probability of transition for each state as
 
 \begin{subequations}
 \begin{alignat}{1}
@@ -315,7 +315,7 @@ In order to propose a more accurate model and compare the results among differen
 \subsection{Factors Considered}
 There are several factors to take into account when analyzing how a virus may spread in a community. First of all the customs and beliefs of a society play an important role, it implies how the individuals interact among themselves, how often they visit their relatives or friends, the amount of travel to other villages, cities or countries to work or buy supplies, as well as the mode of transport.\\
 Having information about the local government and the wealth of the region, would help to determine the capacity of response when facing an epidemic; including the quantity and quality of hospitals and their capacity, as well as the amount of healthcare workers and their expertise.\\
-In the moment of a virus outbreak, goverments from other countries may intervent to help to control the disease, possibly decreasing the number of infected people and increased the number of recovered patients, by educating individuals about the virus, the ways of transmission and handling of the deceased family. \\
+In the moment of a virus outbreak, governments from other countries may intervene to help to control the disease, possibly decreasing the number of infected people and increased the number of recovered patients, by educating individuals about the virus, the ways of transmission and handling of the deceased family. \\
 Characteristics of the virus itself are also important, having an estimate of the incubation period, the rate of recovery, the time it remains in the deceased would help to predict the behavior of the virus.\\
 
 \subsection{Software}
