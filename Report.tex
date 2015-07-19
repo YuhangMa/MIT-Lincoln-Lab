@@ -133,12 +133,36 @@ applied normalizations).
 
 \section{Model}\label{sec:Model}
 %
+%
+%
+We examine the problem from two perspectives. We present a system based model first and then discuss an agent-based modification of it. We then consider an agent-based model that incorporates agents' movement through space.  
+%
+% ASSUMPTIONS
+%
+\subsection{Assumptions}
+\begin{itemize}
+\item We consider a model of Ebola Outbreak with parameters calibrated for Liberia.
+\item We consider two time periods. The first one starts with the announcement of Ebola outbreak in March 2014 and ends the day of the International Intervention in September 2014. The second period covers the time from the International Intervention to present.
+\item We ignore all the possible births and deaths occurred due to reasons other that Ebola during the chosen time. 
+\item Each individual who dies because of Ebola has a funeral.
+\end{itemize}
+\subsection{Compartment-State Definition}
+\begin{description}
+\item[S]- Susceptible. Individuals who have not contracted the disease and have no immunity to it. 
+\item [E] - Exposed. Individuals who have come in contact with the Ebola patient and have contracted the disease but do not yet exhibit sever symptoms and thus, are considered not infectious.
+\item [I] - Infected. Individuals who experience severe symptoms of Ebola and are contagious.
+\item [H] - Hospitalized. Individuals who are infectious and are in the hospital because they are experiencing severe symptoms of Ebola.
+\item[F] - Funeral. Diseased but still contagious victims of Ebola. 
+\item[D] - Dead. Individuals who died because of Ebola, were buried and are currently under ground. They are considered not to be contagious.
+\item [R] - Recovered. Individuals who had Ebola,survived and now are immune to the disease.
+\end{description}
+%
 % SYSTEM BASED
 %
 \subsection{System Based}
 Based on the compartmental model and parameters published by Rivers et al.\cite{Rivers2014} in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could turn into Exposed (E), if they were in contact with an infections individual, initiating a trantition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed from the individual (R), or the patients may recover, at this stage, it can be cosidered equivalently removed. However, for the present study was considered seven compartments in order to distinguish between the recovered (R) patients and the deceased (D) individuals. Figure ~\ref{fig:compartment} depicts the implemented compartment model. \\
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.7\textwidth]{compartment}
   \caption{Compartment Model of the Ebola Epidemic in Liberia and Sierra Leone \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral,  R: Recovered and D: Dead. All the possible flows are specified by the arrows and the parameters that direct them. Note that $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, being a combination of all the $\beta$ transmission terms shown in Table~\ref{tab:parameters}} 
@@ -227,7 +251,7 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 \\ [1ex]
 % AGENT BASED
 %
 \subsection{Agent Based} 
-The next model we consider is an agent-based model. Each individual in the population can be in either of 7 states discussed above: susceptible, exposed, infected, hospitalized, funeral, recovered or dead. The flow between two states is a  probability of transition from one state to another for a typical individual. We represent our model in Figure~\ref{ABM}. In each time step a typical individual who is susceptible to contracting a virus can either transition to exposed state with probability $p_{SE}$ or stay susceptible with probability $p_{SS}$. An individuas in the exposed state transitions to infected with probability $p_{EI}$ and stays exposed with probability $p_{EE}$. An individual who is infected can stay infected, recover, go to a hospital or die and transition to funeral state with probabilities $p_{II},\, p_{IR},\, p_{IH}$ and $p_{IF}$ respectively. Recovery is considered a terminal state so individuals in this state stay in it for the remaining duration of the simulation. Hospitalized individuals may stay hospitalized, transition to recovered or funeral with probabilities $p_{HH}, \, p_{HR}$ and $p_{HF}$. We assume that the individual who dies from Ebola remains infectious through the duration of the entire burial ceremony and no precautions are taken against disease transmission. Safely buried individuals are considered dead and noninfectious and remain in this state for the remaining time of the simulation. We assume that every individual who dies has a funeral.Because we are interested in the number of individuals who died specifically due to Ebola virus we ignore deaths due to other causes.  
+The next model we consider is an agent-based model. Each individual in the population can be in either of 7 states discussed above: susceptible, exposed, infected, hospitalized, funeral, recovered or dead. The flow between two states is a  probability of transition from one state to another for a typical individual. We represent our model in Figure~\ref{ABM}. In each time step a typical individual who is susceptible to contracting a virus can either transition to exposed state with probability $p_{SE}$ or stay susceptible with probability $p_{SS}$. An individuas in the exposed state transitions to infected with probability $p_{EI}$ and stays exposed with probability $p_{EE}$. An individual who is infected can stay infected, recover, go to a hospital or die and transition to funeral state with probabilities $p_{II},\, p_{IR},\, p_{IH}$ and $p_{IF}$ respectively. Recovery is considered a terminal state so individuals in this state stay in it for the remaining duration of the simulation. Hospitalized individuals may stay hospitalized, transition to recovered or funeral with probabilities $p_{HH}, \, p_{HR}$ and $p_{HF}$. We assume that the individual who dies from Ebola remains infectious through the duration of the entire burial ceremony and no precautions are taken against disease transmission. Safely buried individuals are considered dead and noninfectious and remain in this state for the remaining time of the simulation.  
 
 %  \begin{tikzpicture}[node distance=2cm, font=\tiny]
 %        \node [draw, terminal]  (start) at (0,0) {Start};
@@ -320,13 +344,6 @@ We define the individual's probability ofl transition for each state as
 \subsection{Strategy}
 In order to propose a more accurate model and compare the results among different programming  languages, the compartment flow model of the Ebola Epidemic in West Africa, 2014, was modeled with a System Dynamics (SD) and Agent Based Model (ABM) approaches.  Insight Maker and Mathematica was utilized  for the SD, and Insight Maker and Python for the ABM.
 
-\subsection{Assumptions}
-\begin{itemize}
-\item For the present study, it was considered information of two countries that experienced the Ebola Outbreak, Liberia and Sierra Leone.
-\item Time frame: It was divided into stages, first, beginning from the Ebola Outbreak in March 2014 to the International Intervention in September 2014, and second, from the International Intervention to the present.
-\item It was ignored all the possible births and natural deaths ocurred during the chosen timelime, because our simulation is for short period of time, our model was considered as a closed system.
-\end{itemize}
-
 \subsection{Factors Considered}
 There are several factors to take into account when analyzing how a virus may spread in a community. First of all the customs and beliefs of a society play an important role, it implies how the individuals interact among themselves, how often they visit their relatives or friends, the amount of travel to other villages, cities or countries to work or buy supplies, as well as the mode of transport.\\
 Having information about the local government and the wealth of the region, would help to determine the capacity of response when facing an epidemic; including the quantity and quality of hospitals and their capacity, as well as the amount of healthcare workers and their expertise.\\
@@ -357,8 +374,9 @@ We used data reported by World Health Organization recorded by the Center for Di
 %The United Nation reports that the last Census for the countries of Guinea, Sierra Leone, Liberia and Nigeria  was conducted in 2014, 2004, 2008 and 2006 respectively. Due to the need for estimating more current demographic data, we used CIA Factbook estimates. 
 
 \section{Computational Experiments}
-
 \subsection{Compartment Model: System Dynamics}
+\subsection{Agent-Based Model}
+We consider a population of size \textbf{100} with \textbf{99} individuals starting in a susceptible state and \textbf{1} individual in the exposed state. Numeric probabilities of an individual transitioning from each state are recorded in Table \textbf{CREATE A TABLE}. We simulate \textbf{176} days of disease progression without intervention and \textbf{306} days of post intervention disease progression. We repeat the process \textbf{100} times and record the average outcome.  
 
 \subsection{Compartment Model: Agent Dynamics}
 The agent-based model created in Insight Maker also used the data from Rivers et al. with the same states and parameter names as the System Dynamics model. The transitions between the states are described as:\\
