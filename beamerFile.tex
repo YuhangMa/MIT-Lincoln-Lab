@@ -54,6 +54,15 @@
 \begin{frame}
 \frametitle{Model}
 
+<<<<<<< HEAD
+=======
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{compartmentNoFlow}
+  \caption{Compartment Model of the Ebola Epidemic in Liberia \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral,  R: Recovered and D: Dead. } 
+\label{fig:compartment} 
+\end{figure}
+>>>>>>> 39bb738c80778c171147805f700112a1168e22a9
 \end{frame}
 
 \begin{frame}
@@ -62,7 +71,24 @@
 
 \begin{frame}
 \frametitle{Parameters/Data}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{tab_para}
+  \caption{Model Parameters for Ebola Epidemic in Liberia Before and After the International Intervention. Calibrated parameters are written in bold font, and posterior means and standard deviations in parenthesis are notated. } 
+\label{fig:compartment} 
+\end{figure}
 \end{frame}
+
+\begin{frame}
+\frametitle{Parameters/Data}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{CumulativeDeathMathematica}
+  \caption{Validation of calibration. Dots represent cumulative death data and the lines represent simulation
+based on mean posterior parameters. (Blue) - pre intervention and (red) - post treatment.} 
+\end{figure}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{System model}
@@ -70,7 +96,37 @@
 
 \begin{frame}
 \frametitle{System Model Results}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{LB_NoInt_SD_IM}
+  \caption{ Insight Maker results using the parameters of the first stage (Mar/14 to Sept/14) and assuming no intervention}
+\label{fig:LB_IM_NoIn} 
+\end{figure}
 \end{frame}
+
+\begin{frame}
+\frametitle{System Model Results}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{LB_Int3_SD_IM}
+  \caption{ Insight Maker results. \textit{Top:} parameters of the first stage (Mar/14 to Sept/14), \textit{Bottom:} parameters of the second stage ( Sept/14 to July/15)}
+\label{fig:LB_IM_In} 
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{System Model Results}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{PhasePortrait}
+  \caption{ Projection of phase portrait to (Susceptible + Recovered, Dead) space. (Blue) - without intervention,
+(Red) - with intervention, (Dots) - where the phase converges (equilibrium).}
+
+\end{figure}
+\end{frame}
+
+
+
 
 \begin{frame}
 \frametitle{Agent model}
