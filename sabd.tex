@@ -1,17 +1,55 @@
-In the third model, we incorporate spatial information and allow individuals to travel in an agent-based model. This requires making additional assumptions about the grid as well as the individual's movements. The model is coded in \texttt{Python} and propagates the infection and spatial information in discrete days. 
 
-The model uses the same states and have the same transitions possible as in Section \ref{sec:im}.
-
-We initialize the model with one infected individual who does not go to a hospital and does not recover. 
-
-We define a \emph{timeout} to be an integer number of days to wait before transitioning to another state, either uniformly randomly generated between two in or equal to a specified constant. Whenever a range of integers is listed, the number used in simulation is uniformly drawn from that range.
+We next look at an agent-based model where agents are allowed to move within and between cities. Incorporating spatial movement requires making additional assumptions about the map on which movement is allowed and the movement of individuals. The model is coded in \texttt{Python} and propagates the infection and spatial information in discrete days. 
 
 \subsection{Spatial Assumptions}
-We restrict the space to a specified width and height and generate cities randomly within the space with specified variance and relative density. For example, a model may have one city with variance $30$ and density $0.9$ and a village with variance $5$ and density $0.1$. Locations of individuals and cities are real numbers stored as \texttt{floats}. We also create a grid, which partitions the individuals based on their location and is used to determine the closest neighbors for community infection and funeral attendance. A family is assumed to have $3-6$ members (randomly chosen) all of which live in the same exact location. Upon initialization (and later travel), families are place based on the specified city densities, normally distributed around the city's center location using the city's variance. We define an individual's \emph{home} as their initial location.
+We restrict the space (on which cities and individuals are located) to a specified width and height and generate cities randomly within the space with specified variance and relative density. For example, a model may have one city with variance $30$ and density $0.9$ and a village with variance $5$ and density $0.1$. Locations of individuals and cities are real numbers stored as \texttt{floats}. We also create a grid, which partitions the individuals based on their location and is used to determine the closest neighbors for community infection and funeral attendance. A family is assumed to have $3-6$ members (randomly chosen) all of which live in the same exact location. Upon initialization (and later travel), families are place based on the specified city densities, normally distributed around the city's center location using the city's variance. We define an individual's \emph{home} as their initial location.
 
-An individual is movable if he is \emph{susceptible}, \emph{exposed}, or \emph{recovered}. All other individuals remain stationary. Movable individuals travel each timestep with probability $travel_{prob}$. If they are away from home, they will travel home with probability $home_{prob}$. Otherwise, they will travel locally (within their current city or village) with probability $sfd$ or non-locally (to another city) with probability $sdf$.
+An individual is \emph{movable} if he is susceptible, exposed, or recovered. All other individuals remain stationary. Movable individuals travel each timestep with probability $p_{trav}$. If they are away from home, they will travel home with probability $p_{home}$. Otherwise, they will travel locally (within their current city or village) or non-locally (to another city) based on the density of their current city. It is assumed that when an individual is in a density with higher density they are less likely to leave. If individual $i$'s current city density (percentage of the total population) is $d[i]$, then the non-local travel probability is $(1-d[i])/2$.
 
 \subsection{Agent Behavior}
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {S};
+  \node[main node] (2) [right of=1] {E};
+  \node[main node] (3) [right of=2] {I};
+  \node[main node] (4) [right of=3] {F};
+  \node[main node] (5) [below of=3] {H};
+  \node[main node] (6) [below of=4] {D};
+  \node[main node] (7) [left of=5] {R};
+
+  \path[every node/.style={font=\sffamily\small}]
+    (1)
+        edge node {$p_{SE}$} (2)
+        %edge [loop above] node {$1-p_{SE}$} (1)
+    (2) 
+        edge node {$T_{EI}$} (3)
+        % edge [loop above] node {} (2)
+      
+    (3) 
+       edge node {$p_{IF}, T$} (4)
+       edge node[right] {$p_{IH}, T$} (5)
+       edge node[left] {$p_{IR}, T$} (7)
+        %edge [loop above] node {$p_{II}$} (3)
+    (4)
+         edge node {$T$} (6)
+        % edge [loop above] node {$p_{FD}$} (6)
+       
+(5) edge node{$p_{HD}$} (6) 
+	edge node {$T$} (7)
+%edge [loop below] node {$p_{FF}$} (6)     
+;
+        
+\end{tikzpicture}
+\end{center}
+\caption{Available states for individuals and the transitions between them. Probabilistic transitions are denoted be $p$ and timeouts between states by $T$. If both are present, once it is decided that the individual will transition, the timeout is calculated and counted down.}
+\label{fig:sabm-states}
+\end{figure}
+
+The model uses the same states as the previous models, but some of the transitions and probabilities have been modified. Specifically, hospitalized individuals are assumed to be quarantined, and thus no longer infect others or have funerals. Instead, hospitalized individuals move straight to the \emph{Dead} state upon death. See Figure \ref{ABM} vs Figure \ref{fig:sabm-states} for a comparison between the two agent-based models. Figure \ref{fig:sabm-states} denotes the probabilistic and timeout transitions between states. We define a \emph{timeout} to be an integer number of days to wait before transitioning to another state, either uniformly randomly generated between two in or equal to a specified constant. Whenever a range of integers is listed, the number used in simulation is uniformly drawn from that range.
+
 The spatial movement and transitions between states is dependent on the individual's current state. Following are a description of the behavior of each type of individual.
 \begin{description}[labelsep=1.5mm]
 \setlength\itemsep{-3mm}
@@ -91,3 +129,34 @@ Although the values may not precisely match those from the Ebola outbreaks, they
 
 
 \section{Results}
+
+We initialize the model with one infected individual who does not go to a hospital and does not recover. 
+
+\begin{figure}
+\centering
+\begin{subfigure}[t]{0.38\textwidth}
+  \includegraphics[width=\textwidth]{map1} 
+  \caption{Time series of simulation.}
+\end{subfigure}
+\begin{subfigure}[t]{0.56\textwidth}
+  \includegraphics[width=\textwidth]{time1}
+  \caption{Map of final states}
+\end{subfigure}
+\begin{subfigure}[t]{0.38\textwidth}
+  \includegraphics[width=\textwidth]{map2} 
+  \caption{Time series of simulation.}
+\end{subfigure}
+\begin{subfigure}[t]{0.56\textwidth}
+  \includegraphics[width=\textwidth]{time2}
+  \caption{Map of final states}
+\end{subfigure}
+\begin{subfigure}[t]{0.38\textwidth}
+  \includegraphics[width=\textwidth]{map3} 
+  \caption{Time series of simulation.}
+\end{subfigure}
+\begin{subfigure}[t]{0.56\textwidth}
+  \includegraphics[width=\textwidth]{time3}
+  \caption{Map of final states}
+\end{subfigure}
+\caption{Example simulation plots with one city (density 0.8) and two villages (each with density 0.1). The map on the left corresponds to the time series plot on the right.}
+\end{figure}
