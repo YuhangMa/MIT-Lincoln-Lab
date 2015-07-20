@@ -12,10 +12,10 @@
 \contentsline {section}{\numberline {6}Agent-Based Dynamics}{9}
 \contentsline {subsection}{\numberline {6.1}Simulation}{11}
 \contentsline {section}{\numberline {7}Spatial Agent-Based Dyanmics}{11}
-\contentsline {subsection}{\numberline {7.1}Spatial Assumptions}{11}
-\contentsline {subsection}{\numberline {7.2}Agent Behavior}{12}
-\contentsline {subsection}{\numberline {7.3}Parameters}{13}
-\contentsline {section}{\numberline {8}Results}{14}
-\contentsline {section}{\numberline {9}Model Comparison}{14}
-\contentsline {section}{\numberline {10}Summary and Future Work}{14}
-\contentsline {section}{Appendix \numberline {A}MATLAB Pseudocode for Agent-Based Dynamics}{14}
+\contentsline {subsection}{\numberline {7.1}Spatial Assumptions}{13}
+\contentsline {subsection}{\numberline {7.2}Agent Behavior}{13}
+\contentsline {subsection}{\numberline {7.3}Parameters}{14}
+\contentsline {section}{\numberline {8}Results}{15}
+\contentsline {section}{\numberline {9}Model Comparison}{15}
+\contentsline {section}{\numberline {10}Summary and Future Work}{15}
+\contentsline {section}{Appendix \numberline {A}MATLAB Pseudocode for Agent-Based Dynamics}{15}
