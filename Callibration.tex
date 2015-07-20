@@ -1,132 +1,69 @@
-The next model we consider is an agent-based model. Each individual in the population can be in either of 7 states discussed above: susceptible, exposed, infected, hospitalized, funeral, recovered or dead. The flow between two states is a  probability of transition from one state to another for a typical individual. We represent our model in Figure~\ref{ABM}. In each time step a typical individual who is susceptible to contracting a virus can either transition to exposed state with probability $p_{SE}$ or stay susceptible with probability $p_{SS}$. An individuals in the exposed state transitions to infected with probability $p_{EI}$ and stays exposed with probability $p_{EE}$. An individual who is infected can stay infected, recover, go to a hospital or die and transition to funeral state with probabilities $p_{II},\, p_{IR},\, p_{IH}$ and $p_{IF}$ respectively. Recovery is considered a terminal state so individuals in this state stay in it for the remaining duration of the simulation. Hospitalized individuals may stay hospitalized, transition to recovered or funeral with probabilities $p_{HH}, \, p_{HR}$ and $p_{HF}$. We assume that the individual who dies from Ebola remains infectious through the duration of the entire burial ceremony and no precautions are taken against disease transmission. Safely buried individuals are considered dead and noninfectious and remain in this state for the remaining time of the simulation.  
+\section{Parameter Calibration}
+The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown. $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative death in Liberia from March 2014 to July 2015 (reference).
+\subsection{Bayesian calibration framework}
+Using Bayesian calibration methodology, we calibrate the unknown parameters ($\mathcal{P}$). The prior distribution of $\mathcal{P}$ is a uniform distribution which ranges are determined based on numerical exploration and previous researches [references] (Table). \\
 
-%  \begin{tikzpicture}[node distance=2cm, font=\tiny]
-%        \node [draw, terminal]  (start) at (0,0) {Start};
-%        \node [draw, predproc, right of= start] (acquire)(write) {Acquire Image};
-%
-%%% paths
-%    \draw[->](work) -- node[above]{yes}(end);
-%    \end{tikzpicture}
-\begin{figure}[h!]
-\begin{center}
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
-  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
-
-  \node[main node] (1) {S};
-  \node[main node] (2) [right of=1] {E};
-  \node[main node] (3) [right of=2] {I};
-  \node[main node] (4) [right of=3] {R};
-    \node[main node] (5) [below left of=3] {D};
-      \node[main node] (6) [below right of=3] {F};
-        \node[main node] (7) [right of=6] {H};
-
-  \path[every node/.style={font=\sffamily\small}]
-    (1)
-        edge node {$p_{SE}$} (2)
-        edge [loop above] node {$p_{SS}$} (1)
-    (2) 
-        edge node {$p_{EI}$} (3)
-         edge [loop above] node {$p_{EE}$} (2)
-      
-    (3) 
-       edge node {$p_{IR}$} (4)
-       edge node[left] {$p_{IF}$} (6)
-       edge node {$p_{IH}$} (7)
-        edge [loop above] node {$p_{II}$} (3)
-    (4)
-         edge [loop above] node {$p_{RR}$} (4)
-       
-(6) edge node{$p_{FD}$} (5) 
-edge [loop below] node {$p_{FF}$} (6)     
-(7) edge node[right]{$p_{HR}$} (4) 
-edge [loop below] node {$p_{HH}$} (7)
-  (7) edge node{$p_{HF}$} (6)      
- (5) edge [loop below] node {$p_{DD}$} (5)
-        ;
-        
-\end{tikzpicture}
-\end{center}
-\caption{Spread of the disease: Agent-based model. Each node represents a typical individual's state. An individual can transition to a state to which he is connected by a directed arc with a probability specified on an arc}
-\label{ABM}
-\end{figure}
-Let
-
-\begin{itemize}
-\item[]$t_{IP}$ be the incubation period, i.e. time during which the individual has the virus in his body but does not yet show severe symptoms
-\item[] $t_{ID}$ infection duration time after the onset of severe symptoms
-\item[] $t_{H}$ time to hospitalization after manifestation of severe symptoms
-\item[] $t_{IF}$ time from the onset of severe symptoms to funeral
-\item[] $t_{HF}$ time from patient's arrival at the hospital to funeral
-\item[] $t_{HR}$ time from patient's arrival at the hospital to recovery
-\item[] $t_{DF}$ duration of traditional funeral
-\item[] $N$  total number of individuals in a population
-\item[] $N_{I}$  total number of individuals in the infected state
-\item[] $N_{H}$  total number of individuals in the hospitalized state
-\item[] $N_{F}$  total number of individuals in the funeral state
-\item[] $\beta_{I}$ rate at which the disease spreads during an interaction with an infected person
-\item[] $\beta_{H}$ rate at which the disease spreads during an interaction with a hospitalized person
-\item[] $\beta_{F}$ rate at which the disease spreads during an interaction with a person who is in the funeral state
-\end{itemize}
-We define the individual's probability of transition for each state as
-
-\begin{subequations}
-\begin{alignat}{1}
-&p_{SE}=\beta_I\cdot \frac{N_{I}}{N}+\beta_H\cdot \frac{N_{H}}{N}+\beta_F\cdot\frac{ N_F}{N}\\
-&p_{SS}=1-p_{SE}\\
-&p_{EE}=1-\frac{1}{t_{IP}}\\
-&p_{EI}=\frac{1}{t_{IP}}\\
-&p_{II}=\frac{1}{t_{ID}}\\
-&p_{IH}=\frac{1}{t_{H}}\\
-&p_{IF}= \frac{1}{t_{IF}}\\
-&p_{IR}=1-p_{II}-p_{IH}-p_{IF}\\
-&p_{HF}=\frac{1}{t_{HF}}\\
-&p_{HR}=\frac{1}{t_{HR}}\\
-&p_{HH}=1-p_{HF}-p_{HR}\\
-&p_{FF}=\frac{1}{t_{DF}}\\
-&p_{FD}=1-p_{FF}\\
-&p_{RR}=1\\
-&p_{DD}=1
-\end{alignat}
-\end{subequations}
-\subsection{Simulation}We consider a population of size \textbf{100} with \textbf{99} individuals starting in a susceptible state and \textbf{1} individual in the exposed state. Numeric probabilities of an individual transitioning from each state are recorded in Table~\ref{tab:probabilities}. We simulate \textbf{176} days of disease progression without intervention and \textbf{306} days of post intervention disease progression. We repeat the process \textbf{100} times and record the average outcome.  
-%
-%
-% HERE IS THE PROBABILITY TRANSITION TABLE
-%
-%
-%
-%
 \begin{table}[ht]
-\caption{Agent-Model Parameters for Ebola Epidemic in Liberia Before and After the International Intervention} % title of Table
+\caption{Range of the prior parameter space} % title of Table
 \centering % used for centering table
-\begin{tabular}{c c c } 
+\begin{tabular}{c c c c c}
 \hline\hline %inserts double horizontal lines
-Parameter & Liberia Before Intervention  & Liberia After Intervention \\ [0.5ex] 
+$\beta_{I}$ & $\beta_{H}$ & $\beta_{F}$ & $\gamma_{H}$ & $\theta$ \\ [0.5ex]
+\hline % inserts single horizontal line
+$(0,0.5)$ & $(0,0.5)$ & $(0,1)$ & $(2,7)$ & $(0,0.5)$ \\ [0.5ex]
+\hline
+\end{tabular}
+\label{tab:Prior Ranges}
+\end{table}
+
+
+To each random choice ($\mathcal{P}_0$) from the prior distribution, we assign likelihood weight by comparing the real world data ($\mathcal{D}_R$) and data simulated with $\mathcal{P}_0$ ($\mathcal{D}_S$). Multiple choices of parameters and their weights will eventually construct the posterior distribution of $\mathcal{P}$. In this methodology, we provide multiple likely parameter sets, rather than a single best fit. Detailed description on the calibration procedure is:\\
+
+Step 1) Choose a random $\mathcal{P}_0$ from the prior distribution
+
+Step 2) Solve our deterministic system (equation link) with $\mathcal{P}_0$ and given initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$, then evaluate $\mathcal{D}_S=\{D(t_i)\}$ for all dates $\{t_i\}$ corresponding to the cumulative death data ($\mathcal{D}_R$).
+
+Step 3) Evaluate likelihood of $\mathcal{P}_0$: $Exp[-Norm(\mathcal{D}_R-\mathcal{D}_S)/Norm(\mathcal{D}_R)]$
+
+\emph{Repeat Step 1-3 multiple times and make large number of {parameter + likelihood} ensembles. Generate posterior distribution with them.}
+
+\subsection{Results and validation}
+For the calibration of before intervention parameters, we used the data for 176 days (March 14 to September 14), and initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that initial outbreak started from a single infected person in a million population. The calibration of after intervention parameters is based on the data for 306 days (September 14 to July 15), and initial value $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from calibrated mean $\mathcal{P}$ for pre intervention. 10000 random samples were used in each calibration. Calibration results and validation are shown in (table) and (figure).\\
+Based on our calibration, the intervention reduce the basic reproduction number of Ebola in Liberia from 1.99 to 0.787, using the formula in (reference). As a result, infection spread terminated after infection 0.84\% of total population and 0.49\% decrease in population, otherwise 92.7\% are infected and 53.5\% decrease in population.\\
+
+
+\begin{table}[ht]
+\caption{Model Parameters for Ebola Epidemic in Liberia Before and After the International Intervention. Calibrated parameters are written in bold font, and posterior means and standard deviations in parenthesis are notated.} % title of Table
+\centering % used for centering table
+\begin{tabular}{c c c }
+\hline\hline %inserts double horizontal lines
+Parameter & Liberia Before Intervention  & Liberia After Intervention \\ [0.5ex]
  & (Mar/14 to Sept/14) &  (Sept/14 to Jul/15) \\ [0.5ex] % inserts table
 % inserts table
 %heading
 \hline % inserts single horizontal line
-$p_{SE}$ & \textbf{DYNAMIC} & \textbf{DYNAMIC} \\ 
-$p_{SS}$ & \textbf{COMPUTE}8 & \textbf{COMPUTE}  \\ 
-$p_{EE}$ & 0.9091 & 0.9091  \\ 
-$p_{EI}$ & 0.0909 & 0.0909  \\ 
-$p_{II}$ & 0.1 & 0.1  \\ 
-$p_{IH}$ & 0.2227 & 0.2160  \\ 
-$p_{IF}$ & 0.125 & 0.125  \\ 
-$p_{IR}$ & 0.5523 & 0.559  \\ 
-$p_{HF}$ & 0.2849 & 0.2849 \\ 
-$p_{HR}$ & 0.1815 & 0.1815 \\ 
-$p_{HH}$ & 0.5336& 0.5336  \\ 
-$p_{FF}$ & 0.5 & 0.5 \\ 
-$p_{FD}$ & 0.5 & 0.5  \\ 
-$p_{RR}$ & 1 & 1  \\ 
-$p_{DD}$ & 1 & 1 \\ [1ex] 
-\hline 
+\bf {Contact Rate, Community  ($\bf{\beta_{I}}$) }& \bf{0.148 (0.0953)} & \bf{0.0446 (0.338)}  \\
+\bf Contact Rate, Hospital  ($\beta_{H}$) &\bf 0.235 (0.143)& \bf 0.0877 (0.563) \\
+\bf Contact Rate, Funeral  ($\beta_{F}$) & \bf 0.465 (0.287)& \bf 0.283 (0.208) \\
+Incubation Period (${1}/{\alpha}$) & 11 days & 11 days  \\
+\bf Time until Hospitalization (${1}/{\gamma_{H}}$) &\bf 4.49 (1.44) days & \bf 4.63 (1.43) days  \\
+Time froml Hospitalization to Death (${1}/{\gamma_{DH}}$) & 3.51 days & 3.51 days  \\
+Duration of Traditional Funeral (${1}/{\gamma_{F}}$) & 2.00 days & 2.00 days  \\
+Duration of Infection (${1}/{\gamma_{I}}$) & 10.00 days & 10.00 days  \\
+Time from Infection to Death (${1}/{\gamma_{D}}$) & 8.00 days & 8.00 days  \\
+Time from Hospitalization to Recovery (${1}/{\gamma_{IH}}$) & 5.51 days & 5.51 days  \\
+\bf Probablity a Case is Hospitalized ($\theta$) & \bf 0.248 (0.142) & \bf 0.233 (0.145) \\
+Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500  & 0.500  \\
+Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 \\ [1ex]
+\hline
 \end{tabular}
-\label{tab:probabilities}
+\label{tab:parameters}
 \end{table}
-%
-%
-%
-%
-%
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{CumulativeDeathMathematica}
+  \caption{write caption here}
+\label{fig:Validation of calibration. Dots represent cumulative death data and the lines represent simulation based on mean posterior parameters. (Blue) - pre intervention and (red) - post treatment.}
+\end{figure}
