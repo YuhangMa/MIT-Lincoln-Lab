@@ -2,7 +2,7 @@
 \usepackage[final]{graphicx}
 \graphicspath{{Fig/}}
 \usepackage{epstopdf}
-\usepackage{amsfonts} 
+\usepackage{amsfonts, subcaption} 
 \usepackage{amsmath}
 \usepackage{tikz, flowchart}
 \usepackage{enumitem}
@@ -56,31 +56,31 @@ Christian Gunning\footnote{Departments of Entomology and Mathematics, North Caro
 \section{Problem Statement}
 \input{problem}
 
-\section{Methods}
+\section{Methods}\label{sec:Methods}
 \input{methods}
 
 
-\section{Parameter Calibration}
+\section{Parameter Calibration}\label{sec:Calibration}
 \input{Callibration}
 
 
-\section{System Dynamics}
+\section{System Dynamics}\label{sec:SD}
 \input{IM} %includes insight maker and mathematica
 
 
-\section{Agent-Based Dynamics}
+\section{Agent-Based Dynamics}\label{sec:ABM}
 \input{ABM}
 
 
-\section{Spatial Agent-Based Dyanmics}
+\section{Spatial Agent-Based Dyanmics}\label{sec:SD}
 \input{sabd}
 
 
-\section{Model Comparison}
+\section{Model Comparison}\label{sec:Compare}
 \input{modelcomparison}
 
 
-\section{Summary and Future Work}
+\section{Summary and Future Work}\label{sec:Summary}
 \input{summary}
 
 
