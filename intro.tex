@@ -1,0 +1,27 @@
+Bacteria growth during wine making, spread of infectious diseases and recruitment to extremists organizations can be modeled in a similar way - either by exponential or logistic growth models. For the purposes of this paper we focus solely on modeling the spread of Ebola through Liberia throughout 2014 - 2015 outbreak. We chose to focus on Liberia because most of the data needed for the model was available in the literature. While the model allows one to consider other countries affected by the outbreak we did not calibrate the associated parameters. 
+
+Ebola was first discovered in 1976. Since then, there were 34 records of Ebola reported by the Center for Disease Control and Prevention. However, until 2014 all outbreaks had a reported number of deaths that did not exceed 500; 11 of them did not exceed 10 individuals and 15 records did not exceed 65 individuals \cite{CDCOutbreaks}.  The outbreak of 2014 is considered different. It took thousands of lives over the past two years and received an extensive media coverage.
+
+The current outbreak may be different because it was the first time Ebola was contracted in the West Africa as opposed to Central Africa where it was first discovered. Early symptoms are flu-like: fever, headache, fatigue and joint pain. Diseases like HIV and Malaria, which are common to the region, have the same symptoms. As Ebola progresses, the infected experiences abdominal pain, diarrhea, vomiting and rashes. The virus is contracted through direct contact with bodily fluids and secretion: blood, saliva, urine, fecal matter. Once virus is contracted, the incubation period may last up to two weeks making intervention measures like tracking difficult \cite{CDCSympt}. 
+
+A variety of cultural and economic factors have contributed to the spread of the disease: lack of medical centers in some regions and poor sensitization practices in such centers, distrust in the western medicine, poverty and traditional burial ceremony which includes physical contact with the diseased \cite{WHOReasons}. 
+
+One may look at the spread of the infectious diseases from two perspectives: system based and agent based. In the system based model the entire population is divided into compartments with a certain proportion of the population in each. As time progresses certain amount of people flow from one compartment into another. Naturally, such relationship is described either by a difference or a differential equation. One of the most well-known equation-based models involves three states: susceptible, infected, recovered. Such model is called an SIR model; each letter in the abbreviation represents one of the compartments in the population. This model has multiple modifications because various compartments can be added. In the case of Ebola, Lekone and Finkenstäd \cite{Lekone2006} consider a four compartment model, inserting an "Exposed" state between "Susceptible" and "Infected". A six-compartment model, presented by Legrand \cite{Legrand2007} and Rivers\cite{Rivers2014} differentiates between the modes of transition of the disease, i.e. a virus can be transmitted in the community, at hospitals and medical centers or at funerals.
+
+In contrast to system based models, agent-based models are concerned with the behavior of a typical individual rather than the system as a whole. In such models every individual in the system is assigned certain characteristics, i.e. states. Individual's behavior is probabilistic at each unit of time and causes him either to transition to a different state or stay in his current state. Agent-based models for Ebola include Siettos et al. \cite{Siettos2015} and Merler et al.\cite{Merler2015}. A variety of models examine the effectiveness of intervention measures. Examples include contact tracing by Webb et al. \cite{Webb2015} and travel restrictions by Poletto et al. \cite{Poletto2014}.
+
+In this paper we consider a seven compartment system based model as well as agent-based modification of the same model. We show \textbf{What did we show?!} \textbf{What about the model with spatial component?}
+
+The rest of the paper is organized as follows. In section~\ref{sec:Model} we present our model. Section~\ref{sec:Data} describes our data and parameters. Section~\ref{sec:Results} discusses the results of numerical experiments. Section~\ref{sec:Summary} concludes.
+
+It should be written as much as possible in non-technical terms, so that a
+lay reader can understand the context and the contribution of the paper.
+
+\begin{itemize}
+\item Describe the problem you are trying to solve, the approach
+you took, and summarize your contribution and results.
+
+\item Review the history of this problem, and existing literature.
+
+\item Give an outline of the rest of the paper.
+\end{itemize}

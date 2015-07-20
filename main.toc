@@ -1,0 +1,14 @@
+\contentsline {section}{\numberline {1}put this somewhere else}{1}
+\contentsline {section}{\numberline {2}Introduction}{2}
+\contentsline {section}{\numberline {3}Problem Statement}{3}
+\contentsline {section}{\numberline {4}Methods}{3}
+\contentsline {subsection}{\numberline {4.1}Factors Considered}{3}
+\contentsline {subsection}{\numberline {4.2}Compartment-State Definition}{4}
+\contentsline {section}{\numberline {5}Parameter Calibration}{4}
+\contentsline {section}{\numberline {6}System Dynamics}{4}
+\contentsline {subsubsection}{\numberline {6.0.1}Insight Maker}{4}
+\contentsline {section}{\numberline {7}Agent-Based Dynamics}{5}
+\contentsline {section}{\numberline {8}Spatial Agent-Based Dyanmics}{7}
+\contentsline {section}{\numberline {9}Model Comparison}{7}
+\contentsline {section}{\numberline {10}Summary and Future Work}{7}
+\contentsline {section}{Appendix \numberline {A}MATLAB Pseudocode for Agent-Based Dynamics}{7}
