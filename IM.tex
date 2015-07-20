@@ -1,7 +1,9 @@
+
 \documentclass[10pt]{article} 
 \usepackage[final]{graphicx} 
 \usepackage{amsfonts} 
  \usepackage{amsmath}
+
 \topmargin-.5in 
 \textwidth6.6in 
 \textheight9in 
@@ -12,9 +14,6 @@
 
  
 \begin{document} 
-
-%
-
 
 %%SUBSECTION OF SYSTEM DYNAMICS
 
@@ -49,7 +48,7 @@
 \label{fig:SD_IM} 
 \end{figure}\\
 
-\noindent A normalized population fraction was simulated. The compartment S was initialized with a value of 999.999/1.000.000, and the compartment I with 1/1.000.000, meaning that there is an infected individual per every million of habitants, the rest of the compartments were set as 0. The flow between the compartments is specified in Figure \ref{fig:compartment.} and all the other parameters were initialized as shown in Table \ref{tab:parameters}.  As mention in Section CALIBRATION SECTION, the parameters were calibrated in two stages, before and after the international intervention. According with the time frame proposed, the change on the parameters was also implemented on Insight Maker. The links to the online models can be found on \cite{IM_AI} and  \cite{IM_BI}.  \\
+\noindent A normalized population fraction was simulated. The compartment S was initialized with a value of 999.999/1.000.000, and the compartment I with 1/1.000.000, meaning that there is an infected individual per every million of habitants, the rest of the compartments were set as 0. The flow between the compartments is specified in Figure \ref{fig:compartment.} and all the other parameters were initialized as shown in Table \ref{tab:parameters}.  As mention in Section \ref{sec:calibration}, the parameters were calibrated in two stages, before and after the international intervention. According with the time frame proposed, the change on the parameters was also implemented on Insight Maker. The links to the online models can be found on \cite{IM_AI} and  \cite{IM_BI}.  \\
 
 
 % RESULTS AND DISCUSSION
@@ -95,6 +94,19 @@
   \caption{ \bf Comparison between World Health Organization (WHO) data and Insight Maker (IM) results using the parameters before intervention (BI) and after intervention (AI), for the cumulative deaths (D).}
 \label{fig:LB_IM_WHO2} 
 \end{figure}\\
+
+
+%%MATHEMATICA DESCRIPTION
+\newpage
+\subsection{Mathematica}
+We drew the plots in the previous section also with Mathematica, and got almost same result. One additional plot we draw in Mathematica is phase portrait of the system (Figure).
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{PhasePortrait}
+  \caption{Projection of phase portrait to (Susceptible + Recovered, Dead) space. (Blue) - without intervention, (Red) - with inter vention, (Dots) - where the phase converges (equilibrium).}
+\label{fig:Phase Portrait}
+\end{figure}
 
 
 
