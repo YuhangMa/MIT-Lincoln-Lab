@@ -1,0 +1,158 @@
+\documentclass[10pt]{article} 
+\usepackage[final]{graphicx} 
+\usepackage{amsfonts} 
+\usepackage{amsmath}
+\usepackage{tikz, flowchart}
+\usepackage[titletoc]{appendix}
+\usetikzlibrary{arrows}
+\topmargin-.5in 
+\textwidth6.6in 
+\textheight9in 
+\oddsidemargin0in 
+ 
+\def\ds{\displaystyle} 
+\def\d{\partial} 
+
+ 
+\begin{document} 
+% PARTICIPANTS, MENTORS, AFFILIATIONS
+
+\centerline{\large \bf Wine, Ebola and Terrorism}
+
+\vspace{.1truein}
+
+\def\thefootnote{\arabic{footnote}}
+\begin{center}
+  Hsuan-Wei Lee\footnote{Department of Mathematics, University of North Carolina Chapel Hill},
+  Anzhelika Lyubenko\footnote{Department of Mathematical and Statistical Sciences, University of Colorado Denver},
+  Yuhang Ma\footnote{Department of Operations Research and Information Engineering, Cornell University},
+  Emily Meissen\footnote{Department of Applied Mathematics, University of Arizona},
+  Daniela Velez-Rendon\footnote{Department of Bio-engineering, University of Illinois at Chicago},
+    Nara Yoon\footnote{
+Department of Mathematics, Applied Mathematics and Statistics, Case Western Reserve University}
+\end{center}
+
+%\vspace{.1truein}
+
+\begin{center}
+Mentors: John Peach \footnote{Massachusetts Institute of Technology: Lincoln Laboratory}, Cammey Cole Manning\footnote{Mathematics and Computer Science Department, Meredith College},
+Christian Gunning\footnote{Departments of Entomology and Mathematics, North Carolina State University}
+\end{center}
+% ABSTRACT
+
+\begin{abstract}
+\noindent We present a new model of Ebola outbreak in Liberia during 2014-2015. We approach the problem from both systematic and agent perspective and compare the results. We show that if the outbreak is not contained in the early stages and the individuals do not change their behavior as the virus prevails, between 60 and 80 percent of population get the disease. 
+\end{abstract}
+
+\tableofcontents
+
+\section{put this somewhere else}
+We examine the problem from two perspectives. We present a system based model first and then discuss an agent-based modification of it. We then consider an agent-based model that incorporates agents' movement through space. Throughout the three models we utilize the same assumptions and compartment-state definitions. 
+
+In order to propose a more accurate model and compare the results among different programming  languages, the compartment flow model of the Ebola Epidemic in West Africa, 2014, was modeled with a System Dynamics (SD) and Agent Based Model (ABM) approaches.  Insight Maker and Mathematica was utilized  for the SD, and Insight Maker and Python for the ABM.
+
+\begin{itemize}
+\item Insight Maker: SD and ABM
+\item Mathematica: SD
+\item Python: ABM
+\end{itemize}
+We used InsightMaker platform to prototype our model and simulate stepping forward through time. More details about the platform and its functionality can be found in Fortmann-Roe's review \cite{FortmannRoe}. The platform uses fourth order Runge-Kutta differential equation solver for the system dynamics model and  first order Euler approximation for the Agent-Based model.
+
+Give enough details so that readers can duplicate your experiments.
+
+\begin{itemize}
+\item Describe the precise purpose of the experiments, and what they 
+are supposed to show.
+
+\item Describe and justify your test data, and any assumptions you made to 
+simplify the problem.
+
+\item Describe the software you used, and the 
+parameter values you selected.
+
+\item 
+For every figure, describe the meaning and units of the coordinate axes, 
+and what is being plotted.
+
+\item Describe the conclusions you can draw from your experiments
+\end{itemize}
+
+\section{Introduction}
+\input{intro}
+
+
+\section{Problem Statement}
+\input{problem}
+
+
+\section{Methods}
+\input{methods}
+
+
+\section{Parameter Calibration}
+\input{parameters}
+
+
+\section{System Dynamics}
+\input{system}
+
+
+\section{Agent-Based Dynamics}
+\input{abd}
+
+
+\section{Spatial Agent-Based Dyanmics}
+\input{sabd}
+
+
+\section{Model Comparison}
+\input{modelcomparison}
+
+
+\section{Summary and Future Work}
+\input{summary}
+
+
+\begin{appendices}
+\section{MATLAB Pseudocode for Agent-Based Dynamics}
+\input{matlab-pseudo}
+
+\end{appendices}
+
+
+
+
+
+%\subsection{Compartment Model: Agent Dynamics}
+%The agent-based model created in Insight Maker also used the data from Rivers et al. with the same states and parameter names as the System Dynamics model. The transitions between the states are described as:\\
+%
+%\begin{table}[ht]
+%\begin{center}
+%\begin{tabular}{c | l | l}
+%{\bf Transition} & {\bf Type } & {\bf Value}\\\hline
+%$S\rightarrow E$ & Probability & $\min(1,\xi_5\beta_{fam}+\xi_{100}\beta_{com}+\xi_{10}\beta_F)$\\
+%$E\rightarrow I$ & Timeout & $1/\alpha$\\
+%$I\rightarrow H$ & Probability & $\theta\gamma_H$\\
+%$I\rightarrow F$ & Probability & $(1-\theta)\delta_1\gamma_D$\\
+%$I\rightarrow R$ & Probability & $(1-\theta)(1-\delta_{1})\gamma_I$\\
+%$F\rightarrow R$ & Timeout & ${1}/{\gamma_{F}}$\\
+%$H\rightarrow R$ & Timeout & $\delta_{2}/{\gamma_{DH}} + (1-\delta_{2})/{\gamma_{IH}}$\\
+%\end{tabular}
+%\end{center}
+%\end{table}
+%\noindent where $\xi_{i}$ is the number of infected people within the individual's $i$ closest neighbors, $\beta_{fam}$ is the family contact rate, and $\beta_{com}$ is the community contact rate (maybe same?). The probability of contracting Ebola depends on the number of infected people within the individual's family or neighbors, and funerals are assumed to be attended by the deceased's 10 nearest neighbors.
+%
+%\begin{figure}
+%\caption{The agent-based Insight Maker model.}
+%\end{figure}
+%
+%\begin{figure}
+%\caption{A simulation of the agent-based Insight Maker model with $\beta_{fam}=0.4$ and $\beta_{com}=0.01$.}
+%\end{figure}
+
+
+\bibliography{references}
+\bibliographystyle{plain}
+
+\end{document}
+

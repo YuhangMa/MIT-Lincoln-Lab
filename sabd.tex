@@ -1,0 +1,93 @@
+In the third model, we incorporate spatial information and allow individuals to travel in an agent-based model. This requires making additional assumptions about the grid as well as the individual's movements. The model is coded in \texttt{Python} and propagates the infection and spatial information in discrete days. 
+
+The model uses the same states and have the same transitions possible as in Section \ref{sec:im}.
+
+We initialize the model with one infected individual who does not go to a hospital and does not recover. 
+
+We define a \emph{timeout} to be an integer number of days to wait before transitioning to another state, either uniformly randomly generated between two in or equal to a specified constant. Whenever a range of integers is listed, the number used in simulation is uniformly drawn from that range.
+
+\subsection{Spatial Assumptions}
+We restrict the space to a specified width and height and generate cities randomly within the space with specified variance and relative density. For example, a model may have one city with variance $30$ and density $0.9$ and a village with variance $5$ and density $0.1$. Locations of individuals and cities are real numbers stored as \texttt{floats}. We also create a grid, which partitions the individuals based on their location and is used to determine the closest neighbors for community infection and funeral attendance. A family is assumed to have $3-6$ members (randomly chosen) all of which live in the same exact location. Upon initialization (and later travel), families are place based on the specified city densities, normally distributed around the city's center location using the city's variance. We define an individual's \emph{home} as their initial location.
+
+An individual is movable if he is \emph{susceptible}, \emph{exposed}, or \emph{recovered}. All other individuals remain stationary. Movable individuals travel each timestep with probability $travel_{prob}$. If they are away from home, they will travel home with probability $home_{prob}$. Otherwise, they will travel locally (within their current city or village) with probability $sfd$ or non-locally (to another city) with probability $sdf$.
+
+\subsection{Agent Behavior}
+The spatial movement and transitions between states is dependent on the individual's current state. Following are a description of the behavior of each type of individual.
+\begin{description}[labelsep=1.5mm]
+\setlength\itemsep{-3mm}
+\item[Susceptible] individuals travel randomly and may only transition to the exposed state.\\
+\item[Exposed] individuals may also travel randomly. Upon initial transition, they generate a timeout of $??$ days until they will transition to the infected state.\\
+\item[Infected] individuals are assumed to be too sick to travel. Upon initial transition, it is decided whether they will go to the hospital (with probability $??$, generating a timeout of $??$ until transitioning to hospitalization), die and be buried at a funeral (with probability $???$, generating a timeout of $??$ until transitioning to the funeralized state), or recover (generating a timeout of $??$ until transitioning to the recovered state). While in the infected state, the individual infects people in the surrounding grid each with probability $??$ if they are a family member or $sdf$ otherwise.\\
+\item[Hospitalized] individuals are quarantined and no longer infect anyone. Upon initial transition, it is decided whether they will die in the hospital (with probability $sdf$, generating a timeout of $sdf$ until death) or recover (generating a timeout of $sf$ until recovery). Because they are quarantined, traditional funerals with high infection rates are not held upon death.\\
+\item[Funeralized] individuals spend $2$ days in the funeralized state before transitioning to the \emph{dead} state, but only infect people on the initial entrance to the \emph{funeralized} state. Upon initial transition, the individual and all of his movable relatives return home. All susceptible people in his home grid cell who were also in that grid cell at initialization (family and initial neighbors not currently away) are then infected with probability $\beta_{fun}$.\\
+\item[Recovered] individuals do not affect the model but can continue traveling.\\
+\item[Dead] individuals remain stationary and do not affect the model.\\
+\end{description}
+insert picture of grid
+
+\subsection{Parameters}
+
+\begin{table}[ht]
+\caption{Model Parameters for Ebola Epidemic in Liberia Before  and After the International Intervention} % title of Table
+\centering % used for centering table
+\begin{tabular}{c c c } 
+\hline\hline %inserts double horizontal lines
+Parameter & Liberia Before Intervention  & Liberia After Intervention \\ [0.5ex] 
+ & (Mar/14 to Sept/14) &  (Sept/14 to Jul/15) \\ [0.5ex] % inserts table
+% inserts table
+%heading
+\hline % inserts single horizontal line
+Contact Rate, Community  ($\beta_{I}$) & 0.148 & 0.0446  \\ 
+Contact Rate, Hospital  ($\beta_{H}$) & 0.235 & 0.0877  \\
+Contact Rate, Funeral  ($\beta_{F}$) & 0.465 & 0.283 \\
+Incubation Period (${1}/{\alpha}$) & 11 days & 11 days  \\
+Time until Hospitalization (${1}/{\gamma_{H}}$) & 4.49 days & 4.63 days  \\
+Time from Hospitalization to Death (${1}/{\gamma_{DH}}$) & 3.51 days & 3.51 days  \\ 
+Duration of Traditional Funeral (${1}/{\gamma_{F}}$) & 2.00 days & 2.00 days  \\
+Duration of Infection (${1}/{\gamma_{I}}$) & 10.00 days & 10.00 days  \\
+Time from Infection to Death (${1}/{\gamma_{D}}$) & 8.00 days & 8.00 days  \\
+Time from Hospitalization to Recovery (${1}/{\gamma_{IH}}$) & 5.51 days & 5.51 days  \\
+Probability a Case is Hospitalized ($\theta$) & 0.248 & 0.233 \\
+Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500  & 0.500  \\
+Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 \\ [1ex] 
+\hline 
+\end{tabular}
+\label{tab:parameters}
+\end{table}
+
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{c c}\hline\hline
+Parameter & Value\\\hline\hline
+Travel probability & 0.2\\
+Travel home probability & 0.5\\
+Travel non-locally probability & $(1-\text{current city density})/2$\\\hline
+Family size & 3-6\\
+Family infection probability & ?\\
+-Community infection probability & ?\\
+-Funeral infection probability & ?\\
+Funeral length & ?\\
+Funeral attendance size & ?\\\hline
+$^\star$Incubation time & ?\\
+Infected mortality (does this include hospital?)& ?\\
+$^\star$Time from infection to death & ?\\
+$^\star$Time from infection to recovery & ?\\
+$^\star$Hospitalization probability & ?\\
+$^\star$Time until hospitalization & ?\\
+$^\star$Hospital death probability & ?\\
+$^\star$Time from hospitalization to death & ?\\
+$^\star$Time from hospitalization to recovery & ?\\\hline
+\end{tabular}
+%\caption{Parameter values used in the model. Values marked with $^\star$ are based on data from Table ?? from [cite]. Other values were chosen ...
+\end{center}
+\end{table}
+
+For the first group of parameters, each individual has a 20\% chance of traveling per timestep. If he travels and is not home, there is a 50\% chance he travels home. Otherwise, he travels non-locally (to another city or village) with probability .... This incorporates the lower probability of non-local travel from large cities and higher non-local travel from small villages, but still leaves at least a 50\% chance to travel locally instead.
+
+Other parameters for the simulations included map width ($100$) and height ($50$), city densities ($80\%, 10\%, 10\%$) and variance ($20,5,5$), and population size ($500$).
+
+Although the values may not precisely match those from the Ebola outbreaks, they still provide some insight into the spread of a disease through a spatial model.
+
+
+\section{Results}
