@@ -38,26 +38,26 @@ Based on our calibration, the intervention reduce the basic reproduction number 
 \begin{table}[ht]
 \caption{Model Parameters for Ebola Epidemic in Liberia Before and After the International Intervention. Calibrated parameters are written in bold font, and posterior means and standard deviations in parenthesis are notated.} % title of Table
 \centering % used for centering table
-\begin{tabular}{c c c }
+\begin{tabular}{c c c c }
 \hline\hline %inserts double horizontal lines
-Parameter & Liberia Before Intervention  & Liberia After Intervention \\ [0.5ex]
- & (Mar/14 to Sept/14) &  (Sept/14 to Jul/15) \\ [0.5ex] % inserts table
+Parameter & Liberia Before Intervention  & Liberia After Intervention & Liberia Fitted Values\\ [0.5ex]
+ & (Mar/14 to Sept/14) &  (Sept/14 to Jul/15) & from \cite{FortmannRoe}\\ [0.5ex] % inserts table
 % inserts table
 %heading
 \hline % inserts single horizontal line
-\bf {Contact Rate, Community  ($\bf{\beta_{I}}$) }& \bf{0.148 (0.0953)} & \bf{0.0446 (0.0338)}  \\
-\bf Contact Rate, Hospital  ($\beta_{H}$) &\bf 0.235 (0.143)& \bf 0.0877 (0.0563) \\
-\bf Contact Rate, Funeral  ($\beta_{F}$) & \bf 0.465 (0.287)& \bf 0.283 (0.208) \\
-Incubation Period (${1}/{\alpha}$) & 11 days & 11 days  \\
-\bf Time until Hospitalization (${1}/{\gamma_{H}}$) &\bf 4.49 (1.44) days & \bf 4.63 (1.43) days  \\
-Time froml Hospitalization to Death (${1}/{\gamma_{DH}}$) & 3.51 days & 3.51 days  \\
-Duration of Traditional Funeral (${1}/{\gamma_{F}}$) & 2.00 days & 2.00 days  \\
-Duration of Infection (${1}/{\gamma_{I}}$) & 10.00 days & 10.00 days  \\
-Time from Infection to Death (${1}/{\gamma_{D}}$) & 8.00 days & 8.00 days  \\
-Time from Hospitalization to Recovery (${1}/{\gamma_{IH}}$) & 5.51 days & 5.51 days  \\
-\bf Probablity a Case is Hospitalized ($\theta$) & \bf 0.248 (0.142) & \bf 0.233 (0.145) \\
-Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500  & 0.500  \\
-Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 \\ [1ex]
+\bf {Contact Rate, Community  ($\bf{\beta_{I}}$) }& \bf{0.148 (0.0953)} & \bf{0.0446 (0.0338)} & 0.160 \\
+\bf Contact Rate, Hospital  ($\beta_{H}$) &\bf 0.235 (0.143)& \bf 0.0877 (0.0563) & 0.062\\
+\bf Contact Rate, Funeral  ($\beta_{F}$) & \bf 0.465 (0.287)& \bf 0.283 (0.208) & 0.489 \\
+Incubation Period (${1}/{\alpha}$) & 11 days & 11 days  & 12 days\\
+\bf Time until Hospitalization (${1}/{\gamma_{H}}$) &\bf 4.49 (1.44) days & \bf 4.63 (1.43) days & 3.24 days  \\
+Time froml Hospitalization to Death (${1}/{\gamma_{DH}}$) & 3.51 days & 3.51 days  & 10.07 days\\
+Duration of Traditional Funeral (${1}/{\gamma_{F}}$) & 2.00 days & 2.00 days  & 2.01 days\\
+Duration of Infection (${1}/{\gamma_{I}}$) & 10.00 days & 10.00 days  & 15.00 days\\
+Time from Infection to Death (${1}/{\gamma_{D}}$) & 8.00 days & 8.00 days  & 13.31 days\\
+Time from Hospitalization to Recovery (${1}/{\gamma_{IH}}$) & 5.51 days & 5.51 days  & 15.88 days\\
+\bf Probablity a Case is Hospitalized ($\theta$) & \bf 0.248 (0.142) & \bf 0.233 (0.145) & 0.197\\
+Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500  & 0.500  &  0.500 \\
+Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 & 0.500\\ [1ex]
 \hline
 \end{tabular}
 \label{tab:parameters}
