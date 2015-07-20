@@ -8,14 +8,12 @@
 \contentsline {subsection}{\numberline {4.2}Results and validation}{5}
 \contentsline {section}{\numberline {5}System Dynamics}{6}
 \contentsline {subsection}{\numberline {5.1}Insight Maker}{6}
-\contentsline {subsection}{\numberline {5.2}Mathematica}{9}
-\contentsline {section}{\numberline {6}Agent-Based Dynamics}{9}
-\contentsline {subsection}{\numberline {6.1}Simulation}{11}
-\contentsline {section}{\numberline {7}Spatial Agent-Based Dyanmics}{11}
-\contentsline {subsection}{\numberline {7.1}Spatial Assumptions}{13}
-\contentsline {subsection}{\numberline {7.2}Agent Behavior}{13}
-\contentsline {subsection}{\numberline {7.3}Parameters}{14}
-\contentsline {section}{\numberline {8}Results}{15}
-\contentsline {section}{\numberline {9}Model Comparison}{15}
-\contentsline {section}{\numberline {10}Summary and Future Work}{15}
-\contentsline {section}{Appendix \numberline {A}MATLAB Pseudocode for Agent-Based Dynamics}{15}
+\contentsline {subsection}{\numberline {5.2}Mathematica}{8}
+\contentsline {section}{\numberline {6}Spatial Agent-Based Dyanmics}{9}
+\contentsline {subsection}{\numberline {6.1}Spatial Assumptions}{11}
+\contentsline {subsection}{\numberline {6.2}Agent Behavior}{11}
+\contentsline {subsection}{\numberline {6.3}Parameters}{12}
+\contentsline {section}{\numberline {7}Results}{13}
+\contentsline {section}{\numberline {8}Model Comparison}{13}
+\contentsline {section}{\numberline {9}Summary and Future Work}{13}
+\contentsline {section}{Appendix \numberline {A}MATLAB Pseudocode for Agent-Based Dynamics}{13}
