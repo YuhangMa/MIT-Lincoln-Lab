@@ -1,12 +1,11 @@
-Based on the compartmental model and parameters published by Rivers et al.\cite{Rivers2014} in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could turn into Exposed (E), if they were in contact with an infections individual, initiating a trantition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed from the individual (R), or the patients may recover, at this stage, it can be cosidered equivalently removed. However, for the present study was considered seven compartments in order to distinguish between the recovered (R) patients and the deceased (D) individuals. 
-Figure ~\ref{fig:compartment} depicts the implemented compartment model. \\
+Based on the compartmental model and parameters published by Rivers et al.\cite{Rivers2014} in October 2014, it was modeled a similar approach in Insight Maker.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could become Exposed (E), if they were in contact with an infected individual, initiating a transition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed (R) from the individual, or the patients may recover, at this stage, can be considered equivalently removed. However,  in order to distinguish between the recovered (R) patients and the deceased (D) individuals, was considered a model with seven compartments : S, E, I, H, F, R and D. Figure ~\ref{fig:compartment} depicts the implemented compartment model. \\
 
 
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=0.7\textwidth]{compartment}
-  \caption{Compartment Model of the Ebola Epidemic in Liberia and Sierra Leone \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral,  R: Recovered and D: Dead. All the possible flows are specified by the arrows and the parameters that direct them. Note that $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, is a combination of all the $\beta$ transmission terms shown in Table~\ref{tab:parameters} } 
+  \caption{Compartment Model of the Ebola Epidemic in Liberia. \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral,  R: Recovered and D: Dead. All the possible flows are specified by the arrows and the parameters that direct them. Note that $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, is a combination of all the $\beta$ transmission terms shown in Table~\ref{tab:parameters} } 
 \label{fig:compartment} 
 \end{figure}
 
@@ -33,12 +32,12 @@ where each of the parameters are defined on Table \ref{tab:parameters}
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.7\textwidth]{SD_IM}
+  \includegraphics[width=1\textwidth]{SD_IM}
   \caption{ Compartment model of the system dynamics implemented on Insight Maker}
 \label{fig:SD_IM} 
 \end{figure}
 
-\noindent A normalized population fraction was simulated. The compartment S was initialized with a value of 999.999/1.000.000, and the compartment I with 1/1.000.000, meaning that there is an infected individual per every million of habitants, the rest of the compartments were set as 0. The flow between the compartments is specified in Figure \ref{fig:compartment.} and all the other parameters were initialized as shown in Table \ref{tab:parameters}.  As mention in Section \ref{sec:calibration}, the parameters were calibrated in two stages, before and after the international intervention. According with the time frame proposed, the change on the parameters was also implemented on Insight Maker. The links to the online models can be found on \cite{IM_AI} and  \cite{IM_BI}.  
+\noindent A normalized population fraction was simulated. The compartment S was initialized with a value of 999.999/1.000.000, and the compartment I with 1/1.000.000, meaning that there is an infected individual per every million of habitants, the rest of the compartments were set 0 as an initial condition. The flow between the compartments is specified in Figure \ref{fig:compartment.} and all the other parameters were initialized as shown in Table \ref{tab:parameters}.  As mention in Section \ref{sec:calibration}, the parameters were calibrated in two stages, before and after the international intervention. According with the time frame proposed, the change on the parameters was also implemented on Insight Maker. The links to the online models can be found on \cite{IM_AI} and  \cite{IM_BI}.  
 
 
 % RESULTS AND DISCUSSION
@@ -48,7 +47,7 @@ where each of the parameters are defined on Table \ref{tab:parameters}
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.7\textwidth]{LB_NoInt_SD_IM}
+  \includegraphics[width=1\textwidth]{LB_NoInt_SD_IM}
   \caption{ Insight Maker results using the parameters of the first stage (Mar/14 to Sept/14) and assuming no intervention}
 \label{fig:LB_IM_NoIn} 
 \end{figure}
@@ -58,20 +57,20 @@ where each of the parameters are defined on Table \ref{tab:parameters}
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.7\textwidth]{LB_Int3_SD_IM}
-  \caption{ Insight Maker results. \textit{Top:} parameters of the first stage (Mar/14 to Sept/14), \textit{Bottom:} parameters of the second stage ( Sept/14 to July/15)}
+  \includegraphics[width=1\textwidth]{LB_Int3_SD_IM}
+  \caption{ Insight Maker results. \textit{A.} Parameters of the first stage (Mar/14 to Sept/14), \textit{B.} Parameters of the second stage ( Sept/14 to July/15)}
 \label{fig:LB_IM_In} 
 \end{figure}
 
 
 %Comparing with WHO data
 
-\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures \ref{fig:LB_IM_WHO} and \ref{fig:LB_IM_WHO2}. As depicted in \ref{fig:LB_IM_WHO} A and B there is a good fitting of our model with the data reported by WHO. Figure \ref{fig:LB_IM_WHO2} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately.
+\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures \ref{fig:LB_IM_WHO} and \ref{fig:LB_IM_WHO2}. As depicted in Figure \ref{fig:LB_IM_WHO} A and B there is a good fitting of our model with the data reported by WHO. Figure \ref{fig:LB_IM_WHO2} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately.
 
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.7\textwidth]{LB_BI_AI_SD_WHO_IM}
+  \includegraphics[width=1\textwidth]{LB_BI_AI_SD_WHO_IM}
   \caption{ Comparison between World Health Organization (WHO) data and Insight Maker (IM) results using the parameters of A. the first stage (Mar/14 to Sept/14) and B. the second stage ( Sept/14 to July/15) for the cumulative deaths (D).}
 \label{fig:LB_IM_WHO} 
 \end{figure}
@@ -80,7 +79,7 @@ where each of the parameters are defined on Table \ref{tab:parameters}
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.7\textwidth]{LB_Int2_SD_WHO_IM}
+  \includegraphics[width=1\textwidth]{LB_Int2_SD_WHO_IM}
   \caption{ Comparison between World Health Organization (WHO) data and Insight Maker (IM) results using the parameters before intervention (BI) and after intervention (AI), for the cumulative deaths (D).}
 \label{fig:LB_IM_WHO2} 
 \end{figure}
@@ -93,7 +92,7 @@ We drew the plots in the previous section also with Mathematica, and got almost 
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.7\textwidth]{PhasePortrait}
+  \includegraphics[width=1\textwidth]{PhasePortrait}
   \caption{Projection of phase portrait to (Susceptible + Recovered, Dead) space. (Blue) - without intervention, (Red) - with intervention, (Dots) - where the phase converges (equilibrium).}
 \label{fig:Phase Portrait}
 \end{figure}
