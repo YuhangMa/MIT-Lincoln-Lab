@@ -1,9 +1,7 @@
-
 \documentclass[10pt]{article} 
 \usepackage[final]{graphicx} 
 \usepackage{amsfonts} 
  \usepackage{amsmath}
-
 \topmargin-.5in 
 \textwidth6.6in 
 \textheight9in 
@@ -15,10 +13,24 @@
  
 \begin{document} 
 
+%
+
+
 %%SUBSECTION OF SYSTEM DYNAMICS
 
 \section{System Dynamics}
 
+The diagram of the described compartment model is depicted on Figure ~\ref{fig:compartment}. \\
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{compartment}
+  \caption{Compartment Model of the Ebola Epidemic in Liberia and Sierra Leone \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral,  R: Recovered and D: Dead. All the possible flows are specified by the arrows and the parameters that direct them. Note that $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, being a combination of all the $\beta$ transmission terms shown in Table~\ref{tab:parameters}} 
+\label{fig:compartment} 
+\end{figure}
+
+ 
  The governing equations of the system dynamics described on Section \ref{sec:methods} are the following: \\
 
 \begin{eqnarray} 
@@ -64,7 +76,7 @@
 \end{figure}\\
 
 %Intervention 
-\noindent As mentioned before, five parameters were calibrated for the second stage of the Ebola Outbreak, namely, community contact rate ($\beta_I$), hospital contact rate ($\beta_H$), funeral contact rate ($\beta_F$), time until hospitalization ($\gamma_H$) and probability a case is hospitalized ($\theta$). Figure \ref{fig:LB_IM_In} A. shows that there is not much change in the Total population and susceptible compartment, meaning that the virus was controlled;  Figure \ref{fig:LB_IM_In} B focuses on E, I, R, H , F and D compartments, showing that the international intervention causes a dramatic change in the behavior of such compartments.
+\noindent As mentioned before, five parameters were calibrated for the second stage of the Ebola Outbreak, namely, community contact rate ($\beta_I$), hospital contact rate ($\beta_H$), funeral contact rate ($\beta_F$), time until hospitalization ($\gamma_H$) and probability a case is hospitalized ($\theta$). Figure \ref{fig:LB_IM_In} A. shows that there is not much change in the Total population and susceptible compartment, meaning that the virus was controlled;  Figure \ref{fig:LB_IM_In} B focuses on E, I, R, H , F and D compartments, showing that the international intervention causes a dramatic change in the behavior of such compartments.\\
 
 \begin{figure}[!h]
   \centering
@@ -76,7 +88,7 @@
 
 %Comparing with WHO data
 
-\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures \ref{fig:LB_IM_WHO} and \ref{fig:LB_IM_WHO2}. As depicted in \ref{fig:LB_IM_WHO} A and B there is a good fitting of our model with the data reported by WHO. Figure \ref{fig:LB_IM_WHO2} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately. 
+\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures \ref{fig:LB_IM_WHO} and \ref{fig:LB_IM_WHO2}. As depicted in \ref{fig:LB_IM_WHO} A and B there is a good fitting of our model with the data reported by WHO. Figure \ref{fig:LB_IM_WHO2} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately.\\
 
 
 \begin{figure}[!h]
@@ -104,10 +116,9 @@ We drew the plots in the previous section also with Mathematica, and got almost 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=0.7\textwidth]{PhasePortrait}
-  \caption{Projection of phase portrait to (Susceptible + Recovered, Dead) space. (Blue) - without intervention, (Red) - with inter vention, (Dots) - where the phase converges (equilibrium).}
+  \caption{Projection of phase portrait to (Susceptible + Recovered, Dead) space. (Blue) - without intervention, (Red) - with intervention, (Dots) - where the phase converges (equilibrium).}
 \label{fig:Phase Portrait}
 \end{figure}
-
 
 
 \end{document}
