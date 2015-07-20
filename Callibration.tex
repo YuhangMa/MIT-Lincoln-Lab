@@ -1,7 +1,7 @@
-\newpage
-\section{Parameter Calibration}
+
+
 \label{sec:calibration}
-\
+
 The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown. $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative death in Liberia from March 2014 to July 2015 (reference).
 \subsection{Bayesian calibration framework}
 Using Bayesian calibration methodology, we calibrate the unknown parameters ($\mathcal{P}$). The prior distribution of $\mathcal{P}$ is a uniform distribution which ranges are determined based on numerical exploration and previous researches [references] (Table). \\
@@ -45,8 +45,8 @@ Parameter & Liberia Before Intervention  & Liberia After Intervention \\ [0.5ex]
 % inserts table
 %heading
 \hline % inserts single horizontal line
-\bf {Contact Rate, Community  ($\bf{\beta_{I}}$) }& \bf{0.148 (0.0953)} & \bf{0.0446 (0.338)}  \\
-\bf Contact Rate, Hospital  ($\beta_{H}$) &\bf 0.235 (0.143)& \bf 0.0877 (0.563) \\
+\bf {Contact Rate, Community  ($\bf{\beta_{I}}$) }& \bf{0.148 (0.0953)} & \bf{0.0446 (0.0338)}  \\
+\bf Contact Rate, Hospital  ($\beta_{H}$) &\bf 0.235 (0.143)& \bf 0.0877 (0.0563) \\
 \bf Contact Rate, Funeral  ($\beta_{F}$) & \bf 0.465 (0.287)& \bf 0.283 (0.208) \\
 Incubation Period (${1}/{\alpha}$) & 11 days & 11 days  \\
 \bf Time until Hospitalization (${1}/{\gamma_{H}}$) &\bf 4.49 (1.44) days & \bf 4.63 (1.43) days  \\
@@ -64,9 +64,9 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 \\ [1ex]
 \end{table}
 
 
-\begin{figure}
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.7\textwidth]{CumulativeDeathMathematica}
-  \caption{write caption here}
-\label{fig:Validation of calibration. Dots represent cumulative death data and the lines represent simulation based on mean posterior parameters. (Blue) - pre intervention and (red) - post treatment.}
+  \caption{Validation of calibration. Dots represent cumulative death data and the lines represent simulation based on mean posterior parameters. (Blue) - pre intervention and (red) - post treatment.}
+\label{fig:Cumulative Death Plot}
 \end{figure}
