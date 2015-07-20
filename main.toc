@@ -1,14 +1,21 @@
-\contentsline {section}{\numberline {1}put this somewhere else}{1}
-\contentsline {section}{\numberline {2}Introduction}{2}
-\contentsline {section}{\numberline {3}Problem Statement}{3}
-\contentsline {section}{\numberline {4}Methods}{3}
-\contentsline {subsection}{\numberline {4.1}Factors Considered}{3}
-\contentsline {subsection}{\numberline {4.2}Compartment-State Definition}{4}
-\contentsline {section}{\numberline {5}Parameter Calibration}{4}
-\contentsline {section}{\numberline {6}System Dynamics}{4}
-\contentsline {subsubsection}{\numberline {6.0.1}Insight Maker}{4}
-\contentsline {section}{\numberline {7}Agent-Based Dynamics}{5}
-\contentsline {section}{\numberline {8}Spatial Agent-Based Dyanmics}{7}
-\contentsline {section}{\numberline {9}Model Comparison}{7}
-\contentsline {section}{\numberline {10}Summary and Future Work}{7}
-\contentsline {section}{Appendix \numberline {A}MATLAB Pseudocode for Agent-Based Dynamics}{7}
+\contentsline {section}{\numberline {1}Introduction}{2}
+\contentsline {section}{\numberline {2}Problem Statement}{3}
+\contentsline {section}{\numberline {3}Methods}{3}
+\contentsline {subsection}{\numberline {3.1}Factors Considered}{3}
+\contentsline {subsection}{\numberline {3.2}Compartment-State Definition}{4}
+\contentsline {section}{\numberline {4}Parameter Calibration}{4}
+\contentsline {subsection}{\numberline {4.1}Bayesian calibration framework}{4}
+\contentsline {subsection}{\numberline {4.2}Results and validation}{5}
+\contentsline {section}{\numberline {5}System Dynamics}{6}
+\contentsline {subsection}{\numberline {5.1}Insight Maker}{6}
+\contentsline {subsection}{\numberline {5.2}Mathematica}{9}
+\contentsline {section}{\numberline {6}Agent-Based Dynamics}{9}
+\contentsline {subsection}{\numberline {6.1}Simulation}{11}
+\contentsline {section}{\numberline {7}Spatial Agent-Based Dyanmics}{11}
+\contentsline {subsection}{\numberline {7.1}Spatial Assumptions}{11}
+\contentsline {subsection}{\numberline {7.2}Agent Behavior}{12}
+\contentsline {subsection}{\numberline {7.3}Parameters}{13}
+\contentsline {section}{\numberline {8}Results}{14}
+\contentsline {section}{\numberline {9}Model Comparison}{14}
+\contentsline {section}{\numberline {10}Summary and Future Work}{14}
+\contentsline {section}{Appendix \numberline {A}MATLAB Pseudocode for Agent-Based Dynamics}{14}
