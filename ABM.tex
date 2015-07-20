@@ -1,4 +1,4 @@
-The next model we consider is an agent-based model. Each individual in the population can be in either of 7 states discussed above: susceptible, exposed, infected, hospitalized, funeral, recovered or dead. The flow between two states is a  probability of transition from one state to another for a typical individual. We represent our model in Figure~\ref{ABM}. In each time step a typical individual who is susceptible to contracting a virus can either transition to exposed state with probability $p_{SE}$ or stay susceptible with probability $p_{SS}$. An individuals in the exposed state transitions to infected with probability $p_{EI}$ and stays exposed with probability $p_{EE}$. An individual who is infected can stay infected, recover, go to a hospital or die and transition to funeral state with probabilities $p_{II},\, p_{IR},\, p_{IH}$ and $p_{IF}$ respectively. Recovery is considered a terminal state so individuals in this state stay in it for the remaining duration of the simulation. Hospitalized individuals may stay hospitalized, transition to recovered or funeral with probabilities $p_{HH}, \, p_{HR}$ and $p_{HF}$. We assume that the individual who dies from Ebola remains infectious through the duration of the entire burial ceremony and no precautions are taken against disease transmission. Safely buried individuals are considered dead and noninfectious and remain in this state for the remaining time of the simulation.  
+The next model we consider is an agent-based model. Each individual in the population can be in either of 7 states discussed above: susceptible, exposed, infected, hospitalized, funeral, recovered or dead. The flow between two states is a  probability of transition from one state to another for a typical individual. We represent our model in Figure~\ref{ABM}. In each time step a typical individual who is susceptible to contracting a virus can either transition to exposed state with probability $p_{SE}$ or stay susceptible with probability $p_{SS}$. An individual in the exposed state transitions to infected with probability $p_{EI}$ and stays exposed with probability $p_{EE}$. An individual who is infected can stay infected, recover, go to a hospital or die and transition to funeral state with probabilities $p_{II},\, p_{IR},\, p_{IH}$ and $p_{IF}$ respectively. Recovery is considered a terminal state so individuals in this state stay in it for the remaining duration of the simulation. Hospitalized individuals may stay hospitalized, transition to recovered or funeral with probabilities $p_{HH}, \, p_{HR}$ and $p_{HF}$. We assume that the individual who dies from Ebola remains infectious through the duration of the entire burial ceremony and no precautions are taken against disease transmission. Safely buried individuals are considered dead and noninfectious and remain in this state for the remaining time of the simulation.  
 
 %  \begin{tikzpicture}[node distance=2cm, font=\tiny]
 %        \node [draw, terminal]  (start) at (0,0) {Start};
@@ -46,7 +46,7 @@ edge [loop below] node {$p_{HH}$} (7)
         
 \end{tikzpicture}
 \end{center}
-\caption{Spread of the disease: Agent-based model. Each node represents a typical individual's state. An individual can transition to a state to which he is connected by a directed arc with a probability specified on an arc}
+\caption{Spread of the disease: Agent-based model. Each node represents a typical individual's state. An individual can transition to a state to which he is connected by a directed arc with a probability specified on an arc.}
 \label{ABM}
 \end{figure}
 Let
@@ -88,7 +88,9 @@ We define the individual's probability of transition for each state as
 &p_{DD}=1
 \end{alignat}
 \end{subequations}
-\subsection{Simulation}We consider a population of size \textbf{100} with \textbf{99} individuals starting in a susceptible state and \textbf{1} individual in the exposed state. Numeric probabilities of an individual transitioning from each state are recorded in Table~\ref{tab:probabilities}. We simulate \textbf{176} days of disease progression without intervention and \textbf{306} days of post intervention disease progression. We repeat the process \textbf{100} times and record the average outcome.  
+\subsection{Simulation}
+We consider a population of size 1000 with 999 individuals starting in a susceptible state and 1 individual in the exposed state. Numeric probabilities of an individual transitioning from each state are recorded in Table~\ref{tab:probabilities}. We repeat the process 100 times and record the average outcome.  
+Since are model is not deterministic, each time we would see different final outcome. Interestingly, there are basically only two different scenarios. There could be no outbreaks of Ebola but a severe spread of the disease could also happen. During the 100 simulations, 27 of them show no outbreak of Ebola, which means less then 1\% of people get the disease. But on the other hand, 73 experiments show that there will be severe outbreak of disease, more than 90\% of people would get infected. A histogram for simulation outcomes is depicted in Figure~\ref{fig:Hist}.
 %
 %
 % HERE IS THE PROBABILITY TRANSITION TABLE
@@ -96,7 +98,7 @@ We define the individual's probability of transition for each state as
 %
 %
 %
-\begin{table}[ht]
+\begin{table}[h!]
 \caption{Agent-Model Parameters for Ebola Epidemic in Liberia Before and After the International Intervention} % title of Table
 \centering % used for centering table
 \begin{tabular}{c c c } 
@@ -125,8 +127,136 @@ $p_{DD}$ & 1 & 1 \\ [1ex]
 \end{tabular}
 \label{tab:probabilities}
 \end{table}
-%
-%
-%
-%
-%
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{N1000Hist.eps}
+\end{center}
+\caption{Histogram showing the outcome of 100 simulations.}
+\label{fig:Hist}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure N1000Hist.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In our agent based model, all the simulations reach their final stationary states before $t = 500$. We plot the final results of 100 simulations in one graph. There many cases we don't observe any severe outbreak of Ebola. However there are many cases which show catastrophic disease. If the disastrous disease happens, on average, 95\% of people would get the disease and 76\% of people would die from it, as presented in Figure~\ref{fig:Scatter100}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure N1000Scatter.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{N1000Scatter.eps}
+\end{center}
+\caption{Scatter plot showing the proportion of population that contracts a disease and the proportion of the population that dies due to the disease for a population size 1000}
+\label{fig:Scatter}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure N1000Scatter.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+If there is no outbreak, the infected agent may or may not infect some agent in the system, but the majority of people stay susceptible. The infected agents will recover or die before they can infect more people. The amount of people getting Ebola is relatively very low, so all seven states stay mostly like constant all the time. Illustration of this case is presented in Figure~\ref{fig:NoOutbreak}.
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.8]{NoOutbreak.eps}
+\end{center}
+\caption{No outbreak realization of the outbreak process}
+\label{fig:NoOutbreak}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure NoOutbreak.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+On the other hand, if the infected agent contacts many people during the states infected (I), hospitalized (H), or funeral (F) before he or she dies or recovers, then there would be a disastrous outbreak of disease, as shown in Figure~\ref{fig:Outbreak}. People getting the disease would grow exponentially until $t = 125$. That is also the time people in I, H, and F reach their peaks. After this time, the system doesn't have enough susceptible agents to spread the disease, so the increasing rate of people getting Ebola starts slowing down, and the amount of agents in I, H, and F start decreasing too. Around $t = 180$ I, H, and F reach zero, S stops growing, no more new agents get Ebola. That means the dynamic stops, the system reaches its stationary state. All the agent at this time would either be in S, R or D. These are the recurrent states in this Markov chain, and all other four states are transient states. As we showed before, on average, 5\% of people would stay in state S, 19\% of people stay in R, and 76\% of people stay in D. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure Outbreak.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.8]{Outbreak.eps}
+\end{center}
+\caption{Realization in which outbreak occurs}
+\label{fig:Outbreak}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure Outbreak.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+As the system evolves, we can plot the states we are interested in the most in a phase portrait. We keep track of amount of agents who don't get the disease and the amount of people who die from the disease or recover from it and present a phase portrait in Figure~\ref{fig:PhasePortraitABM}. We put the ratio of S to the total population on the x-axis, and put the ratio of D plus R to the total population on the y-axis. Each time we plot the these three quantities as a dot in the 2-D box. When $t = 0$, we have one agent in state E, which means 99.9\% of agents are in state S, and all other states contain no agents. If no severe outbreak happen, the system would stay stable, only negligible amount of people get Ebola, the dot would remain basically the same position as time goes by. However, if there is an outbreak, the trajectory would gradually move to its final state, on average, it would be $(S, [R]+[D]) = (0.05, 0.95)$. We can see the it would be a concave up function. We plot ten experiments and see their trajectories at the same time. Since the total sum of people in ration is one, all the final states in different experiments would go to points on the $x + y = 1$ line. The system starts at $(S, [R]+[D]) = (0.999, 0)$, a point very close to this line. If we see an outbreak, before the system reaches its final state, the distance of this point at any time $t$ would be the amount of agencies in the transient states E, I, H and F. But finally when the system stops evolving, we will see the dot goes to a point on this  $x + y = 1$ line. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure PhasePortrait.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.5]{PhasePortrait.eps}
+\end{center}
+\caption{Phase portrait: proportion of the population who are in susceptible state vs. population of the population who contracted Ebola for different uncertainty realizations.}
+\label{fig:PhasePortraitABM}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure PhasePortrait.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+As in the system dynamic approach, we perform an intervention in our agent-based system too. Since the scale of the two systems are not the same, we start our intervention at a different time to the one in system dynamic approach. If we see an outbreak, we will intervene the system when 1\% of people get the disease. When the intervention starts, we change our three $\beta$, the contact rates of different ways people can get Ebola, which change the behavior of agents the most. Our results, presented in Figure~\ref{fig:Intervention}, show that if we start the intervention at 1\% of people get Ebola, finally 4\% of agents would get the disease, 1\% of agents would recover, and 3\% of agents would die. We wouldn't see a disastrous outbreak of disease comparing to the case without intervention. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure InterventionZoomIn.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.8]{InterventionZoomIn.eps}
+\end{center}
+\caption{Effect of Intervention on the spread of the disease }
+\label{fig:Intervention}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure InterventionZoomIn.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We can try our agent based model on different scales. Aside from $N = 1000$ we did before, set the total population to be $N = 100$ and $5000,$ we can see how the size of population affects the spread of disease. The results are presented in Figure~\ref{fig:VarPopSize}. As we can see in the following figures, when we increase the population size, although the average of final S, D, and R states stay the same, the standard deviations of these quantities are smaller larger systems. The bands of people who get Ebola and die would become narrower as we increase the population size. Hence we might suggest that the system become more stable, and the final results are more predictable for larger systems.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure N100Scatter.eps, N5000Scatter.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[h!]
+ \centering 
+ \begin{subfigure}[b]{0.45\textwidth}
+  \includegraphics[width=\textwidth]{N100Scatter.eps} \caption{Scatter plot showing the proportion of population that contracts a disease and the proportion of the population that dies due to the disease for a population size 100.} \label{fig:Scatter100} \end{subfigure}
+ %
+ \hspace{.1cm}
+\begin{subfigure}[b]{0.45\textwidth}
+ \includegraphics[width=\textwidth]{N5000Scatter.eps} \caption{Scatter plot showing the proportion of population that contracts a disease and the proportion of the population that dies due to the disease for a population size 5000.} \label{fig:Scatter5000} \end{subfigure} \caption{Effect of changing the population size on the proportion of the diseased population}
+\label{fig:VarPopSize} 
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure N100Scatter.eps, N5000Scatter.eps
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
