@@ -1,132 +1,101 @@
-The next model we consider is an agent-based model. Each individual in the population can be in either of 7 states discussed above: susceptible, exposed, infected, hospitalized, funeral, recovered or dead. The flow between two states is a  probability of transition from one state to another for a typical individual. We represent our model in Figure~\ref{ABM}. In each time step a typical individual who is susceptible to contracting a virus can either transition to exposed state with probability $p_{SE}$ or stay susceptible with probability $p_{SS}$. An individuals in the exposed state transitions to infected with probability $p_{EI}$ and stays exposed with probability $p_{EE}$. An individual who is infected can stay infected, recover, go to a hospital or die and transition to funeral state with probabilities $p_{II},\, p_{IR},\, p_{IH}$ and $p_{IF}$ respectively. Recovery is considered a terminal state so individuals in this state stay in it for the remaining duration of the simulation. Hospitalized individuals may stay hospitalized, transition to recovered or funeral with probabilities $p_{HH}, \, p_{HR}$ and $p_{HF}$. We assume that the individual who dies from Ebola remains infectious through the duration of the entire burial ceremony and no precautions are taken against disease transmission. Safely buried individuals are considered dead and noninfectious and remain in this state for the remaining time of the simulation.  
+\documentclass[10pt]{article} 
+\usepackage[final]{graphicx} 
+\usepackage{amsfonts} 
+ \usepackage{amsmath}
+\topmargin-.5in 
+\textwidth6.6in 
+\textheight9in 
+\oddsidemargin0in 
+ 
+\def\ds{\displaystyle} 
+\def\d{\partial} 
 
-%  \begin{tikzpicture}[node distance=2cm, font=\tiny]
-%        \node [draw, terminal]  (start) at (0,0) {Start};
-%        \node [draw, predproc, right of= start] (acquire)(write) {Acquire Image};
-%
-%%% paths
-%    \draw[->](work) -- node[above]{yes}(end);
-%    \end{tikzpicture}
-\begin{figure}[h!]
-\begin{center}
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
-  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+ 
+\begin{document} 
 
-  \node[main node] (1) {S};
-  \node[main node] (2) [right of=1] {E};
-  \node[main node] (3) [right of=2] {I};
-  \node[main node] (4) [right of=3] {R};
-    \node[main node] (5) [below left of=3] {D};
-      \node[main node] (6) [below right of=3] {F};
-        \node[main node] (7) [right of=6] {H};
+%
 
-  \path[every node/.style={font=\sffamily\small}]
-    (1)
-        edge node {$p_{SE}$} (2)
-        edge [loop above] node {$p_{SS}$} (1)
-    (2) 
-        edge node {$p_{EI}$} (3)
-         edge [loop above] node {$p_{EE}$} (2)
-      
-    (3) 
-       edge node {$p_{IR}$} (4)
-       edge node[left] {$p_{IF}$} (6)
-       edge node {$p_{IH}$} (7)
-        edge [loop above] node {$p_{II}$} (3)
-    (4)
-         edge [loop above] node {$p_{RR}$} (4)
-       
-(6) edge node{$p_{FD}$} (5) 
-edge [loop below] node {$p_{FF}$} (6)     
-(7) edge node[right]{$p_{HR}$} (4) 
-edge [loop below] node {$p_{HH}$} (7)
-  (7) edge node{$p_{HF}$} (6)      
- (5) edge [loop below] node {$p_{DD}$} (5)
-        ;
-        
-\end{tikzpicture}
-\end{center}
-\caption{Spread of the disease: Agent-based model. Each node represents a typical individual's state. An individual can transition to a state to which he is connected by a directed arc with a probability specified on an arc}
-\label{ABM}
-\end{figure}
-Let
 
-\begin{itemize}
-\item[]$t_{IP}$ be the incubation period, i.e. time during which the individual has the virus in his body but does not yet show severe symptoms
-\item[] $t_{ID}$ infection duration time after the onset of severe symptoms
-\item[] $t_{H}$ time to hospitalization after manifestation of severe symptoms
-\item[] $t_{IF}$ time from the onset of severe symptoms to funeral
-\item[] $t_{HF}$ time from patient's arrival at the hospital to funeral
-\item[] $t_{HR}$ time from patient's arrival at the hospital to recovery
-\item[] $t_{DF}$ duration of traditional funeral
-\item[] $N$  total number of individuals in a population
-\item[] $N_{I}$  total number of individuals in the infected state
-\item[] $N_{H}$  total number of individuals in the hospitalized state
-\item[] $N_{F}$  total number of individuals in the funeral state
-\item[] $\beta_{I}$ rate at which the disease spreads during an interaction with an infected person
-\item[] $\beta_{H}$ rate at which the disease spreads during an interaction with a hospitalized person
-\item[] $\beta_{F}$ rate at which the disease spreads during an interaction with a person who is in the funeral state
-\end{itemize}
-We define the individual's probability of transition for each state as
+%%SUBSECTION OF SYSTEM DYNAMICS
 
-\begin{subequations}
-\begin{alignat}{1}
-&p_{SE}=\beta_I\cdot \frac{N_{I}}{N}+\beta_H\cdot \frac{N_{H}}{N}+\beta_F\cdot\frac{ N_F}{N}\\
-&p_{SS}=1-p_{SE}\\
-&p_{EE}=1-\frac{1}{t_{IP}}\\
-&p_{EI}=\frac{1}{t_{IP}}\\
-&p_{II}=\frac{1}{t_{ID}}\\
-&p_{IH}=\frac{1}{t_{H}}\\
-&p_{IF}= \frac{1}{t_{IF}}\\
-&p_{IR}=1-p_{II}-p_{IH}-p_{IF}\\
-&p_{HF}=\frac{1}{t_{HF}}\\
-&p_{HR}=\frac{1}{t_{HR}}\\
-&p_{HH}=1-p_{HF}-p_{HR}\\
-&p_{FF}=\frac{1}{t_{DF}}\\
-&p_{FD}=1-p_{FF}\\
-&p_{RR}=1\\
-&p_{DD}=1
-\end{alignat}
-\end{subequations}
-\subsection{Simulation}We consider a population of size \textbf{100} with \textbf{99} individuals starting in a susceptible state and \textbf{1} individual in the exposed state. Numeric probabilities of an individual transitioning from each state are recorded in Table~\ref{tab:probabilities}. We simulate \textbf{176} days of disease progression without intervention and \textbf{306} days of post intervention disease progression. We repeat the process \textbf{100} times and record the average outcome.  
+\section{System Dynamics}
+
+ The governing equations of the system dynamics described on Section \ref{sec:methods} are the following: \\
+
+\begin{eqnarray} 
+\label{SDeqn}
+\frac{dS}{dt} = - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}\\
+\frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\alpha E\\
+\frac{dI}{dt} =  \alpha E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I\\
+\frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{DH}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H\\
+\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F\\
+\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{IH}(1-\delta_{2}) H-\gamma_{F} F
+\end{eqnarray}\\
+
+\noindent where each of the parameters are defined on Table \ref{tab:parameters} \\
+
+
+%INSIGHT MAKER DESCRIPTION AND RESULTS
+\subsection{Insight Maker}
+ Insight Maker is a powerful online tool used to model and simulate utilizing different approaches, such as System Dynamics, Agent-Based Modeling and imperative programming. Insight Maker allows to construct a graphical model interface to forecast the system response \cite{FortmannRoe}. We used InsightMaker platform to prototype our model and simulate stepping forward through time. More details about the platform and its functionality can be found in Fortmann-Roe's review \cite{FortmannRoe}. The platform uses fourth order Runge-Kutta differential equation solver for the system dynamics model and  first order Euler approximation for the Agent-Based model.
+
+\noindent The implemented Insight Maker SD model is depicted in Figure \ref{fig:SD_IM} .
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{SD_IM}
+  \caption{ \bf Compartment model of the system dynamics implemented on Insight Maker}
+\label{fig:SD_IM} 
+\end{figure}\\
+
+\noindent A normalized population fraction was simulated. The compartment S was initialized with a value of 999.999/1.000.000, and the compartment I with 1/1.000.000, meaning that there is an infected individual per every million of habitants, the rest of the compartments were set as 0. The flow between the compartments is specified in Figure \ref{fig:compartment.} and all the other parameters were initialized as shown in Table \ref{tab:parameters}.  As mention in Section CALIBRATION SECTION, the parameters were calibrated in two stages, before and after the international intervention. According with the time frame proposed, the change on the parameters was also implemented on Insight Maker. The links to the online models can be found on \cite{IM_AI} and  \cite{IM_BI}.  \\
+
+
+% RESULTS AND DISCUSSION
 %
-%
-% HERE IS THE PROBABILITY TRANSITION TABLE
-%
-%
-%
-%
-\begin{table}[ht]
-\caption{Agent-Model Parameters for Ebola Epidemic in Liberia Before and After the International Intervention} % title of Table
-\centering % used for centering table
-\begin{tabular}{c c c } 
-\hline\hline %inserts double horizontal lines
-Parameter & Liberia Before Intervention  & Liberia After Intervention \\ [0.5ex] 
- & (Mar/14 to Sept/14) &  (Sept/14 to Jul/15) \\ [0.5ex] % inserts table
-% inserts table
-%heading
-\hline % inserts single horizontal line
-$p_{SE}$ & \textbf{DYNAMIC} & \textbf{DYNAMIC} \\ 
-$p_{SS}$ & \textbf{COMPUTE}8 & \textbf{COMPUTE}  \\ 
-$p_{EE}$ & 0.9091 & 0.9091  \\ 
-$p_{EI}$ & 0.0909 & 0.0909  \\ 
-$p_{II}$ & 0.1 & 0.1  \\ 
-$p_{IH}$ & 0.2227 & 0.2160  \\ 
-$p_{IF}$ & 0.125 & 0.125  \\ 
-$p_{IR}$ & 0.5523 & 0.559  \\ 
-$p_{HF}$ & 0.2849 & 0.2849 \\ 
-$p_{HR}$ & 0.1815 & 0.1815 \\ 
-$p_{HH}$ & 0.5336& 0.5336  \\ 
-$p_{FF}$ & 0.5 & 0.5 \\ 
-$p_{FD}$ & 0.5 & 0.5  \\ 
-$p_{RR}$ & 1 & 1  \\ 
-$p_{DD}$ & 1 & 1 \\ [1ex] 
-\hline 
-\end{tabular}
-\label{tab:probabilities}
-\end{table}
-%
-%
-%
-%
-%
+%No intervention
+\noindent After modeling the system with the parameters before the intervention, it can be observed in Figure \ref{fig:LB_IM_NoIn} how the total population decreases to 46.46\%  if there is not any type of intervention and the each of the parameters continue to be the same. The number of susceptible individuals exponentially decays, converging to 7\% of the population, while exposed, infected, hospitalized and funeral comparments converges to zero; finally, after the system stabilizes, the final proportion of dead people would be 53.53\% \\
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{LB_NoInt_SD_IM}
+  \caption{ \bf Insight Maker results using the parameters of the first stage (Mar/14 to Sept/14) and assuming no intervention}
+\label{fig:LB_IM_NoIn} 
+\end{figure}\\
+
+%Intervention 
+\noindent As mentioned before, five parameters were calibrated for the second stage of the Ebola Outbreak, namely, community contact rate ($\beta_I$), hospital contact rate ($\beta_H$), funeral contact rate ($\beta_F$), time until hospitalization ($\gamma_H$) and probability a case is hospitalized ($\theta$). Figure \ref{fig:LB_IM_In} A. shows that there is not much change in the Total population and susceptible compartment, meaning that the virus was controlled;  Figure \ref{fig:LB_IM_In} B focuses on E, I, R, H , F and D compartments, showing that the international intervention causes a dramatic change in the behavior of such compartments.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{LB_Int3_SD_IM}
+  \caption{ \bf Insight Maker results using the parameters of the first stage (Mar/14 to Sept/14) and the second stage ( Sept/14 to Present)}
+\label{fig:LB_IM_In} 
+\end{figure}\\
+
+
+%Comparing with WHO data
+
+\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures \ref{fig:LB_IM_WHO} and \ref{fig:LB_IM_WHO2}. As depicted in \ref{fig:LB_IM_WHO} A and B there is a good fitting of our model with the data reported by WHO. Figure \ref{fig:LB_IM_WHO2} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately. 
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{LB_BI_AI_SD_WHO_IM}
+  \caption{ \bf Comparison between World Health Organization (WHO) data and Insight Maker (IM) results using the parameters of A. the first stage (Mar/14 to Sept/14) and B. the second stage ( Sept/14 to July/15) for the cumulative deaths (D).}
+\label{fig:LB_IM_WHO} 
+\end{figure}\\
+
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{LB_Int2_SD_WHO_IM}
+  \caption{ \bf Comparison between World Health Organization (WHO) data and Insight Maker (IM) results using the parameters before intervention (BI) and after intervention (AI), for the cumulative deaths (D).}
+\label{fig:LB_IM_WHO2} 
+\end{figure}\\
+
+
+
+\end{document}
