@@ -1,5 +1,7 @@
+\newpage
 \section{Parameter Calibration}
 \label{sec:calibration}
+\
 The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown. $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative death in Liberia from March 2014 to July 2015 (reference).
 \subsection{Bayesian calibration framework}
 Using Bayesian calibration methodology, we calibrate the unknown parameters ($\mathcal{P}$). The prior distribution of $\mathcal{P}$ is a uniform distribution which ranges are determined based on numerical exploration and previous researches [references] (Table). \\
@@ -30,7 +32,7 @@ Step 3) Evaluate likelihood of $\mathcal{P}_0$: $Exp[-Norm(\mathcal{D}_R-\mathca
 
 \subsection{Results and validation}
 For the calibration of before intervention parameters, we used the data for 176 days (March 14 to September 14), and initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that initial outbreak started from a single infected person in a million population. The calibration of after intervention parameters is based on the data for 306 days (September 14 to July 15), and initial value $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from calibrated mean $\mathcal{P}$ for pre intervention. 10000 random samples were used in each calibration. Calibration results and validation are shown in (table) and (figure).\\
-Based on our calibration, the intervention reduce the basic reproduction number of Ebola in Liberia from 1.99 to 0.787, using the formula in (reference). As a result, infection spread terminated after infection 0.84\% of total population and 0.49\% decrease in population, otherwise 92.7\% are infected and 53.5\% decrease in population.\\
+Based on our calibration, the intervention reduce the basic reproduction number of Ebola in Liberia from 1.99 to 0.787, using the formula in (reference). As a result, disease spread is terminated after infecting 0.84\% of total population with 0.49\% decrease in population, otherwise 92.7\% are infected and population decreases by 53.5\%.\\
 
 
 \begin{table}[ht]
