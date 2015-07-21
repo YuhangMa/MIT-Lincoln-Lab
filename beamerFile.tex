@@ -1,6 +1,8 @@
 \documentclass[30pt]{beamer}
-\usepackage{graphicx}
-%\usepackage{tikz, flowchart}
+\usepackage{graphicx, epstopdf, subcaptions}
+\graphicspath{{Fig/}}
+\usepackage{tikz, flowchart}
+\usetikzlibrary{shapes}
 
 %\usetheme{Amsterdam}
 \author{ Hsuan-Wei Lee,
@@ -13,11 +15,11 @@
 
 %\vspace{.1truein}
 
-%\begin{center}
-%Mentors: John Peach \footnote{Massachusetts Institute of Technology: Lincoln Laboratory}, Cammey Cole Manning\footnote{Mathematics and Computer Science Department, Meredith College},
-%Christian Gunning\footnote{Departments of Entomology and Mathematics, North Carolina State University}
-%\end{center}
 \title[]{Wine, Ebola and Terrorism}
+\begin{center}
+Mentors: John Peach, Cammey Cole Manning,
+Christian Gunning
+\end{center}
 
 %\date{February 28, 2015}
 
@@ -34,9 +36,9 @@
 \item Introduction
 \item Models
 \begin{itemize}
-\item System-based model
-\item Agent-based model
-\item Sparial agent-based model
+\item System-based
+\item Agent-based
+\item Sparial agent-based
 \end{itemize}
 \item Comparison
 \item Summary
@@ -46,8 +48,12 @@
 \begin{frame}
 \frametitle{Introduction}
 \begin{itemize}
-\item Ebola was discovered in 1976
-\item 
+\item Ebola was discovered in 1976.
+\item Early sympoms:  headache, fatigue and joint pain. 
+\item Diseases like HIV and Malaria have the same symptoms.
+\item Leter symptoms: abdominal pain, diarrhea, vomiting and rashes. 
+\item The virus is contracted through direct contact with bodily fluids and secretion.
+\item Incubation period may last up to two weeks.
 \end{itemize}
 \end{frame}
 
@@ -130,25 +136,89 @@ based on mean posterior parameters. (Blue) - pre intervention and (red) - post t
 
 \begin{frame}
 \frametitle{Agent model}
-MAYBE INCLUDE DIAGRAM
+%MAYBE INCLUDE DIAGRAM
+%\begin{figure}
+%\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+%  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+%  \node[main node] (1) {S};
+%  \node[main node] (2) [right of=1] {E};
+%  \node[main node] (3) [right of=2] {I};
+%  \node[main node] (4) [right of=3] {R};
+%    \node[main node] (5) [below left of=3] {D};
+%      \node[main node] (6) [below right of=3] {F};
+%        \node[main node] (7) [right of=6] {H};
+%
+%  \path[every node/.style={font=\sffamily\small}]
+%    (1)
+%        edge node {$p_{SE}$} (2)
+%        edge [loop above] node {$p_{SS}$} (1)
+%    (2) 
+%        edge node {$p_{EI}$} (3)
+%         edge [loop above] node {$p_{EE}$} (2)
+%      
+%    (3) 
+%       edge node {$p_{IR}$} (4)
+%       edge node[left] {$p_{IF}$} (6)
+%       edge node {$p_{IH}$} (7)
+%        edge [loop above] node {$p_{II}$} (3)
+%    (4)
+%         edge [loop above] node {$p_{RR}$} (4)
+%       
+%(6) edge node{$p_{FD}$} (5) 
+%edge [loop below] node {$p_{FF}$} (6)     
+%(7) edge node[right]{$p_{HR}$} (4) 
+%edge [loop below] node {$p_{HH}$} (7)
+%  (7) edge node{$p_{HF}$} (6)      
+% (5) edge [loop below] node {$p_{DD}$} (5)
+%        ;
+%\end{tikzpicture}
+%\end{figure}
 \begin{itemize}
-\item Probabilistic model vs. deterministic
-\item Flows become probabilities
-\item Individuals vs. system
+\item \textbf{INCLUDE FLOW CHART ONE MORE TIME}
+\item Probabilistic model vs. deterministic.
+\item Flows become probabilities.
+\item Individuals vs. system.
 \begin{itemize}
-\item 1000 individuals; 1 exsposed
-\item 500 days
-\item 100 repetitions
+\item 1000 individuals; 1 exsposed.
+\item 500 days.
+\item 100 repetitions.
 \end{itemize}
 \end{itemize}
-%\includegraphics[scale=0.5]{N1000Scatter.eps}
 \end{frame}
+
 
 \begin{frame}
 \frametitle{Agent Model Results}
-30 PERCENT OF THE TIME WE DO NOT GET AN OUTBREAK BUT WHEN WE DO CONSEQUENCES ARE SEVIER; A TYPICAL OUTBREAK LOOKS AS FOLLOWS
-\textbf{Timeseries Plot}
-\textbf{Histogram number of cases as a function of number of infected}
+30 percent of the time outbreak deoes not happen
+
+\begin{figure}
+  \includegraphics[scale=0.35]{N1000Hist-eps-converted-to} \caption{Progression of the proportion of the total population in Susceptible, Recovered and Dead states through time.}
+% %
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Agent Model Results}
+\begin{itemize}
+\item A typical outbreak will cause \textbf{HOW MANY} percent of the total population to get the disease.
+\item Among those \textbf{HOW MANY DEAD}.
+\end{itemize}
+
+\begin{figure}
+  \includegraphics[scale=0.35]{TimeSeries} \caption{Progression of the proportion of the total population in Susceptible, Recovered and Dead states through time.}
+% %
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Agent Model Results}
+%\textbf{PHASE PORTRAIT PICTURE}
+\begin{figure}
+  \includegraphics[scale=0.35]{PhasePortrait-eps-converted-to} \caption{Probabilistic Phase Portrait}
+% %
+\end{figure}
 \end{frame}
 
 \begin{frame}
