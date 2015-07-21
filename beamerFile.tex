@@ -67,16 +67,25 @@
 
 
 \begin{frame}
-\frametitle{Model}
+\frametitle{Compartment Model of the Ebola Epidemic in Liberia}
 \section{Models}
-
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=1\textwidth]{compartmentNoFlow}
-  \caption{Compartment Model of the Ebola Epidemic in Liberia \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral,  R: Recovered and D: Dead. } 
-\label{fig:compartment} 
+ \label{fig:compartment} 
 \end{figure}
+
+ S: Susceptible\\
+ E: Exposed \\
+I: Infectious \\
+H: Hospitalized \\
+ F: Funeral  \\
+R: Recovered \\
+D: Dead 
+
+
+
 \end{frame}
 
 \begin{frame}
@@ -84,9 +93,10 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Parameters/Data}
+\frametitle{Model Parameters for Ebola Epidemic in Liberia}
 \begin{table}[ht]
 \centering % used for centering table
+\resizebox{\linewidth}{!}{
 \begin{tabular}{c c c}
 \hline\hline %inserts double horizontal lines
 Parameter & Value  & Reference \\ [0.5ex]
@@ -98,24 +108,16 @@ Time from Infection to Death (${t_{D}}$) & 8.00 days & \cite{Rivers2014} \\
 Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500 & \cite{WHOFacts} \\
 Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & \cite{WHOFacts} \\ [1ex]
 \hline
-\end{tabular}
-\label{tab:knownParameters}
-\caption{Model Parameters for Ebola Epidemic in Liberia with literature citations.} % title of Table
+\end{tabular}}
 \end{table}
-\end{frame}
 
-
-
-
-\begin{frame}
-\frametitle{Parameters/Data}
 \begin{table}[ht]
-\caption{Calibrated Parameters for Ebola Epidemic in Liberia. Posterior mean and standard deviation (in parenthesis) are notated for before-intervention (2nd column) and after-intervention (3nd column) calibrations. For comparison, the evaluated values through least-square optimization \cite{Rivers2014} are in 4th column.} % title of Table
 \centering % used for centering table
+\resizebox{\linewidth}{!}{
 \begin{tabular}{c c c c}
 \hline\hline %inserts double horizontal lines
 Parameter &  Before Intervention  & After Intervention & Fitted Values\\ [0.5ex]
- & (Mar/14 to Sept/14) &  (Sept/14 to Jul/15) & from \cite{Rivers2014}\\ [0.5ex] % inserts table
+ & (Mar 2014 to Sept 2014) &  (Sept 2014 to July 2015) & from \cite{Rivers2014}\\ [0.5ex] % inserts table
 % inserts table
 %heading
 \hline % inserts single horizontal line
@@ -128,44 +130,49 @@ Time from Hospitalization to Recovery (${t_{IH}}$) & 5.51 (1.44) days & 5.51 (1.
 Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) & 0.197\\
 [1ex]
 \hline
-\end{tabular}
-\label{tab:calibratedParameters}
+\end{tabular}}
 \end{table}
+
+
 \end{frame}
 
 
+
+
+
 \begin{frame}
-\frametitle{Parameters/Data}
+\frametitle{Calibration Validation}
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=1\textwidth]{CumulativeDeathMathematica}
-  \caption{Validation of calibration. Dots represent cumulative death data and the lines represent simulation
-based on mean posterior parameters. (Blue) - pre intervention and (red) - post treatment.} 
-\end{figure}
+  \includegraphics[width=1\textwidth]{ValidationPlot.pdf}
+ \end{figure}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{System model}
+\frametitle{System Dynamics Equations}
 \section{System}
-Should we add equations?
+\begin{eqnarray} 
+\label{SDeqn}
+\frac{dS}{dt} = - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N} \label{eqn:SD1}\\
+\frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\gamma_P E         \label{eqn:SD2}\\
+\frac{dI}{dt} =  \gamma_P E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I   \label{eqn:SD3}\\
+\frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{HF}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H \label{eqn:SD4}\\
+\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F      \label{eqn:SD5}\\
+\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{HR}(1-\delta_{2}) H\\        \label{eqn:SD6}
+\frac{dD}{dt} = \gamma_{F} F     \label{eqn:SD7}
+\end{eqnarray}\\
 
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=1\textwidth]{compartment}
-  \caption{Compartment Model of the Ebola Epidemic in Liberia \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral,  R: Recovered and D: Dead. } 
-\end{figure}
 \end{frame}
 
 
 \end{frame}
 
 \begin{frame}
-\frametitle{System Model Results}
+\frametitle{System Model Results Assuming No Intervention}
 \begin{figure}[!h]
   \centering
   \includegraphics[width=1\textwidth]{LB_NoInt_SD_IM}
-  \caption{ Insight Maker results using the parameters of the first stage (Mar/14 to Sept/14) and assuming no intervention}
 \label{fig:LB_IM_NoIn} 
 \end{figure}
 \end{frame}
@@ -179,18 +186,6 @@ Should we add equations?
 \label{fig:LB_IM_In} 
 \end{figure}
 \end{frame}
-
-\begin{frame}
-\frametitle{System Model Results}
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=1\textwidth]{PhasePortrait}
-  \caption{ Projection of phase portrait to (Susceptible + Recovered, Dead) space. (Blue) - without intervention,
-(Red) - with intervention, (Dots) - where the phase converges (equilibrium).}
-
-\end{figure}
-\end{frame}
-
 
 
 
