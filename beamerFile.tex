@@ -120,16 +120,16 @@ D: Dead
 \begin{table}[ht]
 \centering % used for centering table
 \resizebox{.8\linewidth}{!}{
-\begin{tabular}{c c c}
+\begin{tabular}{c cc}
 \hline\hline %inserts double horizontal lines
-Parameter & Value  & Reference \\ [0.5ex]
+Parameter & Value  \\ [0.5ex]
 \hline % inserts single horizontal line
-Incubation Period (${t_{P}}$) & 11 days & \cite{WHOFacts} \\
-Duration of Traditional Funeral (${t_{F}}$) & 2.00 days & \cite{Rivers2014} \\
-Duration of Infection (${t_{I}}$) & 10.00 days & \cite{Rivers2014} \\
-Time from Infection to Death (${t_{D}}$) & 8.00 days & \cite{Rivers2014} \\
-Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500 & \cite{WHOFacts} \\
-Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & \cite{WHOFacts} \\ [1ex]
+Incubation Period (${t_{P}}$) & 11 days  \\
+Duration of Traditional Funeral (${t_{F}}$) & 2.00 days  \\
+Duration of Infection (${t_{I}}$) & 10.00 days  \\
+Time from Infection to Death (${t_{D}}$) & 8.00 days  \\
+Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500  \\
+Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 \\ [1ex]
 \hline
 \end{tabular}}
 \end{table}
@@ -169,26 +169,18 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 
 
 
-\begin{frame}
-\frametitle{System Model Results Assuming No Intervention}
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=1\textwidth]{SEIPlotNoInt.pdf}
-\label{fig:LB_IM_NoIn} 
-\end{figure}
-\end{frame}
-
 
 \begin{frame}
-\frametitle{System Model Results Post-treatment}
+\frametitle{System Model Results}
 \begin{figure}[h!]
  \centering 
-% \begin{subfigure}{\textwidth}
-  \includegraphics[width=\textwidth]{SEIPlotInt.pdf}  \label{fig:LB_IM_In1} %\end{subfigure}
+ \begin{subfigure}{\textwidth}
+  \includegraphics[width=\textwidth]{SEIPlotNoInt.pdf} 
+\end{subfigure}
   \hspace{.1cm}
-%\begin{subfigure}{\textwidth}
- \includegraphics[width=\textwidth]{SEIPlotIntRescale.pdf}  \label{fig:LB_IM_In2} %\end{subfigure} 
-\label{fig:LB_IM_In} 
+\begin{subfigure}{\textwidth}
+ \includegraphics[width=\textwidth]{SEIPlotIntRescale.pdf}  
+\end{subfigure} 
 \end{figure}
 \end{frame}
 
