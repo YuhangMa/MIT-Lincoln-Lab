@@ -1,13 +1,6 @@
 We examine the problem from two perspectives. We present a system based model first and then discuss an agent-based modification of it. We then consider an agent-based model that incorporates agents' movement through space. Throughout the three models we utilize the same assumptions and compartment-state definitions. 
 
-In order to propose a more accurate model and compare the results among different programming  languages, the compartment flow model of the Ebola Epidemic in West Africa, 2014, was modeled with a System Dynamics (SD) and Agent Based Model (ABM) approaches.  Insight Maker and Mathematica was utilized  for the SD, and Insight Maker and Python for the ABM.
-
-\begin{itemize}
-\item Insight Maker: SD and ABM
-\item Mathematica: SD
-\item Python: ABM
-\end{itemize}
-We used InsightMaker platform to prototype our model and simulate stepping forward through time. More details about the platform and its functionality can be found in Fortmann-Roe's review \cite{FortmannRoe}. The platform uses fourth order Runge-Kutta differential equation solver for the system dynamics model and  first order Euler approximation for the Agent-Based model.
+In order to propose a more accurate model and compare the results among different programming  languages, the compartment flow model of the Ebola Epidemic in West Africa, 2014, was modeled with a System Dynamics (SD) and Agent Based Model (ABM) approaches.  Insight Maker and Mathematica was utilized  for the SD, and Insight Maker and Python for the ABM.\\
 
 \begin{itemize}
 \item We consider a model of Ebola Outbreak with parameters calibrated for Liberia.
@@ -17,21 +10,41 @@ We used InsightMaker platform to prototype our model and simulate stepping forwa
 \end{itemize}
 
 
-\subsection{Factors Considered}
-There are several factors to take into account when analyzing how a virus may spread in a community. First of all the customs and beliefs of a society play an important role, it implies how the individuals interact among themselves, how often they visit their relatives or friends, the amount of travel to other villages, cities or countries to work or buy supplies, as well as the mode of transport.\\
-Having information about the local government and the wealth of the region, would help to determine the capacity of response when facing an epidemic; including the quantity and quality of hospitals and their capacity, as well as the amount of healthcare workers and their expertise.\\
-In the moment of a virus outbreak, governments from other countries may intervene to help to control the disease, possibly decreasing the number of infected people and increased the number of recovered patients, by educating individuals about the virus, the ways of transmission and handling of the deceased family. \\
-Characteristics of the virus itself are also important, having an estimate of the incubation period, the rate of recovery, the time it remains in the deceased would help to predict the behavior of the virus.\\
-
 
 \subsection{Compartment-State Definition}
+Based on the compartmental model and parameters published by Rivers et al.\cite{Rivers2014} in October 2014, it was modeled a similar approach.  This particular model, divides the population into six different compartments; the Susceptible persons (S) could become Exposed (E), if they were in contact with an infected individual, initiating a transition to the Infectious (I) state after the incubation period of the disease, subsequently, acquiring the capacity of infecting others. A percentage of the I class individuals may be Hospitalized (H). There are two possible outcomes for the untreated individuals in I and the treated patients in H, individuals may die, with a probability of infecting other people during the resultant Funeral (F), before the virus is removed (R) from the individual, or the patients may recover, at this stage, can be considered equivalently removed. However,  in order to distinguish between the recovered (R) patients and the deceased (D) individuals, was considered a model with seven compartments : S, E, I, H, F, R and D. Figure ~\ref{fig:compartmentNoFlow} depicts the implemented compartment model. \\
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=1\textwidth]{compartmentNoFlow}
+  \caption{Compartment Model of the Ebola Epidemic in Liberia. \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral,  R: Recovered and D: Dead.  } 
+\label{fig:compartmentNoFlow} 
+\end{figure}
+
 \begin{description}
 \item[S]- Susceptible. Individuals who have not contracted the disease and have no immunity to it. 
-\item[E] - Exposed. Individuals who have come in contact with the Ebola patient and have contracted the disease but do not yet exhibit sever symptoms and thus, are considered not infectious.
+\item[E] - Exposed. Individuals who have come in contact with the Ebola patient and have contracted the disease but do not yet exhibit severe symptoms and thus, are considered not infectious.
 \item[I] - Infected. Individuals who experience severe symptoms of Ebola and are contagious.
 \item[H] - Hospitalized. Individuals who are infectious and are in the hospital because they are experiencing severe symptoms of Ebola.
 \item[F] - Funeral. Diseased but still contagious victims of Ebola. 
-\item[D] - Dead. Individuals who died because of Ebola, were buried and are currently under ground. They are considered not to be contagious.
+\item[D] - Dead. Individuals who died because of Ebola and have been buried. They are considered not to be contagious.
 \item[R] - Recovered. Individuals who had Ebola, survived and now are immune to the disease.
 \end{description}
+
+
+ 
+The governing equations of the system dynamics described above are the following:
+\begin{eqnarray} 
+\label{SDeqn}
+\frac{dS}{dt} = - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}\\
+\frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\alpha E\\
+\frac{dI}{dt} =  \alpha E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I\\
+\frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{DH}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H\\
+\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F\\
+\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{IH}(1-\delta_{2}) H-\gamma_{F} F
+\end{eqnarray}
+where each of the parameters are defined on Table \ref{tab:parameters}
+
+
 
