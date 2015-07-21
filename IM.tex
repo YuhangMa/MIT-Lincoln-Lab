@@ -26,6 +26,16 @@ where each of the parameters are defined on Tables ~\ref{tab:knownParameters} an
 
 The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown. $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative deaths in Liberia from March 2014 to July 2015 \cite{CDCData}.\\
 
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{BetaStepFunction.pdf}
+  \caption{$\beta$ step function} 
+\label{fig:BetaStepFunction} 
+\end{figure}
+
+
+
 \subsection{Bayesian calibration framework}
 Using Bayesian calibration methodology, we calibrate the unknown parameters ($\mathcal{P}$). The prior distribution of $\mathcal{P}$ is a uniform distribution which ranges are determined based on numerical exploration and previous researches (See Table \ref{tab: PriorRanges}) \cite{Rivers2014}. \\
 
