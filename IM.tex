@@ -10,16 +10,47 @@ The diagram of the described compartment model is depicted on Figure \ref{fig:co
 
 
 The governing equations of the system dynamics described above are the following:
+
 \begin{eqnarray} 
 \label{SDeqn}
-\frac{dS}{dt} = - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}\\
-\frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\alpha E\\
-\frac{dI}{dt} =  \alpha E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I\\
-\frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{DH}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H\\
-\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F\\
-\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{IH}(1-\delta_{2}) H-\gamma_{F} F
-\end{eqnarray}
+\frac{dS}{dt} = - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N} \label{eqn:SD1}\\
+\frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\gamma_P E         \label{eqn:SD2}\\
+\frac{dI}{dt} =  \gamma_P E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I   \label{eqn:SD3}\\
+\frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{HF}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H \label{eqn:SD4}\\
+\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F      \label{eqn:SD5}\\
+\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{HR}(1-\delta_{2}) H-        \label{eqn:SD6}
+\frac{dD}{dt} = \gamma_{F} F     \label{eqn:SD7}
+\end{eqnarray}\\
+
 where each of the parameters are defined on Tables ~\ref{tab:knownParameters} and ~\ref{tab:calibratedParameters}
+
+
+
+%EQUATION DESCRIPTION
+\noindent The equations described above come from a species balance, which guarantees that any individual is lost. $Accumulation = Input - Output$, in our case,
+
+\begin{equation}
+\frac{d (Accumulation)}{dt} = \frac{d (Input)}{dt} -\frac{d (Output)}{dt} \nonumber
+\end{equation}
+
+
+Equation \ref{eqn:SD1} describes the changes with respect to time on the Susceptible population, the transition from S to I depends on the product $\beta_{I}SI+\beta_{H}SH+\beta_{F}SF$, which specifies that such changes are given by the contact rate with the comparments I, H and F (all of them have Ebola), and the respective number of individuals on each compartment.\\
+
+Equation \ref{eqn:SD2} describes the changes on the Exposed individuals. The number of individuals on this comparment depends on the number of individuals that become E, which depends on the same product as \ref{eqn:1}, substracting the number of individuals that transitions from E to I after the incubation period $\gamma_P$.\\
+
+Equation \ref{eqn:SD3} describes the changes on the Infected patients, equally depends on the number of individuals that become I after the incubation period $\gamma_P$, substracting the individuals that transitions from I to H, which is given by the product between the transition rate from I to H and the probability a case becomes H; in the same way, substracting the individuals that transitions from I to R, given by  the product among the duration of infection rate, the probability a case is NOT hospitalized and the death rate of an unhospitalized case. Finally substracting the individuals that transitions from I to F , given by the product between the transition rate from Infected to Dead,  the probability a case is NOT hospitalized and the death rate of an unhospitalized case.\\
+
+Equation \ref{eqn:SD4} describes the changes on the Hospitalized patients. It depends on the number of individuals that transitions from I to H, given by the  product between the transition rate from Infected to Hospitalized and the probability a case is Hospitalized;  substracting the individuals than transitions from H to D, given by the product among the transition rate from Hospitalized to Dead and the death rate of a hospitalized case, and finally, susbtracting the people that transitions from H to R, which is given by the product between the transition rate from I to R and the survival rate of an hospitalized case.\\
+
+Equation \ref{eqn:SD5} describes the changes on the Funeralized compartment.  Depending on the number of individuals that transitions from I to D, which is given by the product between the transition rate from I to D, the probability a case is NOT hospitalized and the death rate of an unhospitalized case. Adding the people who transitions from H to F , which is given by the product between the transition rate from H to D and the death rate of an hospitalized case. Finally substracting the individuals who already have been buried.\\
+
+Equation \ref{eqn:SD6} describes the changes on the Recovered compartment. Depending on the transition from I to R, which is given by the product between the duration of infection rate, the probability a case is NOT hospitalized and the survival rate of an Unhospitalized rate. Adding  the individuals who transitions from H to I, which is given by the product among the transition rate from I to H and the survival rate of a hospitalized case.\\
+
+Equation \ref{eqn:SD7} describes the changes on the Funeralized compartment, which solely depends on the rate of duration of a traditional funeral.\\
+
+
+
+
 
 %Parameter calibration
 \subsection{Parameter Calibration}
@@ -38,8 +69,8 @@ The parameter values which represent biological process ($\alpha, \gamma_{I}, \g
 
 \subsection{Bayesian calibration framework}
 
-We use Bayesian methodology to calibrate our unknown system parameters. It is a versatile tool which is utilized in many calibrations of complicated systems owing to its merit that a little or no information on the parameter values is not an obstacle to use it. The calibration procedure starts from choosing a distribution in the space of parameters we concern. This distribution, which is called `prior distribution' ($\mathcal{D}_0$), can be a simple like uniform distribution or intuitively chosen parametric distribution. Based on the available data and mathematical setup, we evaluate the likelihood weight for the samples from $\mathcal{D}_0$ with which we update to the weighted distribution `posterior distribution' ($\mathcal{D}_1$) from $\mathcal{D}_0$. Multiple updates ($\mathcal{D}_1$ to $\mathcal{D}_2$, $\mathcal{D}_2$ to $\mathcal{D}_3$, ...) facilitate to get more straightforward pattern on the distribution.\\
-To calibrate the unknown parameters ($\mathcal{P}$), we started from a uniform distribution in the range determined based on numerical exploration and previous researches (See Table \ref{tab: PriorRanges}) \cite{Rivers2014}. \\
+We use Bayesian methodology to calibrate our unknown system parameters. It is a versatile tool which is utilized in many calibrations of complicated systems owing to its merit that a little or no information on the parameter values is not an obstacle to use it. The calibration procedure starts from choosing a distribution in the space of parameters we concern. This distribution, which is called `prior distribution' ($\mathcal{D}_0$), can be a simple like uniform distribution or intuitively chosen parametric distribution. Based on the available data and mathematical setup, we evaluate the likelihood weight for each sample from $\mathcal{D}_0$ with which we update to the weighted distribution `posterior distribution' ($\mathcal{D}_1$) from $\mathcal{D}_0$. Multiple updates ($\mathcal{D}_1$ to $\mathcal{D}_2$, $\mathcal{D}_2$ to $\mathcal{D}_3$, ...) facilitate to get more straightforward pattern on the distribution.\\
+To calibrate the unknown parameters ($\mathcal{P}$), we chose a uniform distribution in the range determined by numerical exploration and previous researches (See Table \ref{tab: PriorRanges}) \cite{Rivers2014}. \\
 
 \begin{table}[ht]
 \caption{Range of the prior parameter space} % title of Table
@@ -66,7 +97,12 @@ Step 3) Evaluate likelihood of $\mathcal{P}_0$: $Exp[-Norm(\mathcal{D}_R-\mathca
 \emph{Repeat Step 1-3 multiple times and make large number of {parameter + likelihood} ensembles. Generate posterior distribution with them.}
 
 \subsubsection{Results and validation}
-We applied our systematic model and calibration method for Ebola spread in Liberia 2014-2015. Two sets of cumulative mortality data (pre-intervention, post-intervention) are used to calibrate pre- and post-intervention parameter calibration, respectively. We assume that about a forth (1 million) of the total Liberia population (the 4.3 million [reference]) are involved in the transmission, and the rest are not in any chance due to geographical and behavior reason. For the calibration of before intervention parameters, we used the data for 176 days (March 2014 to September 2014), and initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that initial outbreak started from a single infected person in a million population. The calibration of intervention parameters is based on the data for 306 days (September 14 to July 15), and initial value $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from calibrated mean $\mathcal{P}$ for pre intervention. 10000 random samples were used in each calibration. Calibration results and validation are shown in Table \ref{tab:parameters} and Figure \ref{fig:Cumulative _Death}.\\
+We applied our systematic model and calibration method for Ebola spread in Liberia 2014-2015. Two sets of cumulative mortality data (pre-intervention, post-intervention) are used to calibrate pre- and post-intervention parameter calibration, respectively. We assume that about a forth (1 million) of the total Liberia population (the 4.3 million [reference]) are involved in the transmission, and the rest are not in any chance due to geographical and behavior reason. For the calibration of before intervention parameters, we used the data for 176 days (March 2014 to September 2014), and initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that initial outbreak started from a single infected person in a million population. The calibration of intervention parameters is based on the data for 306 days (September 14 to July 15), and initial value $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from calibrated mean $\mathcal{P}$ for pre intervention. 10000 random samples were used in each calibration.\\
+
+Calibration results are shown in Table \ref{tab:parameters}. By observing the posterior mean of the two calibrations, we conclude that our calibration reasonably estimated transmission rates ($\beta_I$, $\beta_H$, $\beta_F$) decreased after intervention. However, it is not likely that the parameters of time until hospitalization ($\gamma_H$) and the fraction a case hospitalization ($\theta$) are also decreased. It might be explained by the hospital capacity insufficient to serve for the all increasing cases. Also, it tells that our transmission system is more sensitive to the changes in {$\beta_I$, $\beta_H$, $\beta_F$} compared to the changes in {$\gamma_H$, $\theta$}.\\
+
+We validated our calibration in Figure \ref{fig:Cumulative _Death}. It shows `good-fit' between the used cumulative death data and simulated version of it with our posterior mean and system setup and that our model and calibration scheme works in this modeling.\\
+
 
 Based on our calibration, the intervention reduce the basic reproduction number of Ebola in Liberia from 1.99 to 0.787, using the formula in \cite{Legrand2007}. As a result, disease spread is terminated after infecting 0.84\% of total population with 0.49\% decrease in population, otherwise 92.7\% are infected and population decreases by 53.5\%.\\
 
