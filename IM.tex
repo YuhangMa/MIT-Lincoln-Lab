@@ -9,12 +9,11 @@ The governing equations of the system dynamics described above are the following
 \frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F\\
 \frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{IH}(1-\delta_{2}) H-\gamma_{F} F
 \end{eqnarray}
-where each of the parameters are defined on Tables \ref{tab:knownParameters} and \ref{tab:calibratedParameters}
-
+where each of the parameters are defined on Tables ~\ref{tab:knownParameters} and ~\ref{tab:calibratedParameters}
 
 \subsection{Parameter Calibration}
 
-The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown. $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative death in Liberia from March 2014 to July 2015 \cite{}CDCData}.\\
+The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown. $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative deaths in Liberia from March 2014 to July 2015 \cite{CDCData}.\\
 
 \subsection{Bayesian calibration framework}
 Using Bayesian calibration methodology, we calibrate the unknown parameters ($\mathcal{P}$). The prior distribution of $\mathcal{P}$ is a uniform distribution which ranges are determined based on numerical exploration and previous researches (See Table \ref{tab: PriorRanges}) \cite{Rivers2014}. \\
@@ -122,13 +121,21 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) & 
 
 %Comparing with WHO data
 
-\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures \ref{fig:LB_IM_WHO} and \ref{fig:LB_IM_WHO2}. As depicted in Figure \ref{fig:LB_IM_WHO} A and B there is a good fitting of our model with the data reported by WHO. Figure \ref{fig:LB_IM_WHO2} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately.
+\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures \ref{fig:LB_IM_WHO} and \ref{fig:LB_IM_WHO2}. As depicted in Figure \ref{fig:LB_IM_WHO}, there is a good fitting of our model with the data reported by WHO. Figure \ref{fig:LB_IM_WHO2} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately.
 
 
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=1\textwidth]{LB_BI_AI_SD_WHO_IM}
-  \caption{ Comparison between World Health Organization (WHO) data and Insight Maker (IM) results using the parameters of A. the first stage (March 2014  to Sept 2014) and B. the second stage ( Sept 2014 to July 2015) for the cumulative deaths (D).}
+
+
+
+\begin{figure}[h!]
+ \centering 
+ \begin{subfigure}[b]{1\textwidth}
+  \includegraphics[width=\textwidth]{LB_BI_SD_WHO_IM} \caption{BI: Before Intervention Parameters (March 2014  to Sept 2014)} \label{fig:LB_BI_SD_WHO_IM} \end{subfigure}
+ %
+ \hspace{.1cm}
+\begin{subfigure}[b]{1\textwidth}
+ \includegraphics[width=\textwidth]{LB_AI_SD_WHO_IM} \caption{AI: After Intervention Parameters  ( Sept 2014 to July 2015).} \label{fig:LB_AI_SD_WHO_IM} \end{subfigure} 
+\caption{Comparison between World Health Organization (WHO) data and Insight Maker (IM) results for cumulative deaths (D)}
 \label{fig:LB_IM_WHO} 
 \end{figure}
 
