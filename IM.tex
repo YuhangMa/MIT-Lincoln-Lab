@@ -1,6 +1,6 @@
 \subsection{Parameter Calibration}
 
-The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown. $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative death in Liberia from March 2014 to July 2015 (reference).
+The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown. $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative death in Liberia from March 2014 to July 2015 \cite{}CDCData}.\\
 
 \subsection{Bayesian calibration framework}
 Using Bayesian calibration methodology, we calibrate the unknown parameters ($\mathcal{P}$). The prior distribution of $\mathcal{P}$ is a uniform distribution which ranges are determined based on numerical exploration and previous researches (See Table \ref{tab: PriorRanges}) \cite{Rivers2014}. \\
@@ -29,9 +29,10 @@ Step 3) Evaluate likelihood of $\mathcal{P}_0$: $Exp[-Norm(\mathcal{D}_R-\mathca
 
 \emph{Repeat Step 1-3 multiple times and make large number of {parameter + likelihood} ensembles. Generate posterior distribution with them.}
 
-\subsection{Results and validation}
-For the calibration of before intervention parameters, we used the data for 176 days (March 14 to September 14), and initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that initial outbreak started from a single infected person in a million population. The calibration of after intervention parameters is based on the data for 306 days (September 14 to July 15), and initial value $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from calibrated mean $\mathcal{P}$ for pre intervention. 10000 random samples were used in each calibration. Calibration results and validation are shown in (table) and (figure).\\
-Based on our calibration, the intervention reduce the basic reproduction number of Ebola in Liberia from 1.99 to 0.787, using the formula in (reference). As a result, disease spread is terminated after infecting 0.84\% of total population with 0.49\% decrease in population, otherwise 92.7\% are infected and population decreases by 53.5\%.\\
+\subsubsection{Results and validation}
+For the calibration of before intervention parameters, we used the data for 176 days (March 2014 to September 2014), and initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that initial outbreak started from a single infected person in a million population. The calibration of after intervention parameters is based on the data for 306 days (September 14 to July 15), and initial value $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from calibrated mean $\mathcal{P}$ for pre intervention. 10000 random samples were used in each calibration. Calibration results and validation are shown in Table \ref{tab:parameters} and Figure \ref{fig:Cumulative _Death}.\\
+
+Based on our calibration, the intervention reduce the basic reproduction number of Ebola in Liberia from 1.99 to 0.787, using the formula in \cite{Legrand2007}. As a result, disease spread is terminated after infecting 0.84\% of total population with 0.49\% decrease in population, otherwise 92.7\% are infected and population decreases by 53.5\%.\\
 
 
 \begin{table}[ht]
@@ -67,7 +68,7 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 & 0.500\\ [1ex]
   \centering
   \includegraphics[width=1\textwidth]{CumulativeDeathMathematica}
   \caption{Validation of calibration. Dots represent cumulative death data and the lines represent simulation based on mean posterior parameters. (Blue) - pre intervention and (red) - post treatment.}
-\label{fig:Cumulative Death Plot}
+\label{fig:Cumulative _Death}
 \end{figure}
 
 
@@ -89,7 +90,7 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 & 0.500\\ [1ex]
 \begin{figure}[!h]
   \centering
   \includegraphics[width=1\textwidth]{LB_NoInt_SD_IM}
-  \caption{ Insight Maker results using the parameters of the first stage (Mar/14 to Sept/14) and assuming no intervention}
+  \caption{Simulation results using the parameters of the first stage (Mar 2014  to Sept 2014) and assuming no intervention}
 \label{fig:LB_IM_NoIn} 
 \end{figure}
 
@@ -99,7 +100,7 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 & 0.500\\ [1ex]
 \begin{figure}[!h]
   \centering
   \includegraphics[width=1\textwidth]{LB_Int3_SD_IM}
-  \caption{ Insight Maker results. \textit{A.} Parameters of the first stage (Mar/14 to Sept/14), \textit{B.} Parameters of the second stage ( Sept/14 to July/15)}
+  \caption{ Simulation results. \textit{A.} Parameters of the first stage (March 2014  to Sept 2014), \textit{B.} Parameters of the second stage ( Sept 2014 to July 2015)}
 \label{fig:LB_IM_In} 
 \end{figure}
 
@@ -112,7 +113,7 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 & 0.500\\ [1ex]
 \begin{figure}[!h]
   \centering
   \includegraphics[width=1\textwidth]{LB_BI_AI_SD_WHO_IM}
-  \caption{ Comparison between World Health Organization (WHO) data and Insight Maker (IM) results using the parameters of A. the first stage (Mar/14 to Sept/14) and B. the second stage ( Sept/14 to July/15) for the cumulative deaths (D).}
+  \caption{ Comparison between World Health Organization (WHO) data and Insight Maker (IM) results using the parameters of A. the first stage (March 2014  to Sept 2014) and B. the second stage ( Sept 2014 to July 2015) for the cumulative deaths (D).}
 \label{fig:LB_IM_WHO} 
 \end{figure}
 
