@@ -2,7 +2,7 @@
 \usepackage{graphicx, epstopdf}
 \graphicspath{{Fig/}}
 \usepackage{tikz, flowchart}
-\usetikzlibrary{shapes}
+\usetikzlibrary{shapes, patterns}
 
 \usetheme{Amsterdam}
 \author{ Hsuan-Wei Lee,
@@ -47,6 +47,7 @@
 
 \begin{frame}
 \frametitle{Introduction}
+\section{Intro}
 \begin{itemize}
 \item Ebola was discovered in 1976.
 \item Early sympoms:  headache, fatigue and joint pain. 
@@ -57,8 +58,17 @@
 \end{itemize}
 \end{frame}
 
+
+
+
+
+
+
+
+
 \begin{frame}
 \frametitle{Model}
+\section{Models}
 
 
 \begin{figure}[!h]
@@ -96,6 +106,7 @@ based on mean posterior parameters. (Blue) - pre intervention and (red) - post t
 
 \begin{frame}
 \frametitle{System model}
+\section{System}
 \end{frame}
 
 \begin{frame}
@@ -134,6 +145,7 @@ based on mean posterior parameters. (Blue) - pre intervention and (red) - post t
 
 \begin{frame}
 \frametitle{Agent model}
+\section{Agent}
 %MAYBE INCLUDE DIAGRAM
 %\begin{figure}
 %\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
@@ -219,8 +231,11 @@ based on mean posterior parameters. (Blue) - pre intervention and (red) - post t
 \end{figure}
 \end{frame}
 
+
+
 \begin{frame}
 \frametitle{Spatial Agent Model}
+\section{Spatial}
 \begin{itemize}
 \item Why we should incorporate the spatial info?
 \begin{itemize}
@@ -238,6 +253,79 @@ based on mean posterior parameters. (Blue) - pre intervention and (red) - post t
 
 \end{frame}
 
+\begin{frame}{Spatial Importance}
+\includegraphics[width=\textwidth]{cities}
+\end{frame}
+%\draw[fill=black] (1,1) rectangle (2,2);
+
+\begin{frame}{States and Transitions}
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
+
+  \node[main node] (1) {S};
+  \node[main node] (2) [right of=1] {E};
+  \node[main node] (3) [right of=2] {I};
+  \node[main node] (4) [right of=3] {F};
+  \node[main node] (5) [below of=3] {H};
+  \node[main node] (6) [below of=4] {D};
+  \node[main node] (7) [left of=5] {R};
+
+  \path[every node/.style={font=\sffamily\small}]
+    (1)
+        edge node {} (2)
+        %edge [loop above] node {$1-p_{SE}$} (1)
+    (2) 
+        edge node {} (3)
+        % edge [loop above] node {} (2)
+      
+    (3) 
+       edge node {} (4)
+       edge node[right] {} (5)
+       edge node[left] {} (7)
+        %edge [loop above] node {$p_{II}$} (3)
+    (4)
+         edge node {} (6)
+        % edge [loop above] node {$p_{FD}$} (6)
+       
+(5) edge node{} (6) 
+	edge node {} (7)
+%edge [loop below] node {$p_{FF}$} (6)     
+;
+        
+\end{tikzpicture}
+\end{center}
+\caption{States and transitions for individuals.}
+\label{fig:sabm-states}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Infection Rules}
+%\includegraphics[width=\textwidth]{cities}
+\begin{figure}[h!]
+\begin{center}
+\begin{tikzpicture}[scale=.9]
+\draw [fill=red] (0,0) rectangle (3,3);
+\draw[pattern=north west lines, pattern color=black] (1,1) rectangle (2,2);
+\draw[step=1cm, thin] (-2,-2) grid (5,5);
+\draw[fill=black] (1.7,1.2) circle (.05cm);
+
+\draw[pattern=north west lines, pattern color=black] (6,4) rectangle (6.5,4.5);
+\node[anchor=west] at (7,4.25) {funeral};
+\draw[fill=red] (6,3) rectangle (6.5,3.5);
+\node[anchor=west] at (7,3.25) {community};
+\end{tikzpicture}
+\end{center}
+\caption{States and transitions for individuals.}
+\label{fig:sabm-states}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Travel Rules}
+\includegraphics[width=\textwidth]{travel}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Spatial Agent Model Results}
@@ -246,9 +334,11 @@ based on mean posterior parameters. (Blue) - pre intervention and (red) - post t
 
 \begin{frame}
 \frametitle{Comparison}
+\section{Comparison}
 \end{frame}
 
 \begin{frame}
 \frametitle{Summary}
+\section{Summary}
 \end{frame}
 \end{document}
