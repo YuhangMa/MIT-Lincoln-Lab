@@ -1,3 +1,17 @@
+ 
+The governing equations of the system dynamics described above are the following:
+\begin{eqnarray} 
+\label{SDeqn}
+\frac{dS}{dt} = - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}\\
+\frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\alpha E\\
+\frac{dI}{dt} =  \alpha E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I\\
+\frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{DH}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H\\
+\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F\\
+\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{IH}(1-\delta_{2}) H-\gamma_{F} F
+\end{eqnarray}
+where each of the parameters are defined on Tables \ref{tab:knownParameters} and \ref{tab:calibratedParameters}
+
+
 \subsection{Parameter Calibration}
 
 The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown. $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative death in Liberia from March 2014 to July 2015 \cite{}CDCData}.\\
@@ -34,35 +48,28 @@ For the calibration of before intervention parameters, we used the data for 176 
 
 Based on our calibration, the intervention reduce the basic reproduction number of Ebola in Liberia from 1.99 to 0.787, using the formula in \cite{Legrand2007}. As a result, disease spread is terminated after infecting 0.84\% of total population with 0.49\% decrease in population, otherwise 92.7\% are infected and population decreases by 53.5\%.\\
 
-
 \begin{table}[ht]
-\caption{Model Parameters for Ebola Epidemic in Liberia Before and After the International Intervention. Calibrated parameters are written in bold font, and posterior means and standard deviations in parenthesis are notated.} % title of Table
+\caption{Calibrated Parameters for Ebola Epidemic in Liberia. Posterior mean and standard deviation (in parenthesis) are notated for before-intervention (2nd column) and after-intervention (3nd column) calibrations. For comparison, the evaluated values through least-square optimization \cite{Rivers2014} are in 4th column.} % title of Table
 \centering % used for centering table
-\begin{tabular}{c| c| c| c }
+\begin{tabular}{c c c c}
 \hline\hline %inserts double horizontal lines
 Parameter &  Before Intervention  & After Intervention & Fitted Values\\ [0.5ex]
- & (Mar/14 to Sept/14) &  (Sept/14 to Jul/15) & from \cite{FortmannRoe}\\ [0.5ex] % inserts table
+ & (Mar/14 to Sept/14) &  (Sept/14 to Jul/15) & from \cite{Rivers2014}\\ [0.5ex] % inserts table
 % inserts table
 %heading
 \hline % inserts single horizontal line
-\bf {Contact Rate, Community  ($\bf{\beta_{I}}$) }& \bf{0.148 (0.0953)} & \bf{0.0446 (0.0338)} & 0.160 \\
-\bf Contact Rate, Hospital  ($\beta_{H}$) &\bf 0.235 (0.143)& \bf 0.0877 (0.0563) & 0.062\\
-\bf Contact Rate, Funeral  ($\beta_{F}$) & \bf 0.465 (0.287)& \bf 0.283 (0.208) & 0.489 \\
-Incubation Period (${1}/{\alpha}$) & 11 days & 11 days  & 12 days\\
-\bf Time until Hospitalization (${1}/{\gamma_{H}}$) &\bf 4.49 (1.44) days & \bf 4.63 (1.43) days & 3.24 days  \\
-Time froml Hospitalization to Death (${1}/{\gamma_{DH}}$) & 3.51 days & 3.51 days  & 10.07 days\\
-Duration of Traditional Funeral (${1}/{\gamma_{F}}$) & 2.00 days & 2.00 days  & 2.01 days\\
-Duration of Infection (${1}/{\gamma_{I}}$) & 10.00 days & 10.00 days  & 15.00 days\\
-Time from Infection to Death (${1}/{\gamma_{D}}$) & 8.00 days & 8.00 days  & 13.31 days\\
-Time from Hospitalization to Recovery (${1}/{\gamma_{IH}}$) & 5.51 days & 5.51 days  & 15.88 days\\
-\bf Probablity a Case is Hospitalized ($\theta$) & \bf 0.248 (0.142) & \bf 0.233 (0.145) & 0.197\\
-Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500  & 0.500  &  0.500 \\
-Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 & 0.500\\ [1ex]
+{Contact Rate, Community  (${\beta_{I}}$) }& {0.148 (0.0953)} & {0.0446 (0.0338)} & 0.160 \\
+Contact Rate, Hospital  ($\beta_{H}$) & 0.235 (0.143) & 0.0877 (0.0563) & 0.062\\
+Contact Rate, Funeral  ($\beta_{F}$) & 0.465 (0.287)& 0.283 (0.208) & 0.489 \\
+Time until Hospitalization (${t_{H}}$) & 4.49 (1.44) days & 4.63 (1.43) days & 3.24 days  \\
+Time from Hospitalization to Death (${t_{DH}}$) & 3.51 (1.44) days & 3.51 (1.43) days  & 10.07 days\\
+Time from Hospitalization to Recovery (${t_{IH}}$) & 5.51 (1.44) days & 5.51 (1.43) days  & 15.88 days\\
+Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) & 0.197\\
+[1ex]
 \hline
 \end{tabular}
-\label{tab:parameters}
+\label{tab:calibratedParameters}
 \end{table}
-
 
 \begin{figure}[h]
   \centering
@@ -97,12 +104,20 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 & 0.500\\ [1ex]
 %Intervention 
 \noindent As mentioned before, five parameters were calibrated for the second stage of the Ebola Outbreak, namely, community contact rate ($\beta_I$), hospital contact rate ($\beta_H$), funeral contact rate ($\beta_F$), time until hospitalization ($\gamma_H$) and probability a case is hospitalized ($\theta$). Figure \ref{fig:LB_IM_In} A. shows that there is not much change in the Total population and susceptible compartment, meaning that the virus was controlled;  Figure \ref{fig:LB_IM_In} B focuses on E, I, R, H , F and D compartments, showing that the international intervention causes a dramatic change in the behavior of such compartments.
 
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=1\textwidth]{LB_Int3_SD_IM}
-  \caption{ Simulation results. \textit{A.} Parameters of the first stage (March 2014  to Sept 2014), \textit{B.} Parameters of the second stage ( Sept 2014 to July 2015)}
+
+\begin{figure}[h!]
+ \centering 
+ \begin{subfigure}[b]{1\textwidth}
+  \includegraphics[width=\textwidth]{LB_Int3a_SD_IM} \caption{ Parameters of the first stage (March 2014  to Sept 2014)} \label{fig:LB_IM_In1} \end{subfigure}
+ %
+ \hspace{.1cm}
+\begin{subfigure}[b]{1\textwidth}
+ \includegraphics[width=\textwidth]{LB_Int3b_SD_IM} \caption{ Parameters of the second stage ( Sept 2014 to July 2015).} \label{fig:LB_IM_In2} \end{subfigure} \caption{Simulation Results}
 \label{fig:LB_IM_In} 
 \end{figure}
+
+
+
 
 
 %Comparing with WHO data
