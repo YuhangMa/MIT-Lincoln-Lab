@@ -24,7 +24,7 @@ where each of the parameters are defined on Tables ~\ref{tab:knownParameters} an
 %Parameter calibration
 \subsection{Parameter Calibration}
 
-The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown. $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative deaths in Liberia from March 2014 to July 2015 \cite{CDCData}.\\
+The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown (see Table and Equation for the detail of the parameters). $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative deaths in Liberia from March 2014 to July 2015 \cite{CDCData}.\\
 
 
 \begin{figure}[!h]
@@ -37,7 +37,9 @@ The parameter values which represent biological process ($\alpha, \gamma_{I}, \g
 
 
 \subsection{Bayesian calibration framework}
-Using Bayesian calibration methodology, we calibrate the unknown parameters ($\mathcal{P}$). The prior distribution of $\mathcal{P}$ is a uniform distribution which ranges are determined based on numerical exploration and previous researches (See Table \ref{tab: PriorRanges}) \cite{Rivers2014}. \\
+
+We use Bayesian methodology to calibrate our unknown system parameters. It is a versatile tool which is utilized in many calibrations of complicated systems owing to its merit that a little or no information on the parameter values is not an obstacle to use it. The calibration procedure starts from choosing a distribution in the space of parameters we concern. This distribution, which is called `prior distribution' ($\mathcal{D}_0$), can be a simple like uniform distribution or intuitively chosen parametric distribution. Based on the available data and mathematical setup, we evaluate the likelihood weight for the samples from $\mathcal{D}_0$ with which we update to the weighted distribution `posterior distribution' ($\mathcal{D}_1$) from $\mathcal{D}_0$. Multiple updates ($\mathcal{D}_1$ to $\mathcal{D}_2$, $\mathcal{D}_2$ to $\mathcal{D}_3$, ...) facilitate to get more straightforward pattern on the distribution.\\
+To calibrate the unknown parameters ($\mathcal{P}$), we started from a uniform distribution in the range determined based on numerical exploration and previous researches (See Table \ref{tab: PriorRanges}) \cite{Rivers2014}. \\
 
 \begin{table}[ht]
 \caption{Range of the prior parameter space} % title of Table

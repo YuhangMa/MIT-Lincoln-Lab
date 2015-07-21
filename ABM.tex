@@ -69,8 +69,8 @@ Parameter & Definition&  Liberia Before Intervention  & Liberia After Interventi
 % inserts table
 %heading
 \hline % inserts single horizontal line
-$p_{SE}$	 &$\beta_I N_{I}/N+\beta_H N_{H}/N+\beta_F  N_F/ N$ 	& \textbf{Dynamic}	 & \textbf{Dynamic} \\ 
-$p_{SS}$ 	& $1-p_{SE}$													 & \textbf{Dynamic}	 & \textbf{Dynamic}  \\ 
+$p_{SE}$	 &$\beta_I N_{I}/N+\beta_H N_{H}/N+\beta_F  N_F/ N$ 	& Dynamic	 & Dynamic \\ 
+$p_{SS}$ 	& $1-p_{SE}$													 & Dynamic & Dynamic  \\ 
 $p_{EE}$ 	& $1-1/t_{P}$ 												& 0.9091 			& 0.9091  \\ 
 $p_{EI}$ 	& $1/t_{P}$ 												&0.0909			 & 0.0909  \\ 
 $p_{II}$ 	& $1/t_{I}$ 												& 0.1 				& 0.1  \\ 
@@ -89,7 +89,7 @@ $p_{DD}$ 	& 1															&1				 & 1 \\ [1ex]
 \label{tab:probabilities}
 \end{table}
 \subsection{Simulation}
-We consider a population of size 1000 with 999 individuals starting in a susceptible state and 1 individual in the exposed state. Numeric probabilities of an individual transitioning from each state are recorded in Table~\ref{tab:probabilities}. We run a hundred Monte Carlo simulations and average the results to estimate an outcome of the disease. We define an outbreak as an event in which 1\% of the population or more contracts the disease. If only one individual is exposed to the disease in a population of 1000, there is about 30\% chance that the outbreak does not happen (27/100 cases). However, once the cumulative proportion of the exposed individuals reaches 1\%, the virus affects more than 90\% of the population. A histogram for simulation outcomes is depicted in Figure~\ref{fig:Hist}.
+We consider a population of size 1000 with 999 individuals starting in a susceptible state and 1 individual in the exposed state. Numeric probabilities of an individual transitioning from each state are recorded in Table~\ref{tab:probabilities}. We run a hundred Monte Carlo simulations and average the results to estimate an outcome of the disease. We define an outbreak as an event in which 2\% of the population or more contracts the disease. If only one individual is exposed to the disease in a population of 1000, there is about 30\% chance that the outbreak does not happen (27/100 cases). However, once the cumulative proportion of the exposed individuals reaches 1\%, the virus affects more than 90\% of the population. A histogram for simulation outcomes is depicted in Figure~\ref{fig:Hist}.
 %
 %
 % HERE IS THE PROBABILITY TRANSITION TABLE
@@ -110,7 +110,7 @@ We consider a population of size 1000 with 999 individuals starting in a suscept
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % figure N1000Hist.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-We note that the simulations reach their stationary state before $t = 500$. We plot the result of 100 simulations in Figure~\ref{fig:Scatter}. In many cases we don't observe an outbreak of Ebola. However there are many cases which show catastrophic disease. In the disastrous case, on average, 95\% of people get the disease and 76\% of people die from it. 
+We note that the simulations reach their stationary state before $t = 300$. We plot the result of 100 simulations in Figure~\ref{fig:Scatter}. In many cases we don't observe an outbreak of Ebola. However there are many cases which show catastrophic disease. In the disastrous case, on average, 93\% of people get the disease and 50\% of people die from it. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % figure N1000Scatter.eps
@@ -120,7 +120,7 @@ We note that the simulations reach their stationary state before $t = 500$. We p
 \begin{center}
 \includegraphics[scale=0.5]{N1000Scatter.eps}
 \end{center}
-\caption{Scatter plot showing the proportion of population that contracts the disease and the proportion of the population that dies due to the disease for a population size 1000}
+\caption{Scatter plot showing the proportion of population that contracts the disease and the proportion of the population that dies due to the disease for a population size 1000 \textbf{PUT BOX AND WHISKER PLOT HERE}}
 \label{fig:Scatter}
 \end{figure}
 
@@ -147,7 +147,7 @@ On the other hand, if the infected agent contacts many people during the time he
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.8]{Outbreak.eps}
+\includegraphics[scale=0.5]{TimeSeries-eps-converted-to}
 \end{center}
 \caption{Realization in which outbreak occurs}
 \label{fig:Outbreak}
@@ -157,9 +157,7 @@ On the other hand, if the infected agent contacts many people during the time he
 % figure Outbreak.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\textbf{Choose how you want to word it; Maybe move description to caption of the figure. Also need to cite only once. Either at the beginning or later}.
-We plot a phase portrait for the proportion of agents who never got infected and are in S vs. the proportion of agents who contracted the disease (both D and R) as time progresses.The result is presented in Figure~\ref{fig:PhasePortraitABM}. On the horizontal axis, we put the ratio of S to the total population and on the vertical axis - the ratio of D plus R to the total population.  When $t = 0$, one agent is in state E and 99.9\% of agents are in S. All other states contain no agents. About 30\% of the time, there is no severe outbreak. In such case, only few people get Ebola. As time goes by there are only few transitions between states and a stationary point is reached within a few time steps. However, if there is an outbreak, the trajectory gradually moves to its equilibrium state. On average, the equilibrium occurs at $(S, R+ D) = (0.05, 0.95)$. We conduct ten experiments and plot their trajectories on the same graph, presented in Figure~\ref{fig:PhasePortraitABM}. Because the total proportion of people in the population is one, the equilibria in different experiments lie on the $x + y = 1$ line. The system starts at $(S, [R]+[D]) = (0.999, 0)$, a point that is close to this line. During the course of the outbreak, the phase portrait falls below the x + y = 1 line because a portion of the population are in the transient states: E, I, H and F. 
+We plot a phase portrait for the proportion of agents who never got infected and are in S vs. the proportion of agents who contracted the disease (both D and R) as time progresses. On the horizontal axis, we put the ratio of S to the total population and on the vertical axis - the ratio of D plus R to the total population.  When $t = 0$, one agent is in state E and 99.9\% of agents are in S. All other states contain no agents. About 30\% of the time, there is no severe outbreak. In such case, only few people get Ebola. As time goes by there are only few transitions between states and a stationary point is reached within a few time steps. However, if there is an outbreak, the trajectory gradually moves to its equilibrium state. On average, the equilibrium occurs at $(S, R+ D) = (0.05, 0.95)$. We conduct a hundred experiments and plot their trajectories on the same graph, presented in Figure~\ref{fig:PhasePortraitABM}. Because the total proportion of people in the population is one, the equilibria in different experiments lie on the $x + y = 1$ line. The system starts at $(S, R+D) = (0.999, 0)$, a point that is close to this line. During the course of the outbreak, the phase portrait falls below the x + y = 1 line because a portion of the population are in the transient states: E, I, H and F. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % figure PhasePortrait.eps
@@ -184,9 +182,9 @@ As in the Systems Dynamics approach, we perform an intervention in the agent-bas
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[scale=0.8]{InterventionZoomIn.eps}
+\includegraphics[scale=0.5]{pieChart}
 \end{center}
-\caption{Effect of Intervention on the spread of the disease }
+\caption{Proportions of susceptible, dead and recovered agents if intervention is implemented}
 \label{fig:Intervention}
 \end{figure}
 
@@ -200,9 +198,9 @@ We examine the effect of the population size on the outcome of the agent-based m
 \begin{figure} 
 \centering 
 \begin{subfigure}[b]{0.3\textwidth} \includegraphics[scale=.35]{N100Scatter.eps} \caption{Scatter plot showing the proportion of population that contracts the disease (blue) and dies (red) for a population size 100} \label{fig:N100} \end{subfigure} 
-\hfill 
+\hspace{2cm}
  \begin{subfigure}[b]{0.3\textwidth} \includegraphics[scale=0.35]{N5000Scatter.eps} \caption{Scatter plot showing the proportion of population that contracts the disease (blue) and dies (red) for a population size 5000} \label{fig:N5000} \end{subfigure} 
- \caption{Effect of changing the population size on the proportion of the diseased population}\label{fig:VarPopSize}
+ \caption{Effect of changing the population size on the proportion of the diseased population \textbf{ADD ADDITIONAL FIGURE TO EXAMINE POPULATION SIZE VARIANCE}}\label{fig:VarPopSize}
   \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
