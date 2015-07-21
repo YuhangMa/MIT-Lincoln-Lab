@@ -38,7 +38,7 @@
 \begin{itemize}
 \item System-based
 \item Agent-based
-\item Sparial agent-based
+\item Spatial agent-based
 \end{itemize}
 \item Comparison
 \item Summary
@@ -49,19 +49,14 @@
 \frametitle{Introduction}
 \section{Intro}
 \begin{itemize}
-\item Ebola was discovered in 1976.
-\item Early sympoms:  headache, fatigue and joint pain. 
-\item Diseases like HIV and Malaria have the same symptoms.
-\item Leter symptoms: abdominal pain, diarrhea, vomiting and rashes. 
-\item The virus is contracted through direct contact with bodily fluids and secretion.
-\item Incubation period may last up to two weeks.
+\item Ebola was discovered in 1976
+\item Early symptoms:  headache, fatigue and joint pain
+\item Later symptoms: abdominal pain, diarrhea, vomiting and rashes
+\item Diseases like HIV and Malaria have the same symptoms
+\item The virus is contracted through direct contact with bodily fluids and secretion
+\item Incubation period may last up to two weeks
 \end{itemize}
 \end{frame}
-
-
-
-
-
 
 
 
@@ -81,6 +76,11 @@
 
 \begin{frame}
 \frametitle{Assumptions}
+\begin{itemize}
+\item Focus on Liberia in 2014-2015
+\item Closed system
+\item Everyone who dies has a traditional funeral
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -145,7 +145,7 @@ Should we add equations?
 
 
 \begin{frame}
-\frametitle{Agent model}
+\frametitle{Agent-based model}
 \section{Agent}
 %MAYBE INCLUDE DIAGRAM
 %\begin{figure}
@@ -185,50 +185,50 @@ Should we add equations?
 %\end{tikzpicture}
 %\end{figure}
 \begin{itemize}
-\item \textbf{INCLUDE FLOW CHART ONE MORE TIME}
-\item Probabilistic model vs. deterministic.
-\item Flows become probabilities.
-\item Individuals vs. system.
+%\item \textbf{INCLUDE FLOW CHART ONE MORE TIME}
+\item System $\implies$ agent
+\item Deterministic $\implies$ probabilistic
+\item Simulation:
 \begin{itemize}
-\item 1000 individuals; 1 exsposed.
-\item 500 days.
-\item 100 repetitions.
+\item 1000 individuals; 1 exposed
+\item 300 days
+\item 100 repetitions
 \end{itemize}
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Agent Model Results}
-30 percent of the time outbreak deoes not happen
-
+\frametitle{Probability of having an outbreak}
 \begin{figure}
-  \includegraphics[scale=0.35]{N1000Hist-eps-converted-to} \caption{Progression of the proportion of the total population in Susceptible, Recovered and Dead states through time.}
-% %
+\includegraphics[width = 0.5\textwidth]{N100Hist.pdf}
+\includegraphics[width = 0.5\textwidth]{OutbreakProb.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Effects of Ebola outbreak}
+\begin{figure}
+\includegraphics[width = 0.5\textwidth]{N1000Scatter.pdf}
+\includegraphics[width = 0.5\textwidth]{BWplot.pdf}
+
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Trajectories of S, D and R}
+\begin{figure}
+\includegraphics[width = 0.7\textwidth]{SDRcurves.pdf}
 \end{figure}
 \end{frame}
 
 
-\begin{frame}
-\frametitle{Agent Model Results}
-\begin{itemize}
-\item A typical outbreak will cause \textbf{HOW MANY} percent of the total population to get the disease.
-\item Among those \textbf{HOW MANY DEAD}.
-\end{itemize}
-
-\begin{figure}
-  %\includegraphics[scale=0.35]{TimeSeries} \caption{Progression of the proportion of the total population in Susceptible, Recovered and Dead states through time.}
-% %
-\end{figure}
-\end{frame}
-
 
 \begin{frame}
-\frametitle{Agent Model Results}
-%\textbf{PHASE PORTRAIT PICTURE}
+\frametitle{Results of Intervention}
 \begin{figure}
-  \includegraphics[scale=0.35]{PhasePortrait-eps-converted-to} \caption{Probabilistic Phase Portrait}
-% %
+\includegraphics[width = 0.55\textwidth]{pieChart.pdf}
+\includegraphics[width = 0.55\textwidth]{InterventionPie.pdf}
 \end{figure}
 \end{frame}
 
@@ -335,12 +335,17 @@ Should we add equations?
 \end{frame}
 
 \begin{frame}
-\frametitle{Comparison}
-\section{Comparison}
-\end{frame}
-
-\begin{frame}
 \frametitle{Summary}
 \section{Summary}
+\begin{itemize}
+\item Deterministic and Probabilistic approaches give similar results
+\item Incorporating spatial information is useful
+\item Intervention has a big effect:
+\begin{itemize}
+\item Over 90 percent contract the disease
+\item About 50 percent dies due to disease
+\item Intervention causes these figures to decrease significantly 
+\end{itemize}
+\end{itemize}
 \end{frame}
 \end{document}
