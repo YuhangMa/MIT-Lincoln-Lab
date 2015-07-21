@@ -17,8 +17,8 @@ The governing equations of the system dynamics described above are the following
 \frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\gamma_P E         \label{eqn:SD2}\\
 \frac{dI}{dt} =  \gamma_P E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I   \label{eqn:SD3}\\
 \frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{HF}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H \label{eqn:SD4}\\
-\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F      \label{eqn:SD5}\\
-\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{HR}(1-\delta_{2}) H\\       \label{eqn:SD6}
+\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F     \label{eqn:SD5}\\
+\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{HR}(1-\delta_{2}) H       \label{eqn:SD6}\\
 \frac{dD}{dt} = \gamma_{F} F     \label{eqn:SD7}
 \end{eqnarray}\\
 
@@ -69,8 +69,8 @@ The parameter values which represent biological process ($\alpha, \gamma_{I}, \g
 
 \subsection{Bayesian calibration framework}
 
-We use Bayesian methodology to calibrate our unknown system parameters. It is a versatile tool which is utilized in many calibrations of complicated systems owing to its merit that a little or no information on the parameter values is not an obstacle to use it. The calibration procedure starts from choosing a distribution in the space of parameters we concern. This distribution, which is called `prior distribution' ($\mathcal{D}_0$), can be a simple like uniform distribution or intuitively chosen parametric distribution. Based on the available data and mathematical setup, we evaluate the likelihood weight for each sample from $\mathcal{D}_0$ with which we update to the weighted distribution `posterior distribution' ($\mathcal{D}_1$) from $\mathcal{D}_0$. Multiple updates ($\mathcal{D}_1$ to $\mathcal{D}_2$, $\mathcal{D}_2$ to $\mathcal{D}_3$, ...) facilitate to get more straightforward pattern on the distribution.\\
-To calibrate the unknown parameters ($\mathcal{P}$), we chose a uniform distribution in the range determined by numerical exploration and previous researches (See Table \ref{tab: PriorRanges}) \cite{Rivers2014}. \\
+We use Bayesian methodology to calibrate our unknown system parameters. It is a versatile tool which is utilized in many calibrations of complicated systems owing to its merit that a little or no information on the parameter values is not an obstacle to use it. The calibration procedure starts from choosing a distribution in the space of parameters we concern. This distribution, which is called `prior distribution' ($\mathcal{D}_0$), can be a simple like uniform distribution or intuitively chosen parametric distribution. Based on the available data and mathematical setup, we evaluate the likelihood weight for the samples from $\mathcal{D}_0$ with which we update to the weighted distribution `posterior distribution' ($\mathcal{D}_1$) from $\mathcal{D}_0$. Multiple updates ($\mathcal{D}_1$ to $\mathcal{D}_2$, $\mathcal{D}_2$ to $\mathcal{D}_3$, ...) facilitate to get more straightforward pattern on the distribution.\\
+To calibrate the unknown parameters ($\mathcal{P}$), we started from a uniform distribution in the range determined based on numerical exploration and previous researches (See Table \ref{tab: PriorRanges}) \cite{Rivers2014}. \\
 
 \begin{table}[ht]
 \caption{Range of the prior parameter space} % title of Table
@@ -97,12 +97,7 @@ Step 3) Evaluate likelihood of $\mathcal{P}_0$: $Exp[-Norm(\mathcal{D}_R-\mathca
 \emph{Repeat Step 1-3 multiple times and make large number of {parameter + likelihood} ensembles. Generate posterior distribution with them.}
 
 \subsubsection{Results and validation}
-We applied our systematic model and calibration method for Ebola spread in Liberia 2014-2015. Two sets of cumulative mortality data (pre-intervention, post-intervention) are used to calibrate pre- and post-intervention parameter calibration, respectively. We assume that about a forth (1 million) of the total Liberia population (the 4.3 million [reference]) are involved in the transmission, and the rest are not in any chance due to geographical and behavior reason. For the calibration of before intervention parameters, we used the data for 176 days (March 2014 to September 2014), and initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that initial outbreak started from a single infected person in a million population. The calibration of intervention parameters is based on the data for 306 days (September 14 to July 15), and initial value $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from calibrated mean $\mathcal{P}$ for pre intervention. 10000 random samples were used in each calibration.\\
-
-Calibration results are shown in Table \ref{tab:parameters}. By observing the posterior mean of the two calibrations, we conclude that our calibration reasonably estimated transmission rates ($\beta_I$, $\beta_H$, $\beta_F$) decreased after intervention. However, it is not likely that the parameters of time until hospitalization ($\gamma_H$) and the fraction a case hospitalization ($\theta$) are also decreased. It might be explained by the hospital capacity insufficient to serve for the all increasing cases. Also, it tells that our transmission system is more sensitive to the changes in {$\beta_I$, $\beta_H$, $\beta_F$} compared to the changes in {$\gamma_H$, $\theta$}.\\
-
-We validated our calibration in Figure \ref{fig:Cumulative _Death}. It shows `good-fit' between the used cumulative death data and simulated version of it with our posterior mean and system setup and that our model and calibration scheme works in this modeling.\\
-
+We applied our systematic model and calibration method for Ebola spread in Liberia 2014-2015. Two sets of cumulative mortality data (pre-intervention, post-intervention) are used to calibrate pre- and post-intervention parameter calibration, respectively. We assume that about a forth (1 million) of the total Liberia population (the 4.3 million [reference]) are involved in the transmission, and the rest are not in any chance due to geographical and behavior reason. For the calibration of before intervention parameters, we used the data for 176 days (March 2014 to September 2014), and initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that initial outbreak started from a single infected person in a million population. The calibration of intervention parameters is based on the data for 306 days (September 14 to July 15), and initial value $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from calibrated mean $\mathcal{P}$ for pre intervention. 10000 random samples were used in each calibration. Calibration results and validation are shown in Table \ref{tab:parameters} and Figure \ref{fig:Cumulative _Death}.\\
 
 Based on our calibration, the intervention reduce the basic reproduction number of Ebola in Liberia from 1.99 to 0.787, using the formula in \cite{Legrand2007}. As a result, disease spread is terminated after infecting 0.84\% of total population with 0.49\% decrease in population, otherwise 92.7\% are infected and population decreases by 53.5\%.\\
 
@@ -154,7 +149,7 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) & 
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=1\textwidth]{SEIPlotNoInt.pdf}
+  \includegraphics[width=1\textwidth]{LB_NoInt_SD_IM}
   \caption{Simulation results using the parameters of the first stage (Mar 2014  to Sept 2014) and assuming no intervention}
 \label{fig:LB_IM_NoIn} 
 \end{figure}
@@ -166,11 +161,11 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) & 
 \begin{figure}[h!]
  \centering 
  \begin{subfigure}[b]{1\textwidth}
-  \includegraphics[width=\textwidth]{SEIPlotInt.pdf} \caption{ Parameters of the first stage (March 2014  to Sept 2014)} \label{fig:LB_IM_In1} \end{subfigure}
+  \includegraphics[width=\textwidth]{LB_Int3a_SD_IM} \caption{ Parameters of the first stage (March 2014  to Sept 2014)} \label{fig:LB_IM_In1} \end{subfigure}
  %
  \hspace{.1cm}
 \begin{subfigure}[b]{1\textwidth}
- \includegraphics[width=\textwidth]{SEIPlotIntRescale.pdf} \caption{ Parameters of the second stage ( Sept 2014 to July 2015).} \label{fig:LB_IM_In2} \end{subfigure} \caption{Simulation Results}
+ \includegraphics[width=\textwidth]{LB_Int3b_SD_IM} \caption{ Parameters of the second stage ( Sept 2014 to July 2015).} \label{fig:LB_IM_In2} \end{subfigure} \caption{Simulation Results}
 \label{fig:LB_IM_In} 
 \end{figure}
 
