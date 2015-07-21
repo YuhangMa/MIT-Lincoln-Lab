@@ -22,7 +22,7 @@
 \begin{document} 
 % PARTICIPANTS, MENTORS, AFFILIATIONS
 
-\centerline{\large \bf Wine, Ebola and Terrorism}
+\centerline{\large \bf Modeling Ebola: Three Distinct Models with Similar Predictions}
 
 \vspace{.1truein}
 
@@ -55,9 +55,6 @@ Christian Gunning\footnote{Departments of Entomology and Mathematics, North Caro
 \input{intro}
 
 
-\section{Problem Statement}
-\input{problem}
-
 \section{Methods}
 \input{methods}
 
@@ -82,42 +79,10 @@ Christian Gunning\footnote{Departments of Entomology and Mathematics, North Caro
 \input{summary}
 
 
-\begin{appendices}
-\section{MATLAB Pseudocode for Agent-Based Dynamics}
-\input{matlab-pseudo}
-
-\end{appendices}
-
-
-
-
-
-%\subsection{Compartment Model: Agent Dynamics}
-%The agent-based model created in Insight Maker also used the data from Rivers et al. with the same states and parameter names as the System Dynamics model. The transitions between the states are described as:\\
-%
-%\begin{table}[ht]
-%\begin{center}
-%\begin{tabular}{c | l | l}
-%{\bf Transition} & {\bf Type } & {\bf Value}\\\hline
-%$S\rightarrow E$ & Probability & $\min(1,\xi_5\beta_{fam}+\xi_{100}\beta_{com}+\xi_{10}\beta_F)$\\
-%$E\rightarrow I$ & Timeout & $1/\alpha$\\
-%$I\rightarrow H$ & Probability & $\theta\gamma_H$\\
-%$I\rightarrow F$ & Probability & $(1-\theta)\delta_1\gamma_D$\\
-%$I\rightarrow R$ & Probability & $(1-\theta)(1-\delta_{1})\gamma_I$\\
-%$F\rightarrow R$ & Timeout & ${1}/{\gamma_{F}}$\\
-%$H\rightarrow R$ & Timeout & $\delta_{2}/{\gamma_{DH}} + (1-\delta_{2})/{\gamma_{IH}}$\\
-%\end{tabular}
-%\end{center}
-%\end{table}
-%\noindent where $\xi_{i}$ is the number of infected people within the individual's $i$ closest neighbors, $\beta_{fam}$ is the family contact rate, and $\beta_{com}$ is the community contact rate (maybe same?). The probability of contracting Ebola depends on the number of infected people within the individual's family or neighbors, and funerals are assumed to be attended by the deceased's 10 nearest neighbors.
-%
-%\begin{figure}
-%\caption{The agent-based Insight Maker model.}
-%\end{figure}
-%
-%\begin{figure}
-%\caption{A simulation of the agent-based Insight Maker model with $\beta_{fam}=0.4$ and $\beta_{com}=0.01$.}
-%\end{figure}
+%\begin{appendices}
+%\section{MATLAB Pseudocode for Agent-Based Dynamics}
+%\input{matlab-pseudo}
+%\end{appendices}
 
 
 \bibliography{references}
