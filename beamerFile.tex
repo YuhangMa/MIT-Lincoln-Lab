@@ -83,14 +83,32 @@ H: Hospitalized \\
  F: Funeral  \\
 R: Recovered \\
 D: Dead 
-
-
-
 \end{frame}
+
+
 
 \begin{frame}
 \frametitle{Assumptions}
 \end{frame}
+
+
+
+\begin{frame}
+\frametitle{System Dynamics Equations}
+\section{System}
+\begin{eqnarray} 
+\label{SDeqn}
+\frac{dS}{dt} = - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N} \label{eqn:SD1}\\
+\frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\gamma_P E         \label{eqn:SD2}\\
+\frac{dI}{dt} =  \gamma_P E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I   \label{eqn:SD3}\\
+\frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{HF}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H \label{eqn:SD4}\\
+\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F      \label{eqn:SD5}\\
+\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{HR}(1-\delta_{2}) H\\        \label{eqn:SD6}
+\frac{dD}{dt} = \gamma_{F} F     \label{eqn:SD7}
+\end{eqnarray}\\
+\end{frame}
+
+
 
 \begin{frame}
 \frametitle{Model Parameters for Ebola Epidemic in Liberia}
@@ -132,11 +150,7 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) & 
 \hline
 \end{tabular}}
 \end{table}
-
-
 \end{frame}
-
-
 
 
 
@@ -149,24 +163,6 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) & 
 \end{frame}
 
 
-\begin{frame}
-\frametitle{System Dynamics Equations}
-\section{System}
-\begin{eqnarray} 
-\label{SDeqn}
-\frac{dS}{dt} = - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N} \label{eqn:SD1}\\
-\frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\gamma_P E         \label{eqn:SD2}\\
-\frac{dI}{dt} =  \gamma_P E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I   \label{eqn:SD3}\\
-\frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{HF}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H \label{eqn:SD4}\\
-\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F      \label{eqn:SD5}\\
-\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{HR}(1-\delta_{2}) H\\        \label{eqn:SD6}
-\frac{dD}{dt} = \gamma_{F} F     \label{eqn:SD7}
-\end{eqnarray}\\
-
-\end{frame}
-
-
-\end{frame}
 
 \begin{frame}
 \frametitle{System Model Results Assuming No Intervention}
@@ -177,12 +173,16 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) & 
 \end{figure}
 \end{frame}
 
+
 \begin{frame}
-\frametitle{System Model Results}
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=1\textwidth]{LB_Int3_SD_IM}
-  \caption{ Insight Maker results. \textit{Top:} parameters of the first stage (Mar/14 to Sept/14), \textit{Bottom:} parameters of the second stage ( Sept/14 to July/15)}
+\frametitle{System Model Results Post-treatment}
+\begin{figure}[h!]
+ \centering 
+ \begin{subfigure}{\textwidth}
+  \includegraphics[width=\textwidth]{LB_Int3a_SD_IM}  \label{fig:LB_IM_In1} \end{subfigure}
+  \hspace{.1cm}
+\begin{subfigure}{\textwidth}
+ \includegraphics[width=\textwidth]{LB_Int3b_SD_IM}  \label{fig:LB_IM_In2} \end{subfigure} 
 \label{fig:LB_IM_In} 
 \end{figure}
 \end{frame}
