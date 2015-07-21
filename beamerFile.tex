@@ -85,12 +85,23 @@
 
 \begin{frame}
 \frametitle{Parameters/Data}
-\begin{figure}[!h]
-  \centering
-  %\includegraphics[width=1\textwidth]{tab_para}
-  \caption{Model Parameters for Ebola Epidemic in Liberia Before and After the International Intervention. Calibrated parameters are written in bold font, and posterior means and standard deviations in parenthesis are notated. } 
-\label{fig:compartment} 
-\end{figure}
+\begin{table}[ht]
+\centering % used for centering table
+\begin{tabular}{c c c}
+\hline\hline %inserts double horizontal lines
+Parameter & Value  & Reference \\ [0.5ex]
+\hline % inserts single horizontal line
+Incubation Period (${t_{P}}$) & 11 days & \cite{WHOFacts} \\
+Duration of Traditional Funeral (${t_{F}}$) & 2.00 days & \cite{Rivers2014} \\
+Duration of Infection (${t_{I}}$) & 10.00 days & \cite{Rivers2014} \\
+Time from Infection to Death (${t_{D}}$) & 8.00 days & \cite{Rivers2014} \\
+Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500 & \cite{WHOFacts} \\
+Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & \cite{WHOFacts} \\ [1ex]
+\hline
+\end{tabular}
+\label{tab:knownParameters}
+\caption{Model Parameters for Ebola Epidemic in Liberia with literature citations.} % title of Table
+\end{table}
 \end{frame}
 
 \begin{frame}
