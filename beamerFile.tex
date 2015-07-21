@@ -1,10 +1,10 @@
 \documentclass[30pt]{beamer}
-\usepackage{graphicx, epstopdf, subcaptions}
+\usepackage{graphicx, epstopdf}
 \graphicspath{{Fig/}}
 \usepackage{tikz, flowchart}
 \usetikzlibrary{shapes}
 
-%\usetheme{Amsterdam}
+\usetheme{Amsterdam}
 \author{ Hsuan-Wei Lee,
   Anzhelika Lyubenko,
   Yuhang Ma,
@@ -16,10 +16,10 @@
 %\vspace{.1truein}
 
 \title[]{Wine, Ebola and Terrorism}
-\begin{center}
-Mentors: John Peach, Cammey Cole Manning,
-Christian Gunning
-\end{center}
+%\begin{center}
+%Mentors: John Peach, Cammey Cole Manning,
+%Christian Gunning
+%\end{center}
 
 %\date{February 28, 2015}
 
@@ -60,15 +60,13 @@ Christian Gunning
 \begin{frame}
 \frametitle{Model}
 
-<<<<<<< HEAD
-=======
+
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=1\textwidth]{compartmentNoFlow}
+  %\includegraphics[width=1\textwidth]{compartmentNoFlow}
   \caption{Compartment Model of the Ebola Epidemic in Liberia \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral,  R: Recovered and D: Dead. } 
 \label{fig:compartment} 
 \end{figure}
->>>>>>> 39bb738c80778c171147805f700112a1168e22a9
 \end{frame}
 
 \begin{frame}
@@ -79,7 +77,7 @@ Christian Gunning
 \frametitle{Parameters/Data}
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=1\textwidth]{tab_para}
+  %\includegraphics[width=1\textwidth]{tab_para}
   \caption{Model Parameters for Ebola Epidemic in Liberia Before and After the International Intervention. Calibrated parameters are written in bold font, and posterior means and standard deviations in parenthesis are notated. } 
 \label{fig:compartment} 
 \end{figure}
@@ -206,7 +204,7 @@ based on mean posterior parameters. (Blue) - pre intervention and (red) - post t
 \end{itemize}
 
 \begin{figure}
-  \includegraphics[scale=0.35]{TimeSeries} \caption{Progression of the proportion of the total population in Susceptible, Recovered and Dead states through time.}
+  %\includegraphics[scale=0.35]{TimeSeries} \caption{Progression of the proportion of the total population in Susceptible, Recovered and Dead states through time.}
 % %
 \end{figure}
 \end{frame}
@@ -223,11 +221,27 @@ based on mean posterior parameters. (Blue) - pre intervention and (red) - post t
 
 \begin{frame}
 \frametitle{Spatial Agent Model}
+\begin{itemize}
+\item Why we should incorporate the spatial info?
+\begin{itemize}
+\item We have different contact ratios within households, communities and funerals ($\beta_H$, $\beta_C$, $\beta_F$)
+\item Travel patterns are distinct among big cities and small villages
+\end{itemize}
+\item show the Flow Chart Models
+\item go into the details of the model
+\begin{itemize}
+\item How people get infected (3 different scenarios: househoulds, communities and funerals)
+\item How people travel (every one has prob 0.2 to travel, those away from home will return w/ prob 0.5, while the others have higher chance to travel locally, different probabilities based on the density of the cities/villages for non-local travellers)
+\end{itemize}
+\item Figures $\&$ results
+\end{itemize}
+
 \end{frame}
 
 
 \begin{frame}
 \frametitle{Spatial Agent Model Results}
+
 \end{frame}
 
 \begin{frame}
