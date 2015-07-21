@@ -141,7 +141,7 @@ If there is no outbreak, the infected agent may or may not infect another agent 
 % figure NoOutbreak.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-On the other hand, if the infected agent contacts many people during the time he is infected (I), hospitalized (H), or in a funeral state (F) before he transitions to state D or R, there is a an outbreak of the disease. A typical outbreak is depicted in Figure~\ref{fig:Outbreak}. The proportion of agents who contract the disease grows exponentially until $t = 125$. That is also the time at which the proportion of population  in states I, H, and F is the highest. After that, the population does not have enough susceptible agents to spread the disease causing the proportion of exposed agents to decrease. The proportion of agents in I, H, and F decreases as well. Around $t = 180$ the proportion of the population is states I, H, and F is zero; the proportion of the population in state S does not decrease, i.e. no agents get Ebola. At this point, every agent remains in S, R or D and an equilibrium is reached (stable fixed point). As we showed before, on average, 7\% of agents stay in state S, 43\% of agents stay in R, and 50\% of agents would be in D. The result of a typical outbreak is presented in Figure~\ref{fig:Outbreak}.
+On the other hand, if the infected agent contacts many people during the time he is infected (I), hospitalized (H), or in a funeral state (F) before he transitions to state D or R, there is a an outbreak of the disease. A typical outbreak is depicted in Figure~\ref{fig:Outbreak}. The proportion of agents who contract the disease grows exponentially until $t = 125$. That is also the time at which the proportion of population  in states I, H, and F is the highest. After that, the population does not have enough susceptible agents to spread the disease causing the proportion of exposed agents to decrease. The proportion of agents in I, H, and F decreases as well. Around $t = 180$ the proportion of the population is states I, H, and F is zero; the proportion of the population in state S does not decrease, i.e. no agents get Ebola. At this point, every agent remains in S, R or D and an equilibrium is reached (stable fixed point). As we showed before, on average, 7\% of agents stay in state S, 43\% of agents stay in R, and 50\% of agents would be in D. %The result of a typical outbreak is presented in Figure~\ref{fig:Outbreak}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % figure Outbreak.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -157,21 +157,22 @@ On the other hand, if the infected agent contacts many people during the time he
 % figure Outbreak.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We plot a phase portrait for the proportion of agents who never got infected and are in S vs. the proportion of agents who contracted the disease (both D and R) as time progresses. On the horizontal axis, we put the ratio of S to the total population and on the vertical axis - the ratio of D plus R to the total population.  When $t = 0$, one agent is in state E and 99.9\% of agents are in S. All other states contain no agents. About 30\% of the time, there is no severe outbreak. In such case, only few people get Ebola. As time goes by there are only few transitions between states and a stationary point is reached within a few time steps. However, if there is an outbreak, the trajectory gradually moves to its equilibrium state. On average, the equilibrium occurs at $(S, R+ D) = (0.05, 0.95)$. We conduct a hundred experiments and plot their trajectories on the same graph, presented in Figure~\ref{fig:PhasePortraitABM}. Because the total proportion of people in the population is one, the equilibria in different experiments lie on the $x + y = 1$ line. The system starts at $(S, R+D) = (0.999, 0)$, a point that is close to this line. During the course of the outbreak, the phase portrait falls below the x + y = 1 line because a portion of the population are in the transient states: E, I, H and F. 
+We plot a phase portrait for the proportion of agents who never got infected and are in S vs. the proportion of agents who contracted the disease (both D and R) as time progresses. On the horizontal axis, we put the ratio of S to the total population and on the vertical axis - the ratio of D plus R to the total population.  When $t = 0$, one agent is in state E and 99.9\% of agents are in S. All other states contain no agents. About 30\% of the time, there is no severe outbreak. In such case, only few people get Ebola. As time goes by there are only few transitions between states and a stationary point is reached within a few time steps. However, if there is an outbreak, the trajectory gradually moves to its equilibrium state. On average, the equilibrium occurs at $(S, R+ D) = (0.07, 0.93)$. We conduct a hundred experiments and plot their trajectories on the same graph, presented in Figure~\ref{fig:PhasePortraitAbm}. Because the total proportion of people in the population is one, the equilibria in different experiments lie on the $x + y = 1$ line. The system starts at $(S, R+D) = (0.999, 0)$, a point that is close to this line. During the course of the outbreak, the phase portrait falls below the x + y = 1 line because a portion of the population are in the transient states: E, I, H and F. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % figure PhasePortrait.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{figure}[h!]
+%\begin{center}
+%\includegraphics[scale=0.5]{OutbreakProb}
+%\end{center}
+%\caption{Probability of an outbreak as population size varies}
+%\label{fig:OtbreakProb}
+%\end{figure}
+%
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[scale=0.5]{OutbreakProb}
-\end{center}
-\caption{Probability of an outbreak as population size varies}
-\label{fig:OtbreakProb}
-\end{figure}
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[scale=0.5]{PhasePortraitABM}
+\includegraphics[scale=0.5]{PhasePortraitABM-eps-converted-to}
 \end{center}
 \caption{Phase portrait: proportion of the population who are in susceptible state vs. population of the population who contracted Ebola (blue) or are dead because of it (red) for different uncertainty realizations.}
 \label{fig:PhasePortraitAbm}
@@ -226,13 +227,13 @@ We examine the effect of the population size on the outcome of the agent-based m
  \label{fig:VarPopSize}
   \end{figure}
 We also examine the probability of outbreak occurring based on the population size. The results are presented in Figure~\ref{fig:OtbreakProb}. As population size increases, the probability of outbreak occurring decreases but never get below around 70 \%. 
-%\begin{figure}[h!]
-%\begin{center}
-%\includegraphics[scale=0.5]{OutbreakProb}
-%\end{center}
-%\caption{Probability of an outbreak as population size varies}
-%\label{fig:OtbreakProb}
-%\end{figure}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=0.5]{OutbreakProb}
+\end{center}
+\caption{Probability of an outbreak as population size varies}
+\label{fig:OtbreakProb}
+\end{figure}
 %\begin{figure}[h!]
 %\begin{center}
 %\includegraphics[scale=0.5]{PhasePortraitABM}
