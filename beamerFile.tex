@@ -3,6 +3,8 @@
 \graphicspath{{Fig/}}
 \usepackage{tikz, flowchart}
 \usetikzlibrary{shapes, patterns}
+\usepackage{xcolor}
+\definecolor{myblue}{rgb}{0.137,0.466,0.741}
 
 \usetheme{Amsterdam}
 \author{ Hsuan-Wei Lee,
@@ -15,11 +17,8 @@
 
 %\vspace{.1truein}
 
-\title[]{Wine, Ebola and Terrorism}
-%\begin{center}
-%Mentors: John Peach, Cammey Cole Manning,
-%Christian Gunning
-%\end{center}
+\title[]{Modeling Ebola: System, Agent, and Spatial Models}
+
 
 %\date{February 28, 2015}
 
@@ -27,13 +26,20 @@
 
 \begin{frame}[t,plain]
     \titlepage
+    \begin{center}
+Mentors:\\John Peach\\ Cammey Cole Manning\\
+Christian Gunning
+\end{center}
 \end{frame}
 
 \begin{frame}[t,plain]
     \frametitle{Overview}
+    \setbeamerfont*{itemize/enumerate body}{size=\Large}
+\setbeamerfont*{itemize/enumerate subbody}{parent=itemize/enumerate body}
+\setbeamerfont*{itemize/enumerate subsubbody}{parent=itemize/enumerate body}
 \begin{enumerate}
 \vfill
-\item Introduction
+\item Introduction\vspace{2mm}
 \item Models
 \begin{itemize}
 \item System-based
@@ -50,19 +56,14 @@
 \section{Intro}
 \begin{itemize}
 \item Ebola was discovered in 1976
-\item Early symptoms:  headache, fatigue and joint pain
-\item Later symptoms: abdominal pain, diarrhea, vomiting and rashes
+\item Early symptoms:  headache, fatigue, joint pain
+\item Later symptoms: abdominal pain, diarrhea, vomiting, rashes
 \item Diseases like HIV and Malaria have the same symptoms
 \item The virus is contracted through direct contact with bodily fluids and secretion
 \item Incubation period may last up to two weeks
+\item Serious outbreaks in Liberia, Sierra Leone, and Guinea (2014)
 \end{itemize}
 \end{frame}
-
-
-
-
-
-
 
 
 
@@ -76,13 +77,17 @@
  \label{fig:compartment} 
 \end{figure}
 
- S: Susceptible\\
- E: Exposed \\
-I: Infectious \\
-H: Hospitalized \\
- F: Funeral  \\
-R: Recovered \\
-D: Dead 
+\begin{center}
+\begin{tabular}{l l}
+ S:& Susceptible\\
+ E:& Exposed \\
+ I:& Infectious \\
+ H:& Hospitalized \\
+ F:& Funeral  \\
+ R:& Recovered \\
+ D:& Dead 
+\end{tabular}
+\end{center}
 \end{frame}
 
 
@@ -99,7 +104,7 @@ D: Dead
 
 
 \begin{frame}
-\frametitle{System Dynamics Equations}
+\frametitle{System Dynamics Differential Equations}
 \section{System}
 \begin{align*} 
 \label{SDeqn}
@@ -120,17 +125,16 @@ D: Dead
 \begin{table}[ht]
 \centering % used for centering table
 \resizebox{.8\linewidth}{!}{
-\begin{tabular}{c c c}
+\begin{tabular}{c c}
 \hline\hline %inserts double horizontal lines
-Parameter & Value  & Reference \\ [0.5ex]
+Parameter & Value\\ [0.5ex]
 \hline % inserts single horizontal line
-Incubation Period (${t_{P}}$) & 11 days & \cite{WHOFacts} \\
-Duration of Traditional Funeral (${t_{F}}$) & 2.00 days & \cite{Rivers2014} \\
-Duration of Infection (${t_{I}}$) & 10.00 days & \cite{Rivers2014} \\
-Time from Infection to Death (${t_{D}}$) & 8.00 days & \cite{Rivers2014} \\
-Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500 & \cite{WHOFacts} \\
-Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & \cite{WHOFacts} \\ [1ex]
-\hline
+Incubation Period (${t_{P}}$) & 11 days\\
+Duration of Traditional Funeral (${t_{F}}$) & 2.00 days\\
+Time from Infection to Recovery (${t_{I}}$) & 10.00 days\\
+Time from Infection to Death (${t_{D}}$) & 8.00 days\\
+Case Fatality Rate, Unhospitalized ($\delta_{1}$) & 0.500\\
+Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500\\\hline
 \end{tabular}}
 \end{table}
 
@@ -147,7 +151,7 @@ Parameter &  Before Intervention  & After Intervention \\ [0.5ex]
 {Contact Rate, Community  (${\beta_{I}}$) }& {0.148 (0.0953)} & {0.0446 (0.0338)}\\
 Contact Rate, Hospital  ($\beta_{H}$) & 0.235 (0.143) & 0.0877 (0.0563) \\
 Contact Rate, Funeral  ($\beta_{F}$) & 0.465 (0.287)& 0.283 (0.208)  \\
-Time until Hospitalization (${t_{H}}$) & 4.49 (1.44) days & 4.63 (1.43) days s  \\
+Time until Hospitalization (${t_{H}}$) & 4.49 (1.44) days & 4.63 (1.43) days  \\
 Time from Hospitalization to Death (${t_{DH}}$) & 3.51 (1.44) days & 3.51 (1.43) days  \\
 Time from Hospitalization to Recovery (${t_{IH}}$) & 5.51 (1.44) days & 5.51 (1.43) days  \\
 Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
@@ -160,7 +164,7 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 
 
 \begin{frame}
-\frametitle{Calibration Validation}
+\frametitle{World Health Organization Data vs. Systems Model}
 \begin{figure}[!h]
   \centering
   \includegraphics[width=1\textwidth]{ValidationPlot.pdf}
@@ -170,27 +174,28 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 
 
 \begin{frame}
-\frametitle{System Model Results Assuming No Intervention}
+\frametitle{System Model Results: With and Without Intervention}
 \begin{figure}[!h]
   \centering
   \includegraphics[width=1\textwidth]{SEIPlotNoInt.pdf}
 \label{fig:LB_IM_NoIn} 
-\end{figure}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{System Model Results Post-treatment}
-\begin{figure}[h!]
- \centering 
-% \begin{subfigure}{\textwidth}
-  \includegraphics[width=\textwidth]{SEIPlotInt.pdf}  \label{fig:LB_IM_In1} %\end{subfigure}
-  \hspace{.1cm}
-%\begin{subfigure}{\textwidth}
  \includegraphics[width=\textwidth]{SEIPlotIntRescale.pdf}  \label{fig:LB_IM_In2} %\end{subfigure} 
 \label{fig:LB_IM_In} 
 \end{figure}
 \end{frame}
+
+
+%\begin{frame}
+%\frametitle{System Model Results Post-treatment}
+%\begin{figure}[h!]
+% \centering 
+%% \begin{subfigure}{\textwidth}
+%  \includegraphics[width=\textwidth]{SEIPlotInt.pdf}  \label{fig:LB_IM_In1} %\end{subfigure}
+%  \hspace{.1cm}
+%%\begin{subfigure}{\textwidth}
+%
+%\end{figure}
+%\end{frame}
 
 
 
@@ -237,6 +242,7 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 \begin{itemize}
 %\item \textbf{INCLUDE FLOW CHART ONE MORE TIME}
 \item System $\implies$ agent
+\item Compartment $\implies$ state
 \item Deterministic $\implies$ probabilistic
 \item Simulation:
 \begin{itemize}
@@ -250,6 +256,8 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 
 \begin{frame}
 \frametitle{Probability of having an outbreak}
+\vspace{5mm}
+\textcolor{myblue}{outbreak}: 2\% of population contracts disease
 \begin{figure}
 \includegraphics[width = 0.5\textwidth]{N100Hist.pdf}
 \includegraphics[width = 0.5\textwidth]{OutbreakProb.pdf}
@@ -284,25 +292,25 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 
 
 
-\begin{frame}
-\frametitle{Spatial Agent Model}
-\section{Spatial}
-\begin{itemize}
-\item Why we should incorporate the spatial info?
-\begin{itemize}
-\item We have different contact ratios within households, communities and funerals ($\beta_H$, $\beta_C$, $\beta_F$)
-\item Travel patterns are distinct among big cities and small villages
-\end{itemize}
-\item show the Flow Chart Models
-\item go into the details of the model
-\begin{itemize}
-\item How people get infected (3 different scenarios: househoulds, communities and funerals)
-\item How people travel (every one has prob 0.2 to travel, those away from home will return w/ prob 0.5, while the others have higher chance to travel locally, different probabilities based on the density of the cities/villages for non-local travellers)
-\end{itemize}
-\item Figures $\&$ results
-\end{itemize}
-
-\end{frame}
+%\begin{frame}
+%\frametitle{Spatial Agent Model}
+%\section{Spatial}
+%\begin{itemize}
+%\item Why we should incorporate the spatial info?
+%\begin{itemize}
+%\item We have different contact ratios within households, communities and funerals ($\beta_H$, $\beta_C$, $\beta_F$)
+%\item Travel patterns are distinct among big cities and small villages
+%\end{itemize}
+%\item show the Flow Chart Models
+%\item go into the details of the model
+%\begin{itemize}
+%\item How people get infected (3 different scenarios: househoulds, communities and funerals)
+%\item How people travel (every one has prob 0.2 to travel, those away from home will return w/ prob 0.5, while the others have higher chance to travel locally, different probabilities based on the density of the cities/villages for non-local travellers)
+%\end{itemize}
+%\item Figures $\&$ results
+%\end{itemize}
+%
+%\end{frame}
 
 %\begin{frame}{Spatial Importance}
 %\includegraphics[width=\textwidth]{cities}
@@ -352,19 +360,18 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 %\end{figure}
 %\end{frame}
 
-\begin{frame}{Initialization and Assumptions}
+\begin{frame}{Spatial Agent-Based Model: Overview}
 \begin{itemize}
-\item Normally distribute people around city centers
+\item City residents normally distributed
 \item Family, community, and funeral spread rates
 \item Family goes home for funeral
-\item Neighbors at home can attend funeral
+\item Neighbors at their home can attend funeral
 \item Hospital is quarantined
-\item Probability and timeouts between states
-\item 
+\item Probability and transition time between states
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Infection Rules}
+\begin{frame}{Regions of Infection Spread}
 %\includegraphics[width=\textwidth]{cities}
 \begin{figure}[h!]
 \begin{center}
@@ -378,22 +385,27 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 \node[anchor=west] at (7,4.25) {funeralized};
 \draw[fill=red] (6,3) rectangle (6.5,3.5);
 \node[anchor=west] at (7,3.25) {infected};
+\draw[fill=black] (6.25,2.25) circle (.05cm);
+\node[anchor=west] at (7,2.25) {individual};
 \end{tikzpicture}
 \end{center}
-\caption{States and transitions for individuals.}
 \label{fig:sabm-states}
 \end{figure}
 \end{frame}
 
-\begin{frame}{Travel Rules}
+\begin{frame}{Available Travel Routes}
 \includegraphics[width=\textwidth]{travel}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Spatial Agent Model Results}
-\includegraphics[width=.41\textwidth]{map}
-\includegraphics[width=.59\textwidth]{time}
+\frametitle{Trajectories of S, R, D: 100 simulations}
+\includegraphics[width=\textwidth]{average-time-series}
+\end{frame}
+
+\begin{frame}
+\frametitle{Probability of an Outbreak}
+\includegraphics[width=\textwidth]{Histogram-sabd}
 \end{frame}
 
 
@@ -401,7 +413,7 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 \frametitle{Summary}
 \section{Summary}
 \begin{itemize}
-\item Deterministic and Probabilistic approaches give similar results
+\item Deterministic and probabilistic approaches give similar results
 \item Incorporating spatial information is useful
 \item Intervention has a big effect:
 \begin{itemize}
