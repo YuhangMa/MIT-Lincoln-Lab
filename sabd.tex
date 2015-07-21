@@ -96,28 +96,27 @@ Case Fatality Rate, Hospitalized ($\delta_{2}$) & 0.500 & 0.500 \\ [1ex]
 
 \begin{table}[ht]
 \begin{center}
-\begin{tabular}{c c}\hline\hline
-Parameter & Value\\\hline\hline
-Travel probability & 0.2\\
-Travel home probability & 0.5\\
-Travel non-locally probability & $(1-\text{current city density})/2$\\\hline
-Family size & 3-6\\
-Family infection probability & ?\\
--Community infection probability & ?\\
--Funeral infection probability & ?\\
-Funeral length & ?\\
-Funeral attendance size & ?\\\hline
-$^\star$Incubation time & ?\\
-Infected mortality (does this include hospital?)& ?\\
-$^\star$Time from infection to death & ?\\
-$^\star$Time from infection to recovery & ?\\
-$^\star$Hospitalization probability & ?\\
-$^\star$Time until hospitalization & ?\\
-$^\star$Hospital death probability & ?\\
-$^\star$Time from hospitalization to death & ?\\
-$^\star$Time from hospitalization to recovery & ?\\\hline
+\begin{tabular}{c c c}\hline\hline
+Parameter & Variable & Value\\\hline\hline
+Travel probability & $p_{trav}$ & 0.2\\
+Travel, home probability & $p_{home}$ & 0.5\\
+Travel, non-locally probability & $p_{nonloc}$ & $(1-\text{current city density})/2$\\\hline
+Family size & $n_{fam}$ & 3-6\\
+Family infection probability per day & $\eta_f$ & 0.1\\
+-Community infection probability per day & $\eta_c$ & 0.006\\
+-Funeral infection probability per day & $\eta_F$ & 0.2\\
+Funeral length & $T_F$ & 2\\\hline
+$^\star$Incubation time & $T_{EI}$ & 11 days\\
+Infected mortality & $p_{ID}$ & 0.5\\
+$^\star$Time from infection to death & $T_{ID}$ & 7-9 days\\
+$^\star$Time from infection to recovery & $T_{IR}$ & 10 days\\
+$^\star$Hospitalization probability & $p_{IH}$ & 0.248\\
+$^\star$Time until hospitalization & $T_{IH}$ & 3-6 days\\
+$^\star$Hospital death probability & $p_{HD}$ & 0.5\\
+$^\star$Time from hospitalization to death & $T_{HD}$ & 3-4 days\\
+$^\star$Time from hospitalization to recovery & $T_{HR}$ & 5-6 days\\\hline
 \end{tabular}
-%\caption{Parameter values used in the model. Values marked with $^\star$ are based on data from Table ?? from [cite]. Other values were chosen ...
+%\caption{Parameter values used in the model. Values marked with $^\star$ are based on data from Table ??, which contains data from the parameter calibration and from [cite]. Other values were chosen heuristically.
 \end{center}
 \end{table}
 
