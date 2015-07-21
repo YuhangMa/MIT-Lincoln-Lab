@@ -2,12 +2,12 @@
 We next look at an agent-based model where agents are allowed to move within and between cities. Incorporating spatial movement requires making additional assumptions about the map on which movement is allowed and the movement of individuals. The model is coded in \texttt{Python} and propagates the infection and spatial information in discrete days. 
 
 \subsection{Spatial Assumptions}
-We restrict the space (on which cities and individuals are located) to a specified width and height and generate cities randomly within the space with specified variance and relative density. For example, a model may have one city with variance $30$ and density $0.9$ and a village with variance $5$ and density $0.1$. Locations of individuals and cities are real numbers stored as \texttt{floats}. We also create a grid, which partitions the individuals based on their location and is used to determine the closest neighbors for community infection and funeral attendance. A family is assumed to have $3-6$ members (an integer is randomly chosen in this range) all of which live in the same exact location. Upon initialization (and later travel), families are place based on the specified city densities, normally distributed around the city's center location using the city's variance. We define an individual's \emph{home} as their initial location.
+We restrict the space (on which cities and individuals are located) to a specified width and height and generate cities randomly within the space with specified variance and relative density. For example, a model may have one city with variance $30$ and density $0.9$ and a village with variance $5$ and density $0.1$. Locations of individuals and cities are real numbers stored as \texttt{floats}. We also create a grid, which partitions the individuals based on their location and is used to determine the closest neighbors for community infection and funeral attendance. A family is assumed to have $n_{fam}$ members all of which live in the same exact location. Upon initialization (and later travel), families are place based on the specified city densities, normally distributed around the city's center location using the city's variance. We define an individual's \emph{home} as their initial location.
 
-An individual is \emph{movable} if he is susceptible, exposed, or recovered. All other individuals remain stationary. Movable individuals travel each timestep with probability $p_{trav}$. If they are away from home, they will travel home with probability $p_{home}$. Otherwise, they will travel locally (within their current city or village) or non-locally (to another city) based on the density of their current city. It is assumed that when an individual is in a density with higher density they are less likely to leave. If individual $i$'s current city density (percentage of the total population) is $d[i]$, then the non-local travel probability is $(1-d[i])/2$.
+An individual is \emph{movable} if he is susceptible, exposed, or recovered. All other individuals remain stationary. Movable individuals travel each timestep with probability $p_{trav}$. If they are away from home, they will travel home with probability $p_{home}$. Otherwise, they will travel locally (within their current city or village) or non-locally (to another city) based on the density of their current city. It is assumed that when an individual is in a density with higher density they are less likely to leave. If individual $i$'s current city density (percentage of the total population) is $d[i]$, then the non-local travel probability is $(1-d[i])/2$. In the local and non-local travel, the individual is again normally distributed around that city's center.
 
 \subsection{Agent Behavior}
-\begin{figure}[h!]
+\begin{figure}[h!t]
 \begin{center}
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
   thick,main node/.style={circle,fill=blue!20,draw,font=\sffamily\Large\bfseries}]
@@ -111,7 +111,7 @@ The spatial movement and transitions between states is dependent on the individu
 %\end{table}
 
 
-\begin{table}[ht]
+\begin{table}[!Hht]
 \begin{center}
 \begin{tabular}{c c c}\hline\hline
 Parameter & Variable & Value\\\hline\hline
@@ -134,19 +134,25 @@ $^\star$Time from hospitalization to death & $t_{HD}$ & 3-4 days\\
 $^\star$Time from hospitalization to recovery & $t_{HR}$ & 5-6 days\\\hline
 \end{tabular}
 \caption{Parameter values used in the model. Values marked with $^\star$ (in the third group) are based on data from Tables 1 and 3. Values from the second group were chosen so that the $R_0$ value calculated from the spread of infections in the first 30 days was approximately 1.5-2. Travel values and family size in the first group were chosen heuristically.}
+\label{table:sabd}
 \end{center}
 \end{table}
 
-For the first group of parameters, each individual has a 20\% chance of traveling per timestep. If he travels and is not home, there is a 50\% chance he travels home. Otherwise, he travels non-locally (to another city or village) with probability .... This incorporates the lower probability of non-local travel from large cities and higher non-local travel from small villages, but still leaves at least a 50\% chance to travel locally instead.
+%For the first group of parameters, each individual has a $p_{home}$ chance of traveling per timestep. If he travels and is not home, there is a 50\% chance he travels home. Otherwise, he travels non-locally (to another city or village) with probability .... This incorporates the lower probability of non-local travel from large cities and higher non-local travel from small villages, but still leaves at least a 50\% chance to travel locally instead.
 
-Other parameters for the simulations included map width ($100$) and height ($50$), city densities ($80\%, 10\%, 10\%$) and variance ($20,5,5$), and population size ($500$).
+See Table \ref{table:sabd} for parameter values used in the simulations. Other parameters specific to the modeling procedure include map width ($70$) and height ($70$), number of cities ($3$), city densities ($80\%, 10\%, 10\%$) and variance ($20,5,5$), number of timesteps until termination ($500$), and population size ($1000$).
 
 Although the values may not precisely match those from the Ebola outbreaks, they still provide some insight into the spread of a disease through a spatial model.
 
 
 \subsection{Results}
 
-We initialize the model with one infected individual who does not go to a hospital and does not recover. 
+We initialize the model with one infected individual who does not go to a hospital and does not recover. In Figure \ref{sabd:ex}, we show plots of example simulations of both the final individuals (location and state) and of the time series counting how many individuals are in each state at each step in time. Figure ? shows 100 the time series of the susceptible, recovered, and dead state count, with the average of the simulations with outbreaks. Because the spatial system is not well-mixed, unlike the models in Section ? and ?, we expect the larger spread in instances shown. The averages shown ?????????. 
+
+As can be seen in Figure \ref{?}, about ? of the simulations result in an outbreak, which defined as more than 2\% of the population contracting the disease as in Section ?. 
+
+Because this model uses families, we are able to track whether the infections result from family, community, or funeral contact. We show the data from 25 simulations in Figure ?. The community contact makes up ??? of the infection spread. Thoughts?
+
 
 \begin{figure}
 \centering
@@ -174,5 +180,21 @@ We initialize the model with one infected individual who does not go to a hospit
   \includegraphics[width=\textwidth]{time3}
   \caption{Time series of simulation.}
 \end{subfigure}
-\caption{Example simulation plots with one city (density 0.8) and two villages (each with density 0.1). The map on the left corresponds to the time series plot on the right.}
+\caption{Example simulation plots with one city (density 0.8) and two villages (each with density 0.1). The map on the left corresponds to the time series plot on the right.}\label{sabd:ex}
 \end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{average-time-series}
+  \caption{The number of infected individuals in 25 trials based on how the disease was transmitted: through family, community, or funeral interactions. These simulations used a population size of 1000 and ran for 500 timesteps.}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.75\textwidth]{infecttypes}
+  \caption{The number of infected individuals in 25 trials based on how the disease was transmitted: through family, community, or funeral interactions. These simulations used a population size of 1000 and ran for 500 timesteps.}
+\end{figure}
+
+
+
+%\FloatBarrier
