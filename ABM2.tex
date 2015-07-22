@@ -94,7 +94,7 @@ We consider a population of size 1000 with 999 individuals starting in a suscept
 \begin{center}
 \includegraphics[scale=0.5]{N1000Hist.eps}
 \end{center}
-\caption{Histogram showing the outcome of 100 simulations.}
+\caption{Histogram showing the outcome of 100 simulations: 27 trials experience no outbreak and 73 trials do}
 \label{fig:Hist}
 \end{figure}
 
@@ -112,7 +112,7 @@ We note that the simulations reach their stationary state before $t = 300$. We p
 \begin{center}
 \includegraphics[scale=0.5]{N1000Scatter.eps}
 \end{center}
-\caption{Scatter plot showing the proportion of population that contracts the disease and the proportion of the population that dies due to the disease for a population size 1000 }%\textbf{PUT BOX AND WHISKER PLOT HERE}}
+\caption{Scatter plot showing the proportion of population that contracts the disease (blue) and the proportion of the population that dies due to the disease (red) for a population size 1000 }%\textbf{PUT BOX AND WHISKER PLOT HERE}}
 \label{fig:Scatter}
 \end{figure}
 
@@ -149,7 +149,7 @@ On the other hand, if the infected agent contacts many people while infected (I)
 % figure Outbreak.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We plot a phase portrait for the proportion of agents who never got infected and are in S versus the proportion of agents who contracted the disease (both D and R) as time progresses. On the horizontal axis, we put the ratio of S to the total population and on the vertical axis - the ratio of D plus R to the total population.  When $t = 0$, one agent is in state E and 99.9\% of agents are in S. All other states contain no agents. About 30\% of the time, there is no outbreak. In such case, only few people get Ebola. As time goes by there are only few transitions between states and a stationary point is reached within a few time steps. However, if there is an outbreak, the trajectory gradually moves to its equilibrium state. On average, the equilibrium occurs at $(S, R+ D) = (0.07, 0.93)$. We conduct one hundred experiments and plot their trajectories on the same graph, presented in Figure~\ref{fig:PhasePortraitAbm}. Because the total proportion of people in the population is one, the equilibria in different experiments lie on the $x + y = 1$ line. The system starts at $(S, R+D) = (0.999, 0)$, a point that is close to this line. During the course of the outbreak, the phase portrait falls below the x + y = 1 line because a portion of the population are in the transient states: E, I, H and F. 
+We plot a phase portrait for the proportion of agents who never got infected and are in S versus the proportion of agents who contracted the disease (both D and R) as time progresses. On the horizontal axis, we put the ratio of S to the total population and on the vertical axis - the ratio of D plus R to the total population.  When $t = 0$, one agent is in state E and 99.9\% of agents are in S. All other states contain no agents. About 30\% of the time, there is no outbreak. In such case, only few people get Ebola. As time goes by there are only few transitions between states and a stationary point is reached within a few time steps. However, if there is an outbreak, the trajectory gradually moves to its equilibrium state. On average, the equilibrium occurs at $(S, R+ D) = (0.07, 0.93)$. We conduct one hundred experiments and plot their trajectories on the same graph, presented in Figure~\ref{fig:PhasePortraitAbm}. Because the total proportion of people in the population is one, the equilibria in different experiments lie on the $x + y = 1$ line. The system starts at $(S, R+D) = (0.999, 0)$, a point that is close to this line. During the course of the outbreak, the phase portrait falls below the black line because a portion of the population are in the transient states: E, I, H and F. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % figure PhasePortrait.eps
