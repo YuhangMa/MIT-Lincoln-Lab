@@ -52,7 +52,7 @@ edge [loop below] node {$p_{HH}$} (7)
 We let $N$ be the total number of individuals in a population, $N_{I}$  be the total number of individuals in the infected state, $N_{H}$  be the total number of individuals in the hospitalized state and $N_{F}$ be the total number of individuals in the funeral state. We define and present numeric values of individual's probability of transition for each state in Table~\ref{tab:probabilities}. In calculating the probabilities we used parameters found in Table~\ref{tab:knownParameters} and Table~\ref{tab:calibratedParameters}.
 
 \begin{table}[h!]
-\caption{Agent-based Model Parameters for Ebola Epidemic in Liberia Before and After the International Intervention} % title of Table
+% title of Table
 \centering % used for centering table
 \begin{tabular}{c c c c} 
 \hline\hline %inserts double horizontal lines
@@ -78,10 +78,11 @@ $p_{RR}$ 	& 1															& 1 				& 1  \\
 $p_{DD}$ 	& 1															&1				 & 1 \\ [1ex] 
 \hline 
 \end{tabular}
+\caption{Agent-based Model Parameters for Ebola Epidemic in Liberia with and without the International Intervention.} 
 \label{tab:probabilities}
 \end{table}
 \subsection{Simulation}
-We consider a population of size 1000 with 999 individuals starting in a susceptible state and 1 individual in the exposed state. This means that the scale of our probabilistic model is different from the scale of the system-based model so that there is not neccesearily a direct correspondence between the results. Numeric probabilities of an individual transitioning from each state are recorded in Table~\ref{tab:probabilities}. We run one hundred Monte Carlo simulations and average the results to estimate an outcome of the disease. We define an outbreak as an event in which 2\% of the population or more contracts the disease. If only one individual is exposed to the disease in a population of 1000, there is about 30\% chance that the outbreak does not happen (27/100 trials). However, once the cumulative proportion of the exposed individuals reaches 1\%, the virus affects more than 90\% of the population. A histogram for simulation outcomes is depicted in Figure~\ref{fig:Hist}.
+We consider a population of size 1000 with 999 individuals starting in a susceptible state and 1 individual in the exposed state. This means that the scale of our probabilistic model is different from the scale of the system-based model so that there is not necessarily a direct correspondence between the results. Numeric probabilities of an individual transitioning from each state are recorded in Table~\ref{tab:probabilities}. We run one hundred Monte Carlo simulations and average the results to estimate an outcome of the disease. We define an outbreak as an event in which 2\% of the population or more contracts the disease. If only one individual is exposed to the disease in a population of 1000, there is about 30\% chance that the outbreak does not happen (27/100 trials). However, once the cumulative proportion of the exposed individuals reaches 1\%, the virus affects more than 90\% of the population. A histogram for simulation outcomes is depicted in Figure~\ref{fig:Hist}.
 %
 %
 % HERE IS THE PROBABILITY TRANSITION TABLE
@@ -112,7 +113,7 @@ We note that the simulations reach their stationary state before $t = 300$. We p
 \begin{center}
 \includegraphics[scale=0.5]{N1000Scatter.pdf}
 \end{center}
-\caption{Scatter plot showing the proportion of population that contracts the disease (blue) and the proportion of the population that dies due to the disease (red) for a population size 1000 }%\textbf{PUT BOX AND WHISKER PLOT HERE}}
+\caption{Scatter plot showing the proportion of population that contracts the disease (blue) and the proportion of the population that dies due to the disease (red) for a population size 1000. }%\textbf{PUT BOX AND WHISKER PLOT HERE}}
 \label{fig:Scatter}
 \end{figure}
 
@@ -182,7 +183,7 @@ We plot a phase portrait for the proportion of agents who never got infected and
 % figure PhasePortrait.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-As in the system dynamics approach, we perform an intervention in the agent-based model. Because the scale in the two models is different, we implement the intervention step if we see a total of 1\% of agents contracting the disease. At the beginning of intervention, we change the three $\beta$s, representing the different contact rates. Our results, presented in Figure~\ref{fig:InterventionPie}, show that if we start the intervention at 1\% of population having Ebola, 4\% of agents get the disease, 2\% of agents recover and 2\% of agents die. This is a significant improvement over the disastrous predicted outcome of an outbreak without an intervention. 
+As in the system dynamics approach, we perform an intervention in the agent-based model. Because the scale in the two models is different, we implement the intervention step if we see a total of 1\% of agents contracting the disease. At the beginning of intervention, we change the three $\beta$s, representing the different contact rates. Our results, presented in Table~\ref{tab:intervention}, show that if we start the intervention at 1\% of population having Ebola, 4\% of agents get the disease, 2\% of agents recover and 2\% of agents die. This is a significant improvement over the disastrous predicted outcome of an outbreak without an intervention. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % figure InterventionZoomIn.eps
@@ -196,13 +197,24 @@ As in the system dynamics approach, we perform an intervention in the agent-base
 %\label{fig:Intervention}
 %\end{figure}
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[scale=0.5]{InterventionPie}
-\end{center}
-\caption{Proportions of susceptible, dead and recovered agents if intervention is implemented}
-\label{fig:InterventionPie}
-\end{figure}
+\begin{table}[h!]
+ % title of Table
+\centering % used for centering table
+\begin{tabular}{c | c c c} 
+\hline\hline %inserts double horizontal lines
+&No Intervention & Intervention \\ %[0.5ex]  %[0.5ex] % inserts table
+% inserts table
+%heading
+\hline % inserts single horizontal line
+
+Final $S$ 	& $7\%$ & $96\%$	\\					
+Final $R$ & $43\%$ & $2\%$\\
+Final $D$ & $50\%$ & $2\%$\\ [1ex] 
+\hline 
+\end{tabular}
+\caption{Percent of the total population in different states with and without intervention.}
+\label{tab:intervention}
+\end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % figure InterventionZoomIn.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -223,7 +235,7 @@ We also examine the probability of outbreak occurring based on the population si
 \begin{center}
 \includegraphics[scale=0.5]{OutbreakProb}
 \end{center}
-\caption{Probability of an outbreak as population size varies}
+\caption{Probability of an outbreak as population size varies.}
 \label{fig:OtbreakProb}
 \end{figure}
 %\begin{figure}[h!]
