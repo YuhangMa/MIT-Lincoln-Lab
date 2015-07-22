@@ -1,6 +1,7 @@
 import random
 import matplotlib.pyplot as plt
 import copy
+import numpy as np
 from person import person
 from colors import colors
 from city import city
@@ -15,7 +16,7 @@ numtostate = {0:'S', 1:'E', 2:'I', 3:'H', 4:'F', 5:'R', 6:'D'}
 # come up with references for funeral size, etc. to validate our parameters
 
 class ebola:
-    def __init__(self, width = 70, height = 70, days = 176, pop_size = 1000, var = [], density = []):
+    def __init__(self, width = 70, height = 70, days = 500, pop_size = 1000, var = [], density = []):
         self.width = width      # width of map
         self.height = height    # height of map
         self.days = days        # number of days to simulate
@@ -29,6 +30,8 @@ class ebola:
         self.cities = [city(self.width, self.height, var[i], density[i]) for i in range(self.num_cities)]
         #for i in range(self.num_cities):
         #    print self.cities[i].loc.x, self.cities[i].loc.y
+        self.R = [0 for i in range(self.pop_size)]
+        self.repro = 0
         
         # TODO: list of probabilities - maybe change this?
         self.travel_prob = 0.2
@@ -37,30 +40,30 @@ class ebola:
         self.fam_size_a = 3
         self.fam_size_b = 6
         # CONTACT RATES
-        self.b_fam = 0.4
-        self.b_com = 0.01
-        self.b_fun = 0.489          # funeral contact rate
+        self.b_fam = 0.1
+        self.b_com = 0.006
+        self.b_fun = 0.2          # funeral contact rate
         # PROBABILITIES
         self.i_mortality = 0.5
-        self.h_prob = 0.197
+        self.h_prob = 0.233 #0.248 
         self.h_mortality = 0.5
         # TIMEOUTS
-        self.incubation_time = 12
-        self.i_death_time = 13.31   # use random timeout, 10-16
-        self.i_death_time_a = 10
-        self.i_death_time_b = 16
+        self.incubation_time = 11
+        self.i_death_time = 8   # use random timeout, [7,9]
+        self.i_death_time_a = 7
+        self.i_death_time_b = 9
         self.funeral_time = 2.01    # use constant, 2
         self.funeral_time_c = 2
-        self.r_time = 15            # use constant, 15
-        self.pre_h_time = 3.24      # use random timeout, 1-5
-        self.pre_h_time_a = 1
-        self.pre_h_time_b = 5
-        self.h_recover_time = 15.88 # use random timeout, 13-18
-        self.h_recover_time_a = 13
-        self.h_recover_time_b = 18
-        self.h_death_time = 10.07   # use random timeout, 8-12
-        self.h_death_time_a = 8
-        self.h_death_time_b = 12
+        self.r_time = 10            # use constant, 15
+        self.pre_h_time = 4.5 #4.6      # use random timeout, 1-5
+        self.pre_h_time_a = 3
+        self.pre_h_time_b = 6
+        self.h_recover_time = 5.5 # use random timeout, 13-18
+        self.h_recover_time_a = 5
+        self.h_recover_time_b = 6
+        self.h_death_time = 3.51   # use random timeout, 8-12
+        self.h_death_time_a = 3
+        self.h_death_time_b = 4
         
         # count number infected in each way
         self.funeral_count = 0
@@ -188,12 +191,14 @@ class ebola:
                         if (indiv.family) and (self.pop[z].index in indiv.family) and (self.pop[z].state == 'S'): # within grid
                             #print 'im a family member'
                             if random.random() < self.b_fam: # family member
+                                self.R[indiv.index] += 1
                                 self.family_count += 1
                                 self.pop[z].state = 'E'
                                 self.pop[z].timeout = self.incubation_time
                                 self.updatenum('S','E')
                         elif self.pop[z].state == 'S':
                             if random.random() < self.b_com: # community member
+                                self.R[indiv.index] += 1
                                 self.comm_count += 1
                                 self.pop[z].state = 'E'
                                 self.pop[z].timeout = self.incubation_time
@@ -262,6 +267,7 @@ class ebola:
             # check for original neighbors who are still nearby (including family)
             if int(self.pop[z].home.x) == tempx and int(self.pop[z].home.y) == tempy and self.pop[z].state == 'S':
                 if random.random() < self.b_fun:
+                    self.R[indiv.index] += 1
                     self.funeral_count += 1
                     self.pop[z].state = 'E'
                     self.pop[z].timeout = self.incubation_time
@@ -307,7 +313,7 @@ class ebola:
         legend = colors()
         categories = [[[] for j in range(2)] for i in range(7)]
 
-        fig, ax = plt.subplots(figsize=(5,5))
+        fig, ax = plt.subplots(figsize=(10,10))
         for z in self.pop:
             categories[statetonum[z.state]][0].append(random.gauss(z.pos.y,.5))
             categories[statetonum[z.state]][1].append(random.gauss(z.pos.x,.5))
@@ -324,15 +330,17 @@ class ebola:
         #red_patch = mpatches.Patch(color='r', label='The red data')
         #plt.legend(handles=[red_patch])
         plt.legend(bbox_to_anchor=(1, 1), loc=2)
+        plt.setp(ax.get_xticklabels(), visible=False)
+        plt.setp(ax.get_yticklabels(), visible=False)
         plt.savefig(file_name)
 
     def curveplot(self, file_name):
 
         legend = colors()
-        fig, ax = plt.subplots(figsize=(8,5))
+        fig, ax = plt.subplots(figsize=(16,10))
 
         for i in range(7):
-            plt.plot(range(self.days+1), self.numlist[i], '-', color = legend.tableau20[i], label = numtostate[i])
+            plt.plot(range(self.days+1), self.numlist[i], '-', color = legend.tableau20[i], linewidth = 4, label = numtostate[i])
 
 #        plt.legend(bbox_to_anchor=(1.05, 1), loc=2, mode="expand", borderaxespad=0.)
         handles, labels = ax.get_legend_handles_labels()
@@ -341,6 +349,7 @@ class ebola:
         ax.set_ylim([0, self.pop_size])
         ax.set_xlabel("Time")
         ax.set_ylabel("Population")
+        plt.rcParams.update({'font.size': 24})
         plt.savefig(file_name, bbox_extra_artists=(lgd,), bbox_inches='tight')
         
     def main(self):
@@ -363,27 +372,114 @@ class ebola:
             #print system_state
             system_state = ''
             self.updatethelists()
+            if t == 30:
+#                print '5 R', sum(self.R)/float(self.pop_size - self.R.count(0) + 1)
+                #print 'inherent', sum(self.R)/float(self.pop_size - self.num[0] - self.num[1])
+                self.repro = sum(self.R)/float(self.pop_size - self.num[statetonum['S']] - self.num[statetonum['E']])
 #            print 'current grid at time ', t
 #            for i in range(self.pop_size):
 #                print 'person ', self.pop[i].index, self.grid[int(self.pop[i].pos.x)][int(self.pop[i].pos.y)]
         print self.family_count, self.comm_count, self.funeral_count
         print self.num
+#        print 'R', sum(self.R)/float(self.pop_size - self.R.count(0) + 1)
+#        print 'sdfsd', sum(self.R)/float(self.pop_size - self.num[0] - self.num[1])
 
-        #self.spatialplot('distribtution.jpg')
-        #self.curveplot('outbreak.jpg')
+        self.spatialplot('distribtution.jpg')
+        self.curveplot('outbreak.jpg')
             
 if __name__ == "__main__":
-    numsim = 1000
-    h = 0
-    c = 0
-    f = 0
-    n = 0
+    numsim = 1
+    ##h = [0 for i in range(numsim)]
+    ##c = [0 for i in range(numsim)]
+    ##f = [0 for i in range(numsim)]
+    ##pec_h = 0
+    ##pec_c = 0
+    ##pec_f = 0
+    r = 0
+    day = 250
+    #nlist = [[0 for j in range(day+1)] for i in range(7)]
+    #outbreak = 0.98
+    #num_outbreak = 0
+    ##frac_inf = [0. for i in range(numsim)]
+
+
+    #legend = colors()
+    #fig, ax = plt.subplots(figsize=(24,15))
+
     for t in range(numsim):
-        ebola_run = ebola(var = [5,1,1], density = [.8,.1,.1])
+        ebola_run = ebola(var = [5,1,1], density = [.8,.1,.1], days = day)
     #ebola_run = ebola(var = [20,5], density = [.8,.2])
         ebola_run.main()
-        h += ebola_run.family_count
-        c += ebola_run.comm_count
-        f += ebola_run.funeral_count
-        n += ebola_run.num[statetonum['S']]
-    print h/numsim, c/numsim, f/numsim, n/numsim
+        ##h[t] = ebola_run.family_count
+        ##c[t] = ebola_run.comm_count
+        ##f[t] = ebola_run.funeral_count
+        r += ebola_run.repro
+
+        ##if ebola_run.num[statetonum['S']]/float(ebola_run.pop_size) < outbreak:
+        ##    sum_inf = ebola_run.family_count + ebola_run.comm_count + ebola_run.funeral_count
+        ##    pec_h += ebola_run.family_count/float(sum_inf)
+        ##    pec_c += ebola_run.comm_count/float(sum_inf)
+        ##    pec_f += ebola_run.funeral_count/float(sum_inf)
+        ##   num_outbreak += 1
+
+        ##print 'susceptible percentage:', ebola_run.num[statetonum['S']]/float(ebola_run.pop_size)
+        ##frac_inf[t] = 1. - ebola_run.num[statetonum['S']]/float(ebola_run.pop_size)
+
+        #for i in range(7):
+        #    if numtostate[i] in ('S', 'D', 'R'):
+        #        plt.plot(range(ebola_run.days+1), ebola_run.numlist[i], '-', color = legend.tableau20[i], alpha = 0.2)#, label = numtostate[i])
+        
+        #if ebola_run.num[statetonum['S']]/float(ebola_run.pop_size) < outbreak:
+        #    for i in range(7):
+        #        for j in range(day+1):
+        #            nlist[i][j] += ebola_run.numlist[i][j]
+        #    num_outbreak +=1
+        #plt.legend(bbox_to_anchor=(1.05, 1), loc=2, mode="expand", borderaxespad=0.)
+
+    #print the histogram
+    ##n, bins, patches = plt.hist(frac_inf, 10, facecolor=legend.tableau20[6])
+    ##plt.rcParams.update({'font.size': 42})
+    ##plt.xlabel('Fraction of people infected')
+    ##plt.ylabel('Number of trials')
+    ##plt.axis([0, 1, 0, numsim])
+    ##plt.savefig('Histogram.jpg')
+
+    #print the average time series
+    #for i in range(7):
+    #    for j in range(day+1):
+    #        nlist[i][j] = nlist[i][j]/float(num_outbreak)
+    #for i in range(7):
+    #    if numtostate[i] in ('S', 'D', 'R'):
+    #        plt.plot(range(day+1), nlist[i], '-', color = legend.tableau20[i], linewidth = 4, alpha = 1, label = numtostate[i])
+    #handles, labels = ax.get_legend_handles_labels()
+    #lgd = ax.legend(handles, labels, bbox_to_anchor=(1, 1), loc=2)
+    #plt.rcParams.update({'font.size': 24})#presentation:42
+    #ax.set_xlim([0, ebola_run.days+1])
+    #ax.set_ylim([0, ebola_run.pop_size])
+    #ax.set_xlabel("Time")
+    #ax.set_ylabel("Population")
+    #plt.savefig("Average Time Series.jpg", bbox_extra_artists=(lgd,), bbox_inches='tight')
+    #plt.savefig("Average Time Series.jpg")
+    
+    ##print the stacked bar chart
+    ##ind = np.arange(numsim)
+    ##width = 0.35
+    ##sum_hc = [h[i]+c[i] for i in range(numsim)]
+    ##family = plt.bar(ind, h, width, color=legend.tableau20[3])
+    ##community = plt.bar(ind, c, width, color=legend.tableau20[5], bottom=h)
+    ##funeral = plt.bar(ind, f, width, color=legend.tableau20[6], bottom=sum_hc)
+    ##plt.ylabel('Number of People')
+    ##plt.xlabel('Trial Number')
+    ##plt.xticks(ind+width/2., range(numsim))
+    ##plt.legend((family, community, funeral), ('Housholds', 'Communities', 'Funerals'), loc = 'best')
+    ##plt.savefig('Stacked Bar Char.jpg')
+
+    #print pec_h/num_outbreak, pec_c/num_outbreak, pec_f/num_outbreak
+
+
+
+
+
+
+
+
