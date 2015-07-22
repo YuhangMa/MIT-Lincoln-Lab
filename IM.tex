@@ -1,48 +1,47 @@
-The diagram of the described compartment model is depicted on Figure \ref{fig:compartment}. \\
+We use a system of differential equations to model the dynamics between the states listed in Section 2.1. The diagram of the described compartment model, with compartments and flows, is depicted on Figure \ref{fig:compartment}. \\
 
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=0.7\textwidth]{compartment}
-  \caption{Compartment Model of the Ebola Epidemic in Liberia  \newline  Being S: Susceptible, E: Exposed, I: Infectious, H: Hospitalized, F: Funeral,  R: Recovered and D: Dead. All the possible flows are specified by the arrows and the parameters that direct them. Note that $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, being a combination of all the $\beta$ transmission terms shown in Table~\ref{tab:knownParameters} } 
+  \caption{The compartment model from Section 2.1 with flow parameters. All possible flows are specified by the arrows and parameters. We define $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, a combination of the $\beta$ transmission terms shown in Table~\ref{tab:knownParameters}. } 
 \label{fig:compartment} 
 \end{figure}
 
 
-The governing equations of the system dynamics described above are the following:
-
-\begin{eqnarray} 
-\label{SDeqn}
-\frac{dS}{dt} = - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N} \label{eqn:SD1}\\
-\frac{dE}{dt} =  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\gamma_P E         \label{eqn:SD2}\\
-\frac{dI}{dt} =  \gamma_P E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I   \label{eqn:SD3}\\
-\frac{dH}{dt} = \gamma_{H}\theta I - [\gamma_{HF}\delta_{2}+\gamma_{IH}(1-\delta_{2})]H \label{eqn:SD4}\\
-\frac{dF}{dt} = \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{DH}\delta_{2} H-\gamma_{F} F     \label{eqn:SD5}\\
-\frac{dR}{dt} = \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{HR}(1-\delta_{2}) H       \label{eqn:SD6}\\
-\frac{dD}{dt} = \gamma_{F} F     \label{eqn:SD7}
-\end{eqnarray}\\
-
-where each of the parameters are defined on Tables ~\ref{tab:knownParameters} and ~\ref{tab:calibratedParameters}
+The governing equations of the system dynamics shown above are the following:
+\begin{align}
+\frac{dS}{dt} &= - \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N} \label{eqn:SD1}\\
+\frac{dE}{dt} &=  \frac{\beta_{I}SI+\beta_{H}SH+\beta_{F}SF}{N}-\gamma_P E         \label{eqn:SD2}\\
+\frac{dI}{dt} &=  \gamma_P E - [\gamma_{H}\theta + \gamma_{I}(1-\theta)(1-\delta_{1})+\gamma_{D}(1-\theta)\delta_{1}]I \label{eqn:SD3}\\
+\frac{dH}{dt} &= \gamma_{H}\theta I - [\gamma_{HD}\delta_{2}+\gamma_{HR}(1-\delta_{2})]H \label{eqn:SD4}\\
+\frac{dF}{dt} &= \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{HD}\delta_{2} H-\gamma_{F} F  \label{eqn:SD5}\\
+\frac{dR}{dt} &= \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{HR}(1-\delta_{2}) H       \label{eqn:SD6}\\
+\frac{dD}{dt} &= \gamma_{F} F  \label{eqn:SD7}
+\end{align}\\
+where each of the parameters are defined on Tables~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}. Here $\gamma_x$ refers to $1/t_x$ for the different periods. The equations described obey total conservation, guaranteeing that the total of the compartment values remains constant. This can be seen by adding all terms on the right-hand sides, which sum to 0. 
 
 
 
 %EQUATION DESCRIPTION
-\noindent The equations described above come from a species balance, which guarantees that any individual is lost. $Accumulation = Input - Output$, in our case,
-
-\begin{equation}
-\frac{d (Accumulation)}{dt} = \frac{d (Input)}{dt} -\frac{d (Output)}{dt} \nonumber
-\end{equation}
 
 
-Equation \ref{eqn:SD1} describes the changes with respect to time on the Susceptible population, the transition from S to I depends on the product $\beta_{I}SI+\beta_{H}SH+\beta_{F}SF$, which specifies that such changes are given by the contact rate with the comparments I, H and F (all of them have Ebola), and the respective number of individuals on each compartment.\\
+%$Accumulation = Input - Output$, in our case,
+%
+%\begin{equation}
+%\frac{d (Accumulation)}{dt} = \frac{d (Input)}{dt} -\frac{d (Output)}{dt} \nonumber
+%\end{equation}
 
-Equation \ref{eqn:SD2} describes the changes on the Exposed individuals. The number of individuals on this comparment depends on the number of individuals that become E, which depends on the same product as Equation \ref{eqn:SD1}, substracting the number of individuals that transitions from E to I after the incubation period $\gamma_P$.\\
 
-Equation \ref{eqn:SD3} describes the changes on the Infected patients, equally depends on the number of individuals that become I after the incubation period $\gamma_P$, substracting the individuals that transitions from I to H, which is given by the product between the transition rate from I to H and the probability a case becomes H; in the same way, substracting the individuals that transitions from I to R, given by  the product among the duration of infection rate, the probability a case is NOT hospitalized and the death rate of an unhospitalized case. Finally substracting the individuals that transitions from I to F , given by the product between the transition rate from Infected to Dead,  the probability a case is NOT hospitalized and the death rate of an unhospitalized case.\\
+Equation \ref{eqn:SD1} describes the change with respect to time of the susceptible population. The transition from S to E depends on $\beta_{I}SI+\beta_{H}SH+\beta_{F}SF$, which is the contact rate with the compartments I, H and F (all of which are infectious), and the respective number of value of each compartment.
 
-Equation \ref{eqn:SD4} describes the changes on the Hospitalized patients. It depends on the number of individuals that transitions from I to H, given by the  product between the transition rate from Infected to Hospitalized and the probability a case is Hospitalized;  substracting the individuals than transitions from H to D, given by the product among the transition rate from Hospitalized to Dead and the death rate of a hospitalized case, and finally, susbtracting the people that transitions from H to R, which is given by the product between the transition rate from I to R and the survival rate of an hospitalized case.\\
+Equation \ref{eqn:SD2} describes the change of the exposed compartment. This depends on the flow leaving S and the flow from E to I normalized by the incubation period $t_P$.
 
-Equation \ref{eqn:SD5} describes the changes on the Funeralized compartment.  Depending on the number of individuals that transitions from I to D, which is given by the product between the transition rate from I to D, the probability a case is NOT hospitalized and the death rate of an unhospitalized case. Adding the people who transitions from H to F , which is given by the product between the transition rate from H to D and the death rate of an hospitalized case. Finally substracting the individuals who already have been buried.\\
+Equation \ref{eqn:SD3} describes the change of the infected compartment, which adds the flow from E. Flows out of compartment I include the flow from I to H, which is given by the product between the transition rate from I to H and the probability of hospitalization hospitalized; in the same way, substracting the individuals that transitions from I to R, given by  the product among the duration of infection rate, the probability a case is NOT hospitalized and the death rate of an unhospitalized case. Finally substracting the individuals that transitions from I to F , given by the product between the transition rate from Infected to Dead,  the probability a case is NOT hospitalized and the death rate of an unhospitalized case.
+
+Equation \ref{eqn:SD4} describes the changes on the Hospitalized patients. It depends on the number of individuals that transitions from I to H, given by the  product between the transition rate from Infected to Hospitalized and the probability a case is Hospitalized;  substracting the individuals than transitions from H to D, given by the product among the transition rate from Hospitalized to Dead and the death rate of a hospitalized case, and finally, susbtracting the people that transitions from H to R, which is given by the product between the transition rate from I to R and the survival rate of an hospitalized case.
+
+Equation \ref{eqn:SD5} describes the changes on the Funeralized compartment.  Depending on the number of individuals that transitions from I to D, which is given by the product between the transition rate from I to D, the probability a case is NOT hospitalized and the death rate of an unhospitalized case. Adding the people who transitions from H to F , which is given by the product between the transition rate from H to D and the death rate of an hospitalized case. Finally substracting the individuals who already have been buried.
 
 Equation \ref{eqn:SD6} describes the changes on the Recovered compartment. Depending on the transition from I to R, which is given by the product between the duration of infection rate, the probability a case is NOT hospitalized and the survival rate of an Unhospitalized rate. Adding  the individuals who transitions from H to I, which is given by the product among the transition rate from I to H and the survival rate of a hospitalized case.\\
 
@@ -55,17 +54,15 @@ Equation \ref{eqn:SD7} describes the changes on the Funeralized compartment, whi
 %Parameter calibration
 \subsection{Parameter Calibration}
 
-The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown (see Tables ~\ref{tab:knownParameters} and ~\ref{tab:calibratedParameters} and Equations \ref{eqn:SD1} to \ref{eqn:SD7} for the detail of the parameters). $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative deaths in Liberia from March 2014 to July 2015 \cite{CDCData}.\\
+The parameter values which represent biological processes ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social customs ($\gamma_{F}$) had values listed in the previous literature \cite{Poletto2014, Webb2015}, while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent (see Tables \ref{tab:knownParameters} and \ref{tab:calibratedParameters} and Equations \ref{eqn:SD1} to \ref{eqn:SD7} for the parameter definitions). The parameters $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume the following relation with known parameters: $1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$. In this chapter, we calibrate $\mathcal{P}$ based on our systematic model (Equations 1-7) and the data of cumulative deaths in Liberia from March 2014 to July 2015 \cite{CDCData}.
 
 
+\subsection{Bayesian Calibration Framework}
+We use Bayesian methodology to calibrate the unknown system parameters. This method is utilized in many calibrations of complicated systems owing to its merit that little or no information of the parameter values is needed for its usage. The calibration procedure starts from choosing a distribution in the space of parameters. This distribution, the ``prior distribution" ($\mathcal{D}_0$), can be a simple distribution such as uniform or other intuitively chosen parametric distribution. Based on the available data and mathematical setup, we evaluate the likelihood weight for the samples from $\mathcal{D}_0$ with which we update the ``posterior distribution" ($\mathcal{D}_1$). Multiple updates ($\mathcal{D}_1$ to $\mathcal{D}_2$, $\mathcal{D}_2$ to $\mathcal{D}_3$, ...) facilitate a more accurate distribution.
 
-\subsection{Bayesian calibration framework}
-
-We use Bayesian methodology to calibrate our unknown system parameters. It is a versatile tool which is utilized in many calibrations of complicated systems owing to its merit that a little or no information on the parameter values is not an obstacle to use it. The calibration procedure starts from choosing a distribution in the space of parameters we concern. This distribution, which is called `prior distribution' ($\mathcal{D}_0$), can be a simple like uniform distribution or intuitively chosen parametric distribution. Based on the available data and mathematical setup, we evaluate the likelihood weight for the samples from $\mathcal{D}_0$ with which we update to the weighted distribution `posterior distribution' ($\mathcal{D}_1$) from $\mathcal{D}_0$. Multiple updates ($\mathcal{D}_1$ to $\mathcal{D}_2$, $\mathcal{D}_2$ to $\mathcal{D}_3$, ...) facilitate to get more straightforward pattern on the distribution.\\
-To calibrate the unknown parameters ($\mathcal{P}$), we started from an uniform distribution in the range determined based on numerical exploration and previous researches (See Table \ref{tab:PriorRanges}) \cite{Rivers2014}. \\
+To calibrate the unknown parameters ($\mathcal{P}$), we started from an uniform prior distribution in the range determined based on numerical exploration and previous literature (see Table \ref{tab:PriorRanges}) \cite{Rivers2014}. \\
 
 \begin{table}[ht]
-\caption{Range of the prior parameter space} % title of Table
 \centering % used for centering table
 \begin{tabular}{c c c c c}
 \hline\hline %inserts double horizontal lines
@@ -74,35 +71,29 @@ $\beta_{I}$ & $\beta_{H}$ & $\beta_{F}$ & $\gamma_{H}$ & $\theta$ \\ [0.5ex]
 $(0,0.5)$ & $(0,0.5)$ & $(0,1)$ & $(2,7)$ & $(0,0.5)$ \\ [0.5ex]
 \hline
 \end{tabular}
+\caption{Range of the prior parameter space} % title of Table
 \label{tab:PriorRanges}
 \end{table}
 
 
-To each random choice ($\mathcal{P}_0$) from the prior distribution, we assigned likelihood weight by comparing the World Health Organization (WHO) data reports ($\mathcal{D}_R$) and data simulated with $\mathcal{P}_0$ ($\mathcal{D}_S$). Multiple choices of parameters and their weights will eventually construct the posterior distribution of $\mathcal{P}$. In this methodology, we provide multiple likely parameter sets, rather than a single best fit. Detailed description on the calibration procedure is:\\
+To each random choice ($\mathcal{P}_0$) from the prior distribution, we assigned likelihood weight by comparing the World Health Organization (WHO) data reports ($\mathcal{D}_R$) to the data simulated with $\mathcal{P}_0$ ($\mathcal{D}_S$) from the systems-based model. Repeating this method, we build the posterior distribution for $\mathcal{P}$. In this methodology, we provide multiple likely parameter sets, rather than a single best fit, by listing the mean as well as the standard deviation of suggested parameter values. The algorithm for the parameter calibration is:
 
-Step 1) Choose a random $\mathcal{P}_0$ from the prior distribution
+Step 1) Choose a random $\mathcal{P}_0$ from the prior distribution.
 
-Step 2) Solve our deterministic system (equation link) with $\mathcal{P}_0$ and given initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$, then evaluate $\mathcal{D}_S=\{D(t_i)\}$ for all dates $\{t_i\}$ corresponding to the cumulative death data ($\mathcal{D}_R$).
+Step 2) Solve the deterministic system (Equations 1-7) with $\mathcal{P}_0$ and given initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$, then evaluate $\mathcal{D}_S=\{D(t_i)\}$ for all dates $\{t_i\}$ corresponding to the cumulative death data ($\mathcal{D}_R$).
 
-Step 3) Evaluate likelihood of $\mathcal{P}_0$: $Exp[-Norm(\mathcal{D}_R-\mathcal{D}_S)/Norm(\mathcal{D}_R)]$
+Step 3) Evaluate likelihood of $\mathcal{P}_0$: $\exp\left(-\lVert\mathcal{D}_R-\mathcal{D}_S\rVert_2/\lVert\mathcal{D}_R\rVert_2\right)$.
 
-\emph{Repeat Step 1-3 multiple times and make large number of {parameter + likelihood} ensembles. Generate posterior distribution with them.}
+\emph{Repeat Steps 1-3 many times to generate {parameter and likelihood} estimates. Generate the posterior distribution using these weights.}
 
 \subsubsection{Results and validation}
-We applied our systematic model and calibration method for Ebola spread in Liberia 2014-2015. Two sets of cumulative mortality data (pre-intervention, post-intervention) are used to calibrate pre- and post-intervention parameter calibration, respectively. We assume that about a forth (1 million) of the total Liberia population ( 4.3 million \cite{LiberiaPop}) are involved in the transmission, and the rest are not in any chance due to geographical and behavior reason. For the calibration of before intervention parameters, we used the data for 176 days (March 2014 to September 2014), and initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that initial outbreak started from a single infected person in a million population. The calibration of intervention parameters is based on the data for 306 days (September 14 to July 15), and initial value $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from calibrated mean $\mathcal{P}$ for pre intervention. 10000 random samples were used in each calibration. \\
-
-Calibration results are shown in Table \ref{tab:calibratedParameters}. By observing the posterior mean of the two calibrations, we conclude that our calibration reasonably estimated decreased transmission rates ($\beta_I$, $\beta_H$, $\beta_F$) after intervention. (Figure \ref{fig:BetaStepFunction}) However, it is not likely that the parameters of time until hospitalization ($\gamma_H$) and the fraction a case hospitalization ($\theta$) are also decreased. It might be explained by the hospital capacity insufficient to serve for the all increasing cases. Also, it tells that our transmission system is more sensitive to the changes in {$\beta_I$, $\beta_H$, $\beta_F$} compared to the changes in {$\gamma_H$, $\theta$}.\\
-
-
-We validated our calibration in Figure \ref{fig:Cumulative _Death}. It shows `good-fit' between the used cumulative death data and simulated version of it with our posterior mean and system setup.\\
-
+We applied our systematic model and calibration method to the Ebola spread in Liberia during 2014-2015. Two sets of cumulative mortality data (pre-intervention and post-intervention) are used to calibrate pre- and post-intervention parameters, respectively. We assume that about a forth (1 million) of Liberia's total population (4.3 million \cite{LiberiaPop}) are involved in the model, and that the rest of the population are not at risk due to geographical location or behavioral reasons. For the calibration of pre-intervention parameters, we used the data from 176 days (March 2014 to September 2014) and initial values $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that the initial outbreak started from a single infected person. The calibration of post-intervention parameters is based on the data from 306 days (September 14 to July 15) and initial values $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from the calibrated parameter means $\mathcal{P}$ for pre-intervention. Each calibration used 10,000 random samples.
 
 \begin{table}[ht]
-\caption{Calibrated Parameters for Ebola Epidemic in Liberia. Posterior mean and standard deviation (in parenthesis) are notated for before-intervention (2nd column) and after-intervention (3nd column) calibrations. For comparison, the evaluated values through least-square optimization \cite{Rivers2014} are in 4th column.} % title of Table
 \centering % used for centering table
 \begin{tabular}{c  c c}
 \hline\hline %inserts double horizontal lines
-Parameter &  Before Intervention  & After Intervention \\ [0.5ex]
+Parameter &  Pre-Intervention  & Post-Intervention \\ [0.5ex]
  & (Mar 2014 to Sept 2014) &  (Sept 2014 to July 2015)\\ [0.5ex] % inserts table
 % inserts table
 %heading
@@ -111,15 +102,20 @@ Parameter &  Before Intervention  & After Intervention \\ [0.5ex]
 Contact Rate, Hospital  ($\beta_{H}$) & 0.235 (0.143) & 0.0877 (0.0563) \\
 Contact Rate, Funeral  ($\beta_{F}$) & 0.465 (0.287)& 0.283 (0.208) \\
 Time until Hospitalization (${t_{H}}$) & 4.49 (1.44) days & 4.63 (1.43) days  \\
-Time from Hospitalization to Death (${t_{DH}}$) & 3.51 (1.44) days & 3.51 (1.43) days  \\
-Time from Hospitalization to Recovery (${t_{IH}}$) & 5.51 (1.44) days & 5.51 (1.43) days \\
+Time from Hospitalization to Death (${t_{HD}}$) & 3.51 (1.44) days & 3.51 (1.43) days  \\
+Time from Hospitalization to Recovery (${t_{HR}}$) & 5.51 (1.44) days & 5.51 (1.43) days \\
 Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 [1ex]
 \hline
 \end{tabular}
+\caption{Calibrated parameters for Ebola epidemic in Liberia. Posterior mean and standard deviation (in parentheses) are listed for pre-intervention and post-intervention calibrations.}%For comparison, the evaluated values through least-square optimization \cite{Rivers2014} are in 4th column.} % title of Table
 \label{tab:calibratedParameters}
 \end{table}
 
+Calibration results are shown in Table \ref{tab:calibratedParameters}. By observing the posterior mean of the two calibrations, we conclude that our calibration reasonably predicts decreased transmission rates ($\beta_I$, $\beta_H$, $\beta_F$) post-intervention. See Figure \ref{fig:BetaStepFunction} for the differences of these parameters; the step function pictured is used when running the systems model. The parameters for time until hospitalization ($\gamma_H$) and the probability a case hospitalized ($\theta$) were calibrated to have the same approximate value pre- and post-intervention. This may be reasonable if, for example, the hospital capacity  insufficient to handle the increasing number of cases. It also tells shows that the system dynamics are more sensitive to the changes in {$\beta_I$, $\beta_H$, $\beta_F$} compared to the changes in {$\gamma_H$, $\theta$}.
+
+
+We validated our calibration in Figure \ref{fig:Cumulative _Death}, which shows a good fit between the used cumulative death data and the systems model using the calculated parameter means.
 
 
 \begin{figure}[!h]
@@ -136,8 +132,6 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
   \caption{Validation of calibration. Dots represent cumulative death data and the lines represent simulation based on mean posterior parameters. (Blue) - pre intervention and (red) - post treatment.}
 \label{fig:Cumulative _Death}
 \end{figure}
-
-
 
 
 
