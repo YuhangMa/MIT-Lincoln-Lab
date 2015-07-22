@@ -4,18 +4,9 @@ We use a system of differential equations to model the dynamics between the stat
 \begin{figure}[!h]
   \centering
   \includegraphics[width=0.7\textwidth]{compartment}
-  \caption{The compartment model from Section 2.1 with flow parameters. All possible flows are specified by the arrows and parameters. We define $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, a combination of the $\beta$ transmission terms shown in Table~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}. } 
+  \caption{The compartment model from Section 2.1 with flow parameters. All possible flows are specified by the arrows and parameters. } 
 \label{fig:compartment} 
 \end{figure}
-
-
-
-
-
-
-
-
-
 
 
 The governing equations of the system dynamics shown above are the following:
@@ -28,8 +19,8 @@ The governing equations of the system dynamics shown above are the following:
 \frac{dR}{dt} &= \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{HR}(1-\delta_{2}) H       \label{eqn:SD6}\\
 \frac{dD}{dt} &= \gamma_{F} F  \label{eqn:SD7}
 \end{align}\\
-where each of the parameters are defined on Tables~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}. Here $\gamma_x$ refers to $1/t_x$ for the different periods. The equations described obey total conservation, guaranteeing that the total of the compartment values remains constant. This can be seen by adding all terms on the right-hand sides, which sum to 0. The transmission rate $\beta$ is the parameter representing all the complexity in the transmission process like contact frequency, infection probability per contact and so on.\\
 
+ Here, we define $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, a combination of the $\beta$ transmission terms shown in Table~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}. $\gamma_x$ refers to $1/t_x$ for the different periods. The equations described obey total conservation, guaranteeing that the total of the compartment values remains constant. This can be seen by adding all terms on the right-hand sides, which sum to 0. The transmission rate $\beta$ is the parameter representing all the complexity in the transmission process like contact frequency, infection probability per contact and so on. $\theta$ refers to the probability of a case being Hospitalized and $\delta$ to the case fatality rate (See Tables~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}).
 
 
 %EQUATION DESCRIPTION
@@ -64,7 +55,7 @@ Equation \ref{eqn:SD7} describes the changes on the Dead compartment, which sole
 %Parameter calibration
 \subsection{Parameter Calibration}
 
-The parameter values which represent biological processes ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social customs ($\gamma_{F}$) had values listed in the previous literature \cite{Poletto2014, Webb2015}, while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) depend on infection region (see Tables \ref{tab:knownParameters} and \ref{tab:calibratedParameters} and Equations \ref{eqn:SD1} to \ref{eqn:SD7} for the parameter definitions). The parameters $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume the following relation with known parameters: $1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$. Here, we calibrate $\mathcal{P}$ based on our systematic model (Equations 1-7) and the data of cumulative deaths in Liberia from March 2014 to July 2015 from WHO \cite{CDCData}.
+The parameter values which represent biological processes ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social customs ($\gamma_{F}$) had values listed in the previous literature \cite{Poletto2014, Webb2015}, while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) depend on infection region (see Tables \ref{tab:knownParameters} and \ref{tab:calibratedParameters} and Equations \ref{eqn:SD1} to \ref{eqn:SD7} for the parameter definitions). The parameters $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume the following relation with known parameters: $1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$. Here, we calibrate $\mathcal{P}$ based on our systematic model (Equations 1-7) and the data of cumulative deaths in Liberia from March 2014 to July 2015 from World Health Organization (WHO) \cite{CDCData}.
 
 
 \subsection{Bayesian Calibration Framework}
@@ -111,7 +102,7 @@ Parameter &  Pre-Intervention  & Post-Intervention \\ [0.5ex]
 {Contact Rate, Community  (${\beta_{I}}$) }& {0.148 (0.0953)} & {0.0446 (0.0338)}  \\
 Contact Rate, Hospital  ($\beta_{H}$) & 0.235 (0.143) & 0.0877 (0.0563) \\
 Contact Rate, Funeral  ($\beta_{F}$) & 0.465 (0.287)& 0.283 (0.208) \\
-Time until Hospitalization (${t_{H}}$) & 4.49 (1.44) days & 4.63 (1.43) days  \\
+Time from Infection to Hospitalization (${t_{H}}$) & 4.49 (1.44) days & 4.63 (1.43) days  \\
 Time from Hospitalization to Death (${t_{HD}}$) & 3.51 (1.44) days & 3.51 (1.43) days  \\
 Time from Hospitalization to Recovery (${t_{HR}}$) & 5.51 (1.44) days & 5.51 (1.43) days \\
 Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
@@ -221,6 +212,8 @@ Figure \ref{fig:PhasePortrait} shows another visualization of our simulation on 
 \label{fig:PhasePortrait} 
 \end{figure}
 
+
+\clearpage
 
 
 
