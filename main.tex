@@ -46,7 +46,9 @@ Christian Gunning\footnote{Departments of Entomology and Mathematics, North Caro
 % ABSTRACT
 
 \begin{abstract}
-\noindent We present and compare three models of the Ebola outbreak in Liberia during 2014-2015 and examine the effect of international intervention. We utilize both the system and agent-based approaches. We show that the basic reproduction number of the disease is greater than one before intervention and decreases to less than one after intervention, implying eventual eradication of the disease. We demonstrate that the probability of an outbreak varies depending on the population size and that even for large populations there is a 70\% chance of an outbreak if only one person gets exposed to the disease. In addition, if an outbreak is not contained in early stages and the individuals do not change their behavior as the virus prevails, over 90\% of population contract  the disease and about 50\% of the population dies because of it. Effective intervention may decrease both figures to be less than 1\%.\textbf{If spatial dynamics are incorporated Emily and Yuhang  results}
+\noindent We present and compare three models of the Ebola outbreak in Liberia during 2014-2015 and examine the effect of international intervention. We utilize both system dynamics and agent-based approaches. We show that the basic reproduction number of the disease is greater than one before intervention and decreases to less than one after intervention, implying eventual irradiation of the disease. We demonstrate that the probability of an outbreak varies depending on the population size and that even for large populations there is a 70\% chance of an outbreak if only one person gets exposed to the disease. In addition, if an outbreak is not contained in early stages and the individuals do not change their behavior as the virus prevails, over 90\% of population contract  the disease and about 50\% of the population dies because of it. Effective intervention may decrease both figures to be less than 1\%. When including spatial movement in the agent-based setting, we conclude that outbreaks can be less severe due to the environment not being well-mixed, the spread between community members is the highest proportion of transmission, and that the common practices of touching the deceased at a funeral accounts for a significant portion of disease contractions (13\% in the model). 
+
+\textbf{If spatial dynamics are incorporated Emily and Yuhang  results}
 \end{abstract}
 
 %\tableofcontents
@@ -63,9 +65,9 @@ Christian Gunning\footnote{Departments of Entomology and Mathematics, North Caro
 \input{IM} %includes parameter calibration, insight maker and mathematica results
 
 
-\section{Agent-Based Dynamics}
-\input{ABM2}
-
+%\section{Agent-Based Dynamics}
+%\input{ABM2}
+%
 
 \section{Spatial Agent-Based Dynamics}
 \input{sabd}
@@ -83,7 +85,72 @@ Christian Gunning\footnote{Departments of Entomology and Mathematics, North Caro
 %\section{MATLAB Pseudocode for Agent-Based Dynamics}
 %\input{matlab-pseudo}
 %\end{appendices}
+\begin{figure}
+\centering
+\def\angle{0}
+\def\radius{3}
+\def\cyclelist{{"blue","red","green","green"}}
+\newcount\cyclecount \cyclecount=-1
+\newcount\ind \ind=-1
+\begin{tikzpicture}[scale=.8]
+\draw[white] (-4,-4) rectangle (4,4);
+\node at (0,3.5) {\Large With Intervention};
+  \foreach \percent/\name in {
+      96/S (96\%),
+      2/D (2\%),
+      2/R (2\%)
+    } {
+      \ifx\percent\empty\else               % If \percent is empty, do nothing
+        \global\advance\cyclecount by 1     % Advance cyclecount
+        \global\advance\ind by 1            % Advance list index
+        \ifnum3<\cyclecount                 % If cyclecount is larger than list
+          \global\cyclecount=0              %   reset cyclecount and
+          \global\ind=0                     %   reset list index
+        \fi
+        \pgfmathparse{\cyclelist[\the\ind]} % Get color from cycle list
+        \edef\color{\pgfmathresult}         %   and store as \color
+        % Draw angle and set labels
+        \draw[fill={\color!50},draw={\color}] (0,0) -- (\angle:\radius)
+          arc (\angle:\angle+\percent*3.6:\radius) -- cycle;
+        %\node at (\angle+0.5*\percent*3.6:0.85*\radius) {\percent\,\%};
+        \node[pin=\angle+0.5*\percent*3.6:\name]
+          at (\angle+0.5*\percent*3.6:\radius) {};
+        \pgfmathparse{\angle+\percent*3.6}  % Advance angle
+        \xdef\angle{\pgfmathresult}         %   and store in \angle
+      \fi
+    };
+\end{tikzpicture}
+\begin{tikzpicture}[scale=.8]
+\draw[white] (-4,-4) rectangle (4,4);
+	\node at (0,3.5) {\Large Without Intervention};
+  \foreach \percent/\name in {
+      7/S (7\%),
+      50/D (50\%),
+      43/R (43\%)
+    } {
+      \ifx\percent\empty\else               % If \percent is empty, do nothing
+        \global\advance\cyclecount by 1     % Advance cyclecount
+        \global\advance\ind by 1            % Advance list index
+        \ifnum3<\cyclecount                 % If cyclecount is larger than list
+          \global\cyclecount=0              %   reset cyclecount and
+          \global\ind=0                     %   reset list index
+        \fi
+        \pgfmathparse{\cyclelist[\the\ind]} % Get color from cycle list
+        \edef\color{\pgfmathresult}         %   and store as \color
+        % Draw angle and set labels
+        \draw[fill={\color!50},draw={\color}] (0,0) -- (\angle:\radius)
+          arc (\angle:\angle+\percent*3.6:\radius) -- cycle;
+        %\node at (\angle+0.5*\percent*3.6:0.85*\radius) {\percent\,\%};
+        \node[pin=\angle+65+0.5*\percent*3.6:\name]
+          at (\angle+0.5*\percent*3.6:\radius) {};
+        \pgfmathparse{\angle+\percent*3.6}  % Advance angle
+        \xdef\angle{\pgfmathresult}         %   and store in \angle
+      \fi
+    };
+\end{tikzpicture}
+\end{figure}
 
+\pagebreak
 
 \bibliography{references}
 \bibliographystyle{plain}
