@@ -58,14 +58,6 @@ Equation \ref{eqn:SD7} describes the changes on the Funeralized compartment, whi
 The parameter values which represent biological process ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social custom ($\gamma_{F}$) were discovered in many sources [reference], while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent and unknown (see Table and Equation for the detail of the parameters). $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume that they are dependent on other variables ($1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$). In this chapter, we calibrated $\mathcal{P}$ based on our systematic model (equation link) and the data of cumulative deaths in Liberia from March 2014 to July 2015 \cite{CDCData}.\\
 
 
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=0.7\textwidth]{BetaStepFunction.pdf}
-  \caption{$\beta$ step function} 
-\label{fig:BetaStepFunction} 
-\end{figure}
-
-
 
 \subsection{Bayesian calibration framework}
 
@@ -99,8 +91,6 @@ Step 3) Evaluate likelihood of $\mathcal{P}_0$: $Exp[-Norm(\mathcal{D}_R-\mathca
 \subsubsection{Results and validation}
 We applied our systematic model and calibration method for Ebola spread in Liberia 2014-2015. Two sets of cumulative mortality data (pre-intervention, post-intervention) are used to calibrate pre- and post-intervention parameter calibration, respectively. We assume that about a forth (1 million) of the total Liberia population ( 4.3 million \cite{LiberiaPop}) are involved in the transmission, and the rest are not in any chance due to geographical and behavior reason. For the calibration of before intervention parameters, we used the data for 176 days (March 2014 to September 2014), and initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that initial outbreak started from a single infected person in a million population. The calibration of intervention parameters is based on the data for 306 days (September 14 to July 15), and initial value $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from calibrated mean $\mathcal{P}$ for pre intervention. 10000 random samples were used in each calibration. Calibration results and validation are shown in Table \ref{tab:calibratedParameters} and Figure \ref{fig:Cumulative _Death} respectively.\\
 
-Based on our calibration, the intervention reduce the basic reproduction number of Ebola in Liberia from 1.99 to 0.787, using the formula in \cite{Legrand2007}. As a result, disease spread is terminated after infecting 0.84\% of total population with 0.49\% decrease in population, otherwise 92.7\% are infected and population decreases by 53.5\%.\\
-
 \begin{table}[ht]
 \caption{Calibrated Parameters for Ebola Epidemic in Liberia. Posterior mean and standard deviation (in parenthesis) are notated for before-intervention (2nd column) and after-intervention (3nd column) calibrations. For comparison, the evaluated values through least-square optimization \cite{Rivers2014} are in 4th column.} % title of Table
 \centering % used for centering table
@@ -123,6 +113,16 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) & 
 \end{tabular}
 \label{tab:calibratedParameters}
 \end{table}
+
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{BetaStepFunction.pdf}
+  \caption{$\beta$ step function} 
+\label{fig:BetaStepFunction} 
+\end{figure}
+
 
 \begin{figure}[h]
   \centering
@@ -201,9 +201,7 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) & 
 \end{figure}
 
 
-%%MATHEMATICA DESCRIPTION
-Additionally, we drew the plots in the previous section also with Mathematica, and got almost same result. Furthermore, phase portraits of the system are shown in Figure \ref{fig:PhasePortrait}. 
-
+Figure \ref{fig:PhasePortrait} shows another visualization of our simulation on 2 dimensional space of $S+R$ vs. $D$. By watching the phase portrait in the figure, we can see that the fraction of survived population after outbreak $S+R$ converges to $46\%$ and dead people $D$ converges to $54\%$ without intervention. However, with intervention on 176th day, the $S+R$ and $D$ converge to $99.5\%$ and $0.487 \times10^{-3}\%$, respectively. The significant effect of intervention observed here can be analyzed by the basic reproduction number ($R_0$). $R_0$ is a indicator to tell if the infection will spread (if $R_0>1$) or die out (if $R_0<1$) eventually in the population. Evaluated Based on (reference), $R_0$ is $1.99 (>1)$ before intervention. However, it has been changed with after intervention to $0.786(<1)$.
 
 
 \begin{figure}[h!]
