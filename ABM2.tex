@@ -81,7 +81,7 @@ $p_{DD}$ 	& 1															&1				 & 1 \\ [1ex]
 \label{tab:probabilities}
 \end{table}
 \subsection{Simulation}
-We consider a population of size 1000 with 999 individuals starting in a susceptible state and 1 individual in the exposed state. Numeric probabilities of an individual transitioning from each state are recorded in Table~\ref{tab:probabilities}. We run one hundred Monte Carlo simulations and average the results to estimate an outcome of the disease. We define an outbreak as an event in which 2\% of the population or more contracts the disease. If only one individual is exposed to the disease in a population of 1000, there is about 30\% chance that the outbreak does not happen (27/100 trials). However, once the cumulative proportion of the exposed individuals reaches 1\%, the virus affects more than 90\% of the population. A histogram for simulation outcomes is depicted in Figure~\ref{fig:Hist}.
+We consider a population of size 1000 with 999 individuals starting in a susceptible state and 1 individual in the exposed state. This means that the scale of our probabilistic model is different from the scale of the system-based model so that there is not neccesearily a direct correspondence between the results. Numeric probabilities of an individual transitioning from each state are recorded in Table~\ref{tab:probabilities}. We run one hundred Monte Carlo simulations and average the results to estimate an outcome of the disease. We define an outbreak as an event in which 2\% of the population or more contracts the disease. If only one individual is exposed to the disease in a population of 1000, there is about 30\% chance that the outbreak does not happen (27/100 trials). However, once the cumulative proportion of the exposed individuals reaches 1\%, the virus affects more than 90\% of the population. A histogram for simulation outcomes is depicted in Figure~\ref{fig:Hist}.
 %
 %
 % HERE IS THE PROBABILITY TRANSITION TABLE
@@ -207,7 +207,7 @@ As in the system dynamics approach, we perform an intervention in the agent-base
 % figure InterventionZoomIn.eps
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We examine the effect of the population size on the outcome of the agent-based model. Besides the baseline case of $N = 1000$, we set the total population to be $N = 100$ and $5000$. The results show that an increase in population size decreases the standard deviation of the quantities S, D and R, but the relative averages remain the same. The standard deviation of the number of agents with Ebola becomes smaller as population size increases. This suggests that the system becomes more stable. An important implication of this result is that the predicted outcome is more reliable for larger systems.
+We examine the effect of the population size on the outcome of the agent-based model. Besides the baseline case of $N = 1000$, we set the total population to be $N = 100$ and $5000$. The results show that an increase in population size decreases the standard deviation of the quantities S, D and R, but the relative averages remain the same. As the population size increases stochastic variation decreases and the system becomes more predictable. 
 
 
 %\begin{figure} [h!]
@@ -236,3 +236,4 @@ We also examine the probability of outbreak occurring based on the population si
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
