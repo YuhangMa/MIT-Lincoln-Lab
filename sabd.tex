@@ -71,12 +71,12 @@ The spatial movement and transitions between states is dependent on the individu
 \draw[fill=black] (1.7,1.2) circle (.05cm);
 
 \draw[pattern=north west lines, pattern color=black] (6,4) rectangle (6.5,4.5);
-\node[anchor=west] at (7,4.25) {funeral};
+\node[anchor=west] at (7,4.25) {funeralized};
 \draw[fill=red] (6,3) rectangle (6.5,3.5);
-\node[anchor=west] at (7,3.25) {community};
+\node[anchor=west] at (7,3.25) {infected};
 \end{tikzpicture}
 \end{center}
-\caption{Grid cells affected by funeral and community infection. Family infection occurs in the same region as community infection during the normal infection process or in the same region as funeral infection during the funeral infection process.}
+\caption{Grid cells affected by funeralized and infected individuals. Infected individuals may infect other family or community members in the red region. Funeralized individuals may infect others in the shaded cell -- family members, who all return home for the funeral or community members who were originally located in that cell and are considered neighbors.}
 \label{fig:infect}
 \end{figure}
 
@@ -147,39 +147,39 @@ Although the values may not precisely match those from the Ebola outbreaks, they
 
 \subsection{Results}
 
-We initialize the model with one infected individual who does not go to a hospital and does not recover. In Figure \ref{sabd:ex}, we show plots of example simulations of both the final individuals (location and state) and of the time series counting how many individuals are in each state at each step in time. Figure ? shows 100 the time series of the susceptible, recovered, and dead state count, with the average of the simulations with outbreaks. Because the spatial system is not well-mixed, unlike the models in Section ? and ?, we expect the larger spread in instances shown. The averages shown ?????????. 
+We initialize the model with one infected individual who does not go to a hospital and does not recover. In Figure \ref{sabd:ex}, we show plots of example simulations of both the final individuals (location and state) and of the time series counting how many individuals are in each state at each step in time. Figure ? shows 100 the time series of the susceptible, recovered, and dead state count, with the average of the simulations with outbreaks. Because the spatial system is not well-mixed, unlike the models in Section ? and ?, we expect the larger spread in instances shown. The averages shown ?????????. The number of people in the recovered and dead classes are the same on average because once an individual contracts the disease, they have a 50\% chance to recover and a 50\% chance to die (see Table \ref{table:sabd}).
 
-As can be seen in Figure \ref{?}, about ? of the simulations result in an outbreak, which defined as more than 2\% of the population contracting the disease as in Section ?. 
+As can be seen in Figure \ref{fig:hist-sabd}, about 80\% of the simulations result in an outbreak, which defined as more than 2\% of the population contracting the disease as in Section ?. Unlike in the model in Section ?, when an outbreak occurs it may not infect the entire population (see Figure \ref{fig:Hist}) -- this is expected, as that model assumes a well-mixed population in the infection dynamics, whereas this spatial model allows individuals to escape the disease through movement to non-infected areas.
 
-Because this model uses families, we are able to track whether the infections result from family, community, or funeral contact. We show the data from 25 simulations in Figure ?. The community contact makes up ??? of the infection spread. Thoughts?
+Because this model uses families, we are able to track differentiate between the infections resulting from family, community, and funeral contact. We show the data from 25 simulations in Figure \ref{fig:infecttypes}. Out of 200 trials, the disease spread on average 17\% through family contact, 70\% through community contact, and 13\% through funeral contact. These rates are highly reliant on the different infection probabilities ($\eta_f,\eta_c,\eta_F$), which were chosen so that the combination gave a reasonable $R_0$ value; however, increasing one infection probability and decreasing another could give the same $R_0$ value and very different percentages.
 
 
 \begin{figure}
 \centering
 \begin{subfigure}[t]{0.38\textwidth}
-  \includegraphics[width=\textwidth]{map1} 
+  \includegraphics[width=\textwidth]{map} 
   \caption{Map of final states}
 \end{subfigure}
 \begin{subfigure}[t]{0.56\textwidth}
-  \includegraphics[width=\textwidth]{time1}
+  \includegraphics[width=\textwidth]{time}
   \caption{Time series of simulation.}
 \end{subfigure}
-\begin{subfigure}[t]{0.38\textwidth}
-  \includegraphics[width=\textwidth]{map2} 
-  \caption{Map of final states}
-\end{subfigure}
-\begin{subfigure}[t]{0.56\textwidth}
-  \includegraphics[width=\textwidth]{time2}
-  \caption{Time series of simulation.}
-\end{subfigure}
-\begin{subfigure}[t]{0.38\textwidth}
-  \includegraphics[width=\textwidth]{map3} 
-  \caption{Map of final states}
-\end{subfigure}
-\begin{subfigure}[t]{0.56\textwidth}
-  \includegraphics[width=\textwidth]{time3}
-  \caption{Time series of simulation.}
-\end{subfigure}
+%\begin{subfigure}[t]{0.38\textwidth}
+%  \includegraphics[width=\textwidth]{map2} 
+%  \caption{Map of final states}
+%\end{subfigure}
+%\begin{subfigure}[t]{0.56\textwidth}
+%  \includegraphics[width=\textwidth]{time2}
+%  \caption{Time series of simulation.}
+%\end{subfigure}
+%\begin{subfigure}[t]{0.38\textwidth}
+%  \includegraphics[width=\textwidth]{map3} 
+%  \caption{Map of final states}
+%\end{subfigure}
+%\begin{subfigure}[t]{0.56\textwidth}
+%  \includegraphics[width=\textwidth]{time3}
+%  \caption{Time series of simulation.}
+%\end{subfigure}
 \caption{Example simulation plots with one city (density 0.8) and two villages (each with density 0.1). The map on the left corresponds to the time series plot on the right.}\label{sabd:ex}
 \end{figure}
 
@@ -193,4 +193,12 @@ Because this model uses families, we are able to track whether the infections re
   \centering
   \includegraphics[width=.75\textwidth]{infecttypes}
   \caption{The number of infected individuals in 25 trials based on how the disease was transmitted: through family, community, or funeral interactions. These simulations used a population size of 1000 and ran for 500 timesteps.}
+  \label{fig:infecttypes}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.75\textwidth]{Histogram-sabd}
+  \caption{A histogram showing the fraction of people infected in each trial, run with 1000 trials. About 20\% of trials do not exhibit an outbreak.}
+  \label{fig:hist-sabd}
 \end{figure}
