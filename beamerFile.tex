@@ -4,16 +4,17 @@
 \usepackage{adjustbox}
 \usepackage{tikz, flowchart}
 \usetikzlibrary{shapes, patterns}
+\usepackage[overlay,absolute]{textpos}
 \usepackage{xcolor}
 \definecolor{myblue}{rgb}{0.137,0.466,0.741}
 
 \usetheme{Amsterdam}
 \author{ Hsuan-Wei Lee,
   Anzhelika Lyubenko,
-  Yuhang Ma,
+  Yuhang Ma,\\
   Emily Meissen,
   Daniela Velez-Rendon,
-    Nara Yoon \newline \newline \underline{Mentors:} \newline John Peach, \newline Cammey Cole Manning,\newline Christian Gunning}
+    Nara Yoon}
 
 
 %\vspace{.1truein}
@@ -27,7 +28,7 @@
 
 \begin{frame}[t,plain]
     \titlepage
-    \begin{center}
+        \begin{center}
 Mentors:\\John Peach\\ Cammey Cole Manning\\
 Christian Gunning
 \end{center}
@@ -47,7 +48,6 @@ Christian Gunning
 \item Agent-based
 \item Spatial agent-based
 \end{itemize}
-\item Comparison
 \item Summary
 \end{enumerate}
 \end{frame}
@@ -59,7 +59,7 @@ Christian Gunning
 \item Ebola was discovered in 1976
 \item Early symptoms:  headache, fatigue, joint pain
 \item Later symptoms: abdominal pain, diarrhea, vomiting, rashes
-\item Diseases like HIV and Malaria have the same symptoms
+\item Diseases like HIV and malaria have the same symptoms
 \item The virus is contracted through direct contact with bodily fluids and secretion
 \item Incubation period may last up to two weeks
 \item Serious outbreaks in Liberia, Sierra Leone, and Guinea (2014)
@@ -448,14 +448,12 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 \item Transition time between states
 \end{itemize}
 \end{itemize}
+\begin{textblock}{5.5}(10,8)
+\includegraphics[width = 1\textwidth]{map.png}
+\end{textblock}
+
 \end{frame}
 
-\begin{frame}
-\frametitle{An Example for SBAM}
-\begin{figure}
-\includegraphics[width = 0.7\textwidth]{map.png}
-\end{figure}
-\end{frame}
 
 \begin{frame}{Regions of Infection Spread}
 %\includegraphics[width=\textwidth]{cities}
@@ -494,17 +492,24 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 \includegraphics[width=\textwidth]{Histogram-sabd}
 \end{frame}
 
+\begin{frame}
+\frametitle{Methods of Infection}
+\centering
+\includegraphics[width=.8\textwidth]{infecttypes}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Summary}
 \section{Summary}
 \begin{itemize}
+\item Deterministic model matches real data of Liberia
 \item Deterministic and probabilistic approaches give similar results
-\item Incorporating spatial information is useful
+\item Incorporating spatial information allows for less severe outbreaks
 \item Intervention has a big effect:
 \begin{itemize}
-\item Over 90 percent contract the disease
-\item About 50 percent dies due to disease
+\item Over 90\% contract the disease
+\item About 50\% dies due to disease
 \item Intervention causes these figures to decrease significantly 
 \end{itemize}
 \end{itemize}
