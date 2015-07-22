@@ -1,5 +1,4 @@
-We use a system of differential equations to model the dynamics between the states listed in Section 2.1. The diagram of the described compartment model, with compartments and flows, is depicted on Figure \ref{fig:compartment}.\\
-
+We use a system of differential equations to model the dynamics between the states listed in Section 2.1. The diagram of the described compartment model, with compartments and flows, is depicted on Figure \ref{fig:compartment}.
 
 \begin{figure}[!h]
   \centering
@@ -18,9 +17,9 @@ The governing equations of the system dynamics shown above are the following:
 \frac{dF}{dt} &= \gamma_{D}(1-\theta) \delta_{1} I + \gamma_{HD}\delta_{2} H-\gamma_{F} F  \label{eqn:SD5}\\
 \frac{dR}{dt} &= \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{HR}(1-\delta_{2}) H       \label{eqn:SD6}\\
 \frac{dD}{dt} &= \gamma_{F} F  \label{eqn:SD7}
-\end{align}\\
+\end{align}
 
- Here, we define $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, a combination of the $\beta$ transmission terms shown in Table~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}. $\gamma_x$ refers to $1/t_x$ for the different periods. The equations described obey total conservation, guaranteeing that the total of the compartment values remains constant. This can be seen by adding all terms on the right-hand sides, which sum to 0. The transmission rate $\beta$ is the parameter representing all the complexity in the transmission process like contact frequency, infection probability per contact and so on. $\theta$ refers to the probability of a case being Hospitalized and $\delta$ to the case fatality rate (See Tables~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}).
+Here, we define $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, a combination of the $\beta$ transmission terms shown in Table~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}. $\gamma_x$ refers to $1/t_x$ for the different periods. The equations described obey total conservation, guaranteeing that the total of the compartment values remains constant. This can be seen by adding all terms on the right-hand sides, which sum to 0. The transmission rate $\beta$ is the parameter representing all the complexity in the transmission process like contact frequency, infection probability per contact and so on. $\theta$ refers to the probability of a case being Hospitalized and $\delta$ to the case fatality rate (See Tables~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}).
 
 
 %EQUATION DESCRIPTION
@@ -40,13 +39,13 @@ Equation \ref{eqn:SD2} describes the change in the exposed compartment. This dep
 
 Equation \ref{eqn:SD3} describes the change in the infected compartment, which adds the flow from E. Flows out of compartment I include the flow from I to H, which is given by the product between the transition rate from I to H and the probability of hospitalization hospitalized; in the same way, subtracting the individuals that transitions from I to R, given by  the product among the duration of infection rate, the probability a case is not hospitalized and the death rate of an unhospitalized case. Finally substracting the individuals that transitions from I to F , given by the product between the transition rate from Infected to Dead,  the probability a case is NOT hospitalized and the death rate of an unhospitalized case.
 
-Equation \ref{eqn:SD4} describes the changes in the Hospitalized patients. It depends on the number of individuals that transition from I to H, given by the  product between the transition rate from Infected to Hospitalized and the probability a case is Hospitalized;  substracting the individuals than transitions from H to D, given by the product among the transition rate from Hospitalized to Dead and the death rate of a hospitalized case, and finally, susbtracting the people that transitions from H to R, which is given by the product between the transition rate from I to R and the survival rate of an hospitalized case.
+Equation \ref{eqn:SD4} describes the changes in the hospitalized patients. It depends on the number of individuals that transition from I to H, given by the  product between the transition rate from infected to hospitalized and the probability a case is hospitalized; substracting the individuals than transitions from H to D, given by the product among the transition rate from hospitalized to Dead and the death rate of a hospitalized case, and finally, susbtracting the people that transitions from H to R, which is given by the product between the transition rate from I to R and the survival rate of an hospitalized case.
 
-Equation \ref{eqn:SD5} describes the changes in the Funeralized compartment.  Depending on the number of individuals that transitions from I to D, which is given by the product between the transition rate from I to D, the probability a case is not hospitalized and the death rate of an unhospitalized case. Adding the people who transitions from H to F , which is given by the product between the transition rate from H to D and the death rate of an hospitalized case. Finally substracting the individuals who already have been buried.
+Equation \ref{eqn:SD5} describes the changes in the funeralized compartment.  Depending on the number of individuals that transitions from I to D, which is given by the product between the transition rate from I to D, the probability a case is not hospitalized and the death rate of an unhospitalized case. Adding the people who transitions from H to F , which is given by the product between the transition rate from H to D and the death rate of an hospitalized case. Finally substracting the individuals who already have been buried.
 
-Equation \ref{eqn:SD6} describes the changes in the Recovered compartment. Depending on the transition from I to R, which is given by the product between the duration of infection rate, the probability a case is not hospitalized and the survival rate of an Unhospitalized rate. Adding  the individuals who transitions from H to I, which is given by the product among the transition rate from I to H and the survival rate of a hospitalized case.
+Equation \ref{eqn:SD6} describes the changes in the recovered compartment. Depending on the transition from I to R, which is given by the product between the duration of infection rate, the probability a case is not hospitalized and the survival rate of an unhospitalized rate. Adding  the individuals who transitions from H to I, which is given by the product among the transition rate from I to H and the survival rate of a hospitalized case.
 
-Equation \ref{eqn:SD7} describes the changes on the Dead compartment, which solely depends on the rate of duration of a traditional funeral.\\
+Equation \ref{eqn:SD7} describes the changes on the dead compartment, which solely depends on the rate of duration of a traditional funeral.
 
 
 
@@ -61,7 +60,7 @@ The parameter values which represent biological processes ($\alpha, \gamma_{I}, 
 \subsection{Bayesian Calibration Framework}
 We use Bayesian methodology to calibrate the unknown system parameters. This method is utilized in many calibrations of complicated systems owing to its merit that little or no information of the parameter values is needed for its usage. The calibration procedure starts from choosing a distribution in the space of parameters. This distribution, the ``prior distribution" ($\mathcal{D}_0$), can be a simple distribution such as uniform or other intuitively chosen parametric distribution. Based on the available data and mathematical setup, we evaluate the likelihood weight for the samples from $\mathcal{D}_0$ with which we update the ``posterior distribution" ($\mathcal{D}_1$). Multiple updates ($\mathcal{D}_1$ to $\mathcal{D}_2$, $\mathcal{D}_2$ to $\mathcal{D}_3$, ...) facilitate a more accurate distribution.
 
-To calibrate the unknown parameters ($\mathcal{P}$), we started from an uniform prior distribution in the range determined based on numerical exploration and other papers (see Table \ref{tab:PriorRanges}) \cite{Rivers2014}. \\
+To calibrate the unknown parameters ($\mathcal{P}$), we started from an uniform prior distribution in the range determined based on numerical exploration and other papers (see Table \ref{tab:PriorRanges}) \cite{Rivers2014}. 
 
 \begin{table}[ht]
 \centering % used for centering table
@@ -140,15 +139,15 @@ We validated our calibration in Figure \ref{fig:Cumulative _Death}, which shows 
 
 
 \subsection{Simulation}
- Insight Maker is a powerful online tool used to model and simulate complex systems. It utilizes different approaches, such as System Dynamics, Agent-Based Modeling and imperative programming. Insight Maker permits  construction of a graphical model to forecast the system response \cite{FortmannRoe}. We used the InsightMaker platform to prototype our model and simulate stepping forward through time. More details about the platform and its functionality can be found in Fortmann-Roe's review. The platform uses two numerical solvers to approximate solutions of the system of differential equations; fourth-order Runge-Kutta method \cite{FortmannRoe}.\\
+ Insight Maker is a powerful online tool used to model and simulate complex systems. It utilizes different approaches, such as System Dynamics, Agent-Based Modeling and imperative programming. Insight Maker permits  construction of a graphical model to forecast the system response \cite{FortmannRoe}. We used the InsightMaker platform to prototype our model and simulate stepping forward through time. More details about the platform and its functionality can be found in Fortmann-Roe's review. The platform uses two numerical solvers to approximate solutions of the system of differential equations; fourth-order Runge-Kutta method \cite{FortmannRoe}.
 
-\noindent The compartment S was initialized with a value of 999999, and the compartment I with 1, meaning that there is one infected individual per every million individuals; the rest of the compartments were set to zero as an initial condition. The flows between the compartments are given in the equations and all the other parameters were initialized as shown in Tables   \ref{tab:knownParameters} and \ref{tab:calibratedParameters}.  As mention at the beginning of the section, the parameters were calibrated in two stages, before and after the international intervention. According with the time frame proposed, the change in the parameters was also implemented on Insight Maker. The links to the online models can be found on \cite{IM_AI} and  \cite{IM_BI}.\\ 
+\noindent The compartment S was initialized with a value of 999999, and the compartment I with 1, meaning that there is one infected individual per every million individuals; the rest of the compartments were set to zero as an initial condition. The flows between the compartments are given in the equations and all the other parameters were initialized as shown in Tables   \ref{tab:knownParameters} and \ref{tab:calibratedParameters}.  As mention at the beginning of the section, the parameters were calibrated in two stages, before and after the international intervention. According with the time frame proposed, the change in the parameters was also implemented on Insight Maker. The links to the online models can be found on \cite{IM_AI} and  \cite{IM_BI}.
 
 
 % RESULTS AND DISCUSSION
 %
 %No intervention
-\noindent After modeling the system with the parameters before the intervention, it can be observed in Figure \ref{fig:LB_IM_NoIn} how the total population decreases to 46.46\%  if there is no intervention and the each of the parameters continue to be the same. The number of susceptible individuals decays  exponentially, converging to 7\% of the population, while exposed, infected, hospitalized and funeral comparments converges to zero; finally, after the system stabilizes, the final proportion of deaths would be 53.53\%. \\
+\noindent After modeling the system with the parameters before the intervention, it can be observed in Figure \ref{fig:LB_IM_NoIn} how the total population decreases to 46.46\%  if there is no intervention and the each of the parameters continue to be the same. The number of susceptible individuals decays  exponentially, converging to 7\% of the population, while exposed, infected, hospitalized and funeral comparments converges to zero; finally, after the system stabilizes, the final proportion of deaths would be 53.53\%. 
 
 \begin{figure}[!h]
   \centering
