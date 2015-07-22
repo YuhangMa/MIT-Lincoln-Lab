@@ -434,19 +434,26 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 
 \begin{frame}{Spatial Agent-Based Model: Overview}
 \begin{itemize}
-\item City residents normally distributed
-\item Family, community, and funeral spread rates
-\item Family goes home for funeral
-\item Neighbors at their home can attend funeral
-\item Hospital is quarantined
-\item Probability and transition time between states
+\item Importance of incorporating the spatial information
+\begin{itemize}
+\item Distinct contact rates within households, communities and funerals
+\item Different travel patterns for cities and villages
+\end{itemize}
+\item Initialization: an example
+\item Regions of infection spread
+\item Available travel routes
+\item Differences:
+\begin{itemize}
+\item Hospitalized people are quarantined
+\item Transition time between states
+\end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{An example for SBAM}
+\frametitle{An Example for SBAM}
 \begin{figure}
-\includegraphics[width = 0.7\textwidth]{distribution.jpg}
+\includegraphics[width = 0.7\textwidth]{map.png}
 \end{figure}
 \end{frame}
 
