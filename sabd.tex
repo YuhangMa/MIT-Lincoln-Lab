@@ -2,7 +2,7 @@
 We next look at an agent-based model where agents are allowed to move within and between cities. Incorporating spatial movement requires making additional assumptions about the map on which movement is allowed and the movement of individuals. The model is coded in \texttt{Python} and propagates the infection and spatial information in discrete days. 
 
 \subsection{Spatial Assumptions}
-We restrict the space (on which cities and individuals are located) to a specified width and height and generate cities randomly within the space with specified relative density and population variance from the city center. For example, a model may have one city with variance $30$ and density $0.9$ and a village with variance $5$ and density $0.1$. Locations of individuals and cities are real numbers. We also create a grid, which partitions the individuals based on their location and is used to determine the closest neighbors for community infection and funeral attendance. A family is assumed to have $n_{fam}$ members all of which live in the same exact location. Upon initialization (and later travel), families are place based on the specified city densities, normally distributed around the city's center location using the city's variance. We define an individual's \emph{home} as their initial location.
+We restrict the space (on which cities and individuals are located) to a specified rectangular region and generate cities randomly within the space with specified relative density and population variance from the city center. For example, a model may have one city with variance $30$ and density $0.9$ and a village with variance $5$ and density $0.1$. Locations of individuals and cities are real numbers. We also create a grid which partitions the individuals based on their location and is used to determine the closest neighbors for community infection and funeral attendance. A family is assumed to have $n_{fam}$ members all of which live in the same location. Upon initialization (and later travel), families are place based on the specified city densities, normally distributed around the city's center location using the city's variance. We define an individual's \emph{home} as their initial location.
 
 An individual is \emph{movable} if he is susceptible, exposed, or recovered. All other individuals remain stationary. Movable individuals travel each timestep with probability $p_{trav}$. If they are away from home, they will travel home with probability $p_{home}$. Otherwise, they will travel locally (within their current city or village) or non-locally (to another city) based on the density of their current city. It is assumed that when an individual is in a city with higher density they are less likely to leave. If individual $i$'s current city density (percentage of the total population) is $d(i)$, then the non-local travel probability is $(1-d(i))/2$. In the local and non-local travel, the individual is again normally distributed around that city's center.
 
@@ -44,11 +44,11 @@ An individual is \emph{movable} if he is susceptible, exposed, or recovered. All
         
 \end{tikzpicture}
 \end{center}
-\caption{Available states for individuals and the transitions between them. Probabilistic transitions and timeouts between states are listed along the transitions. If both are present, once it is decided that the individual will transition, the timeout is calculated and counted down. The transition from susceptible to exposed is based on the surrounding infected individuals using transmission probabilities $\eta_f,\eta_c,\eta_F$.}
+\caption{Available states for individuals and the transitions between them. Probabilistic transitions and timeouts between states are listed along the transitions. If both the transition probability and timeout are present, once the transition is decided using the probability, the individual will transition with the timeout calculated and counted down. The transition from susceptible to exposed is based on the surrounding infected individuals using transmission probabilities $\eta_f,\eta_c,\eta_F$.}
 \label{fig:sabm-states}
 \end{figure}
 
-The model uses the same states as the previous models, but some of the transitions and probabilities have been modified. Specifically, hospitalized individuals are assumed to be quarantined, and thus no longer infect others or have funerals. Instead, hospitalized individuals move straight to the dead state upon death. See Figure \ref{ABM} vs Figure \ref{fig:sabm-states} for a comparison between the two agent-based models. Figure \ref{fig:sabm-states} denotes the probabilistic and timeout transitions between states. We define a \emph{timeout} to be an integer number of days to wait before transitioning to another state, either uniformly randomly generated between two integers or equal to a specified constant. Whenever a range of integers is listed, the integer used in simulation is uniformly drawn from that range.
+The model uses the same states as the previous models, but some of the transitions and probabilities have been modified. Specifically, hospitalized individuals are assumed to be quarantined, and thus no longer infect others or have funerals. Instead, hospitalized individuals move straight to the dead state upon death. See Figure \ref{ABM} vs Figure \ref{fig:sabm-states} for a comparison of the two agent-based models. Figure \ref{fig:sabm-states} denotes the probabilistic and timeout transitions between states. We define a \emph{timeout} to be an integer number of days to wait before transitioning to another state, either uniformly randomly generated between two integers or equal to a specified constant. Whenever a range of integers is listed, the integer used in simulation is uniformly drawn from that range.
 
 The spatial movement and transitions between states is dependent on the individual's current state. Following are a description of the behavior of each type of individual.
 \begin{description}[labelsep=1.5mm]
@@ -88,7 +88,7 @@ Parameter values used in the simulations are listed in Table \ref{table:sabd}. O
 \begin{table}[!Hht]
 \begin{center}
 \begin{tabular}{c c c}\hline\hline
-Parameter & Variable & Value\\\hline\hline
+Description & Parameter & Value\\\hline\hline
 Travel probability & $p_{trav}$ & 0.2\\
 Travel, home probability & $p_{home}$ & 0.5\\
 Travel, non-locally probability & $p_{nonloc}$ & $(1-\text{current city density})/2$\\
@@ -116,7 +116,7 @@ Although the values may not precisely match those from the Ebola outbreaks, they
 
 
 \subsection{Results}
-We initialize the model with one infected individual who does not go to a hospital and does not recover. In Figure \ref{sabd:ex}, we show plots of an example simulation of the final individuals (location and state) and of the time series counting how many individuals are in each state at each step in time. Figure \ref{fig:av-time} shows 200 time series of the susceptible, recovered, and dead state count, with the average of the simulations with outbreaks. The spread of the instances is similar to that in Figure ? from the non-spatial agent-based model. Because the spatial system is not well-mixed, we see that less individuals contract the disease and are able to remain in the susceptible class. The number of people in the recovered and dead classes are the same on average because once an individual contracts the disease, they have a 50\% chance to recover and a 50\% chance to die (see Table \ref{table:sabd}).
+We initialize the model with one infected individual who does not go to a hospital and does not recover. In Figure \ref{sabd:ex}, we show plots of an example simulation of the final individuals (location and state) and of the time series counting how many individuals are in each state at each step in time. Figure \ref{fig:av-time} shows 200 time series of the susceptible, recovered, and dead state count, with the average of the simulations with outbreaks. The spread of the instances is similar to that in the non-spatial agent-based model. Because the spatial system is not well-mixed, fewer individuals contract the disease and are able to remain in the susceptible class. The numbers of people in the recovered and dead classes are the same on average because once an individual contracts the disease, they have a 50\% recovery probability (see Table \ref{table:sabd}).
 
 As can be seen in Figure \ref{fig:hist-sabd}, about 80\% of the simulations result in an outbreak, which is defined as more than 2\% of the population contracting the disease as in Section 4. Unlike the model in Section 4, the outbreaks can be less severe. When an outbreak occurs it may not infect the entire population (see Figure \ref{fig:Hist}) -- this is expected, as that model assumes a well-mixed population in the infection dynamics, whereas this spatial model allows individuals to escape the disease through movement to non-infected areas.
 
@@ -159,7 +159,7 @@ Because this model uses families, we are able to differentiate between the infec
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{av-time}
-  \caption{Time series graphs of the number of individuals in the susceptible, recovered, and dead states of 200 simulations. The averaged values of simulations in which an outbreak occurred are the bold curves.}
+  \caption{Time series graphs of the number of individuals in the susceptible, recovered, and dead states of 200 simulations. The averaged values of the simulations in which an outbreak occurred are the bold curves.}
   \label{fig:av-time}
 \end{figure}
 
