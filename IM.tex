@@ -1,4 +1,4 @@
-We use a system of differential equations to model the dynamics between the states listed in Section 2.1. The diagram of the described compartment model, with compartments and flows, is depicted on Figure \ref{fig:compartment}. Here, $\gamma_j = 1/t_j$ for all index \textit{j}.\\
+We use a system of differential equations to model the dynamics between the states listed in Section 2.1. The diagram of the described compartment model, with compartments and flows, is depicted on Figure \ref{fig:compartment}.\\
 
 
 \begin{figure}[!h]
@@ -7,6 +7,15 @@ We use a system of differential equations to model the dynamics between the stat
   \caption{The compartment model from Section 2.1 with flow parameters. All possible flows are specified by the arrows and parameters. We define $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, a combination of the $\beta$ transmission terms shown in Table~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}. } 
 \label{fig:compartment} 
 \end{figure}
+
+
+
+
+
+
+
+
+
 
 
 The governing equations of the system dynamics shown above are the following:
@@ -19,7 +28,7 @@ The governing equations of the system dynamics shown above are the following:
 \frac{dR}{dt} &= \gamma_{I}(1-\theta)(1- \delta_{1}) I + \gamma_{HR}(1-\delta_{2}) H       \label{eqn:SD6}\\
 \frac{dD}{dt} &= \gamma_{F} F  \label{eqn:SD7}
 \end{align}\\
-where each of the parameters are defined on Tables~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}. Here $\gamma_x$ refers to $1/t_x$ for the different periods. The equations described obey total conservation, guaranteeing that the total of the compartment values remains constant. This can be seen by adding all terms on the right-hand sides, which sum to 0. 
+where each of the parameters are defined on Tables~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}. Here $\gamma_x$ refers to $1/t_x$ for the different periods. The equations described obey total conservation, guaranteeing that the total of the compartment values remains constant. This can be seen by adding all terms on the right-hand sides, which sum to 0. The transmission rate $\beta$ is the parameter representing all the complexity in the transmission process like contact frequency, infection probability per contact and so on.\\
 
 
 
@@ -33,6 +42,7 @@ where each of the parameters are defined on Tables~\ref{tab:knownParameters} and
 %\end{equation}
 
 
+
 Equation \ref{eqn:SD1} describes the change with respect to time of the susceptible population. The transition from S to E depends on $\beta_{I}SI+\beta_{H}SH+\beta_{F}SF$, which is the contact rate with the compartments I, H and F (all of which are infectious), and the respective number of value of each compartment.
 
 Equation \ref{eqn:SD2} describes the change in the exposed compartment. This depends on the flow leaving S and the flow from E to I normalized by the incubation period $t_P$.
@@ -43,7 +53,7 @@ Equation \ref{eqn:SD4} describes the changes in the Hospitalized patients. It de
 
 Equation \ref{eqn:SD5} describes the changes in the Funeralized compartment.  Depending on the number of individuals that transitions from I to D, which is given by the product between the transition rate from I to D, the probability a case is not hospitalized and the death rate of an unhospitalized case. Adding the people who transitions from H to F , which is given by the product between the transition rate from H to D and the death rate of an hospitalized case. Finally substracting the individuals who already have been buried.
 
-Equation \ref{eqn:SD6} describes the changes in the Recovered compartment. Depending on the transition from I to R, which is given by the product between the duration of infection rate, the probability a case is not hospitalized and the survival rate of an Unhospitalized rate. Adding  the individuals who transitions from H to I, which is given by the product among the transition rate from I to H and the survival rate of a hospitalized case.\\
+Equation \ref{eqn:SD6} describes the changes in the Recovered compartment. Depending on the transition from I to R, which is given by the product between the duration of infection rate, the probability a case is not hospitalized and the survival rate of an Unhospitalized rate. Adding  the individuals who transitions from H to I, which is given by the product among the transition rate from I to H and the survival rate of a hospitalized case.
 
 Equation \ref{eqn:SD7} describes the changes on the Dead compartment, which solely depends on the rate of duration of a traditional funeral.\\
 
@@ -170,7 +180,7 @@ We validated our calibration in Figure \ref{fig:Cumulative _Death}, which shows 
 
 %Comparing with WHO data
 
-\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures \ref{fig:LB_IM_WHO} and \ref{fig:LB_IM_WHO2}. As depicted in Figure \ref{fig:LB_IM_WHO}, there is a good fit of our model with the data reported by WHO. Figure \ref{fig:LB_IM_WHO2} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately.
+\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures  \ref{fig:Cumulative _Death} and \ref{fig:LB_IM_WHO}. As depicted in Figure \ref{fig:LB_IM_WHO}, there is a good fit of our model with the data reported by WHO. Figure \ref{Cumulative _Death} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately.
 
 
 
@@ -187,14 +197,14 @@ We validated our calibration in Figure \ref{fig:Cumulative _Death}, which shows 
 \end{figure}
 
 
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=1\textwidth]{LB_Int2_SD_WHO_IM}
-  \caption{ Comparison between World Health Organization (WHO) data and Insight Maker (IM) results using the parameters before intervention (BI) and after intervention (AI), for the cumulative deaths (D).}
-\label{fig:LB_IM_WHO2} 
-\end{figure}
-
+%
+%\begin{figure}[!h]
+%  \centering
+%  \includegraphics[width=1\textwidth]{LB_Int2_SD_WHO_IM}
+%  \caption{ Comparison between World Health Organization (WHO) data and Insight Maker (IM) results using the parameters before intervention (BI) and after intervention (AI), for the cumulative deaths (D).}
+%\label{fig:LB_IM_WHO2} 
+%\end{figure}
+%
 
 Figure \ref{fig:PhasePortrait} shows another visualization of our simulation on 2 dimensional space of $S+R$ vs. $D$. By watching the phase portrait in the figure, we can see that the fraction of survived population after outbreak $S+R$ converges to $46\%$ and dead people $D$ converges to $54\%$ without intervention. However, with intervention on 176th day, the $S+R$ and $D$ converge to $99.5\%$ and $0.487 \times10^{-3}\%$, respectively. The significant effect of intervention observed here can be analyzed by the basic reproduction number ($R_0$). $R_0$ is a indicator to tell if the infection will spread (if $R_0>1$) or die out (if $R_0<1$) eventually in the population. Evaluated Based on (reference), $R_0$ is $1.99 (>1)$ before intervention. However, it has been changed with after intervention to $0.786(<1)$.
 
