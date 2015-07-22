@@ -4,7 +4,7 @@ We use a system of differential equations to model the dynamics between the stat
 \begin{figure}[!h]
   \centering
   \includegraphics[width=0.7\textwidth]{compartment}
-  \caption{The compartment model from Section 2.1 with flow parameters. All possible flows are specified by the arrows and parameters. We define $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, a combination of the $\beta$ transmission terms shown in Table~\ref{tab:knownParameters}. } 
+  \caption{The compartment model from Section 2.1 with flow parameters. All possible flows are specified by the arrows and parameters. We define $\lambda = \beta_{I}I+\beta_{H}H+\beta_{F}F $, a combination of the $\beta$ transmission terms shown in Table~\ref{tab:knownParameters} and \ref{tab:calibratedParameters}. } 
 \label{fig:compartment} 
 \end{figure}
 
@@ -54,13 +54,13 @@ Equation \ref{eqn:SD7} describes the changes on the Dead compartment, which sole
 %Parameter calibration
 \subsection{Parameter Calibration}
 
-The parameter values which represent biological processes ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social customs ($\gamma_{F}$) had values listed in the previous literature \cite{Poletto2014, Webb2015}, while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) are site-dependent (see Tables \ref{tab:knownParameters} and \ref{tab:calibratedParameters} and Equations \ref{eqn:SD1} to \ref{eqn:SD7} for the parameter definitions). The parameters $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume the following relation with known parameters: $1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$. In this chapter, we calibrate $\mathcal{P}$ based on our systematic model (Equations 1-7) and the data of cumulative deaths in Liberia from March 2014 to July 2015 \cite{CDCData}.
+The parameter values which represent biological processes ($\alpha, \gamma_{I}, \gamma_{D}, \delta_{1}, \delta_{2}$) or social customs ($\gamma_{F}$) had values listed in the previous literature \cite{Poletto2014, Webb2015}, while the parameters which represent social behavior ($\mathcal{P}=\{\beta_{I}, \beta_{H}, \beta_{F}, \gamma_{H}, \theta\}$) depend on infection region (see Tables \ref{tab:knownParameters} and \ref{tab:calibratedParameters} and Equations \ref{eqn:SD1} to \ref{eqn:SD7} for the parameter definitions). The parameters $\gamma_{DH}$ and $\gamma_{IH}$ are also unknown, but we assume the following relation with known parameters: $1/\gamma_{DH}$=$1/\gamma_{D}$-$1/\gamma_{H}$ and $1/\gamma_{IH}$=$1/\gamma_{I}$-$1/\gamma_{H}$. Here, we calibrate $\mathcal{P}$ based on our systematic model (Equations 1-7) and the data of cumulative deaths in Liberia from March 2014 to July 2015 from WHO \cite{CDCData}.
 
 
 \subsection{Bayesian Calibration Framework}
 We use Bayesian methodology to calibrate the unknown system parameters. This method is utilized in many calibrations of complicated systems owing to its merit that little or no information of the parameter values is needed for its usage. The calibration procedure starts from choosing a distribution in the space of parameters. This distribution, the ``prior distribution" ($\mathcal{D}_0$), can be a simple distribution such as uniform or other intuitively chosen parametric distribution. Based on the available data and mathematical setup, we evaluate the likelihood weight for the samples from $\mathcal{D}_0$ with which we update the ``posterior distribution" ($\mathcal{D}_1$). Multiple updates ($\mathcal{D}_1$ to $\mathcal{D}_2$, $\mathcal{D}_2$ to $\mathcal{D}_3$, ...) facilitate a more accurate distribution.
 
-To calibrate the unknown parameters ($\mathcal{P}$), we started from an uniform prior distribution in the range determined based on numerical exploration and previous literature (see Table \ref{tab:PriorRanges}) \cite{Rivers2014}. \\
+To calibrate the unknown parameters ($\mathcal{P}$), we started from an uniform prior distribution in the range determined based on numerical exploration and other papers (see Table \ref{tab:PriorRanges}) \cite{Rivers2014}. \\
 
 \begin{table}[ht]
 \centering % used for centering table
@@ -76,18 +76,18 @@ $(0,0.5)$ & $(0,0.5)$ & $(0,1)$ & $(2,7)$ & $(0,0.5)$ \\ [0.5ex]
 \end{table}
 
 
-To each random choice ($\mathcal{P}_0$) from the prior distribution, we assigned likelihood weight by comparing the World Health Organization (WHO) data reports ($\mathcal{D}_R$) to the data simulated with $\mathcal{P}_0$ ($\mathcal{D}_S$) from the systems-based model. Repeating this method, we build the posterior distribution for $\mathcal{P}$. In this methodology, we provide multiple likely parameter sets, rather than a single best fit, by listing the mean as well as the standard deviation of suggested parameter values. The algorithm for the parameter calibration is:
+To each random choice ($\mathcal{P}_0$) from the prior distribution, we assigned a likelihood weight by comparing the World Health Organization (WHO) data reports ($\mathcal{D}_R$) to the data simulated with $\mathcal{P}_0$ ($\mathcal{D}_S$) from the systems-based model. Repeating this method, we build the posterior distribution for $\mathcal{P}$. In this methodology, we provide multiple likely parameter sets, rather than a single best fit, by listing the mean as well as the standard deviation of suggested parameter values. The algorithm for the parameter calibration is:
 
 Step 1) Choose a random $\mathcal{P}_0$ from the prior distribution.
 
-Step 2) Solve the deterministic system (Equations 1-7) with $\mathcal{P}_0$ and given initial value $\{S_0,E_0,I_0,F_0,D_0,R_0\}$, then evaluate $\mathcal{D}_S=\{D(t_i)\}$ for all dates $\{t_i\}$ corresponding to the cumulative death data ($\mathcal{D}_R$).
+Step 2) Solve the deterministic system (Equations 1-7) with $\mathcal{P}_0$ and given initial value $\{S_0,E_0,I_0,H_0,D_0,R_0\}$, then evaluate $\mathcal{D}_S=\{D(t_i)\}$ for all dates $\{t_i\}$ corresponding to the cumulative death data ($\mathcal{D}_R$).
 
 Step 3) Evaluate likelihood of $\mathcal{P}_0$: $\exp\left(-\lVert\mathcal{D}_R-\mathcal{D}_S\rVert_2/\lVert\mathcal{D}_R\rVert_2\right)$.
 
 \emph{Repeat Steps 1-3 many times to generate {parameter and likelihood} estimates. Generate the posterior distribution using these weights.}
 
 \subsubsection{Results and validation}
-We applied our systematic model and calibration method to the Ebola spread in Liberia during 2014-2015. Two sets of cumulative mortality data (pre-intervention and post-intervention) are used to calibrate pre- and post-intervention parameters, respectively. We assume that about a forth (1 million) of Liberia's total population (4.3 million \cite{LiberiaPop}) are involved in the model, and that the rest of the population are not at risk due to geographical location or behavioral reasons. For the calibration of pre-intervention parameters, we used the data from 176 days (March 2014 to September 2014) and initial values $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that the initial outbreak started from a single infected person. The calibration of post-intervention parameters is based on the data from 306 days (September 14 to July 15) and initial values $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from the calibrated parameter means $\mathcal{P}$ for pre-intervention. Each calibration used 10,000 random samples.
+We applied our systematic model and calibration method to the Ebola spread in Liberia during 2014-2015. Two sets of cumulative mortality data (pre-intervention and post-intervention) were used to calibrate pre- and post-intervention parameters, respectively. We assume that about a fourth (1 million) of Liberia's total population (4.3 million \cite{LiberiaPop}) are involved in the model, and that the rest of the population do not have any chance of acquiring the disease due to geographical location or behavioral reasons. For the calibration of pre-intervention parameters, we used the data from 176 days (March 2014 to September 2014) and initial values $\{S_0,E_0,I_0,F_0,D_0,R_0\}$=$\{10^6-1,0,1,0,0,0\}$ assuming that the initial outbreak started from a single infected person. The calibration of post-intervention parameters is based on the data from 306 days (September 14 to July 15) and initial values $\{S[176],E[176],I[176],F[176],D[176],R[176]\}$ which are evaluated from the calibrated parameter means $\mathcal{P}$ for pre-intervention. Each calibration used 10,000 random samples.
 
 \begin{table}[ht]
 \centering % used for centering table
