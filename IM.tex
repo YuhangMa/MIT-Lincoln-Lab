@@ -35,17 +35,17 @@ where each of the parameters are defined on Tables~\ref{tab:knownParameters} and
 
 Equation \ref{eqn:SD1} describes the change with respect to time of the susceptible population. The transition from S to E depends on $\beta_{I}SI+\beta_{H}SH+\beta_{F}SF$, which is the contact rate with the compartments I, H and F (all of which are infectious), and the respective number of value of each compartment.
 
-Equation \ref{eqn:SD2} describes the change of the exposed compartment. This depends on the flow leaving S and the flow from E to I normalized by the incubation period $t_P$.
+Equation \ref{eqn:SD2} describes the change in the exposed compartment. This depends on the flow leaving S and the flow from E to I normalized by the incubation period $t_P$.
 
-Equation \ref{eqn:SD3} describes the change of the infected compartment, which adds the flow from E. Flows out of compartment I include the flow from I to H, which is given by the product between the transition rate from I to H and the probability of hospitalization hospitalized; in the same way, substracting the individuals that transitions from I to R, given by  the product among the duration of infection rate, the probability a case is NOT hospitalized and the death rate of an unhospitalized case. Finally substracting the individuals that transitions from I to F , given by the product between the transition rate from Infected to Dead,  the probability a case is NOT hospitalized and the death rate of an unhospitalized case.
+Equation \ref{eqn:SD3} describes the change in the infected compartment, which adds the flow from E. Flows out of compartment I include the flow from I to H, which is given by the product between the transition rate from I to H and the probability of hospitalization hospitalized; in the same way, subtracting the individuals that transitions from I to R, given by  the product among the duration of infection rate, the probability a case is not hospitalized and the death rate of an unhospitalized case. Finally substracting the individuals that transitions from I to F , given by the product between the transition rate from Infected to Dead,  the probability a case is NOT hospitalized and the death rate of an unhospitalized case.
 
-Equation \ref{eqn:SD4} describes the changes on the Hospitalized patients. It depends on the number of individuals that transitions from I to H, given by the  product between the transition rate from Infected to Hospitalized and the probability a case is Hospitalized;  substracting the individuals than transitions from H to D, given by the product among the transition rate from Hospitalized to Dead and the death rate of a hospitalized case, and finally, susbtracting the people that transitions from H to R, which is given by the product between the transition rate from I to R and the survival rate of an hospitalized case.
+Equation \ref{eqn:SD4} describes the changes in the Hospitalized patients. It depends on the number of individuals that transition from I to H, given by the  product between the transition rate from Infected to Hospitalized and the probability a case is Hospitalized;  substracting the individuals than transitions from H to D, given by the product among the transition rate from Hospitalized to Dead and the death rate of a hospitalized case, and finally, susbtracting the people that transitions from H to R, which is given by the product between the transition rate from I to R and the survival rate of an hospitalized case.
 
-Equation \ref{eqn:SD5} describes the changes on the Funeralized compartment.  Depending on the number of individuals that transitions from I to D, which is given by the product between the transition rate from I to D, the probability a case is NOT hospitalized and the death rate of an unhospitalized case. Adding the people who transitions from H to F , which is given by the product between the transition rate from H to D and the death rate of an hospitalized case. Finally substracting the individuals who already have been buried.
+Equation \ref{eqn:SD5} describes the changes in the Funeralized compartment.  Depending on the number of individuals that transitions from I to D, which is given by the product between the transition rate from I to D, the probability a case is not hospitalized and the death rate of an unhospitalized case. Adding the people who transitions from H to F , which is given by the product between the transition rate from H to D and the death rate of an hospitalized case. Finally substracting the individuals who already have been buried.
 
-Equation \ref{eqn:SD6} describes the changes on the Recovered compartment. Depending on the transition from I to R, which is given by the product between the duration of infection rate, the probability a case is NOT hospitalized and the survival rate of an Unhospitalized rate. Adding  the individuals who transitions from H to I, which is given by the product among the transition rate from I to H and the survival rate of a hospitalized case.\\
+Equation \ref{eqn:SD6} describes the changes in the Recovered compartment. Depending on the transition from I to R, which is given by the product between the duration of infection rate, the probability a case is not hospitalized and the survival rate of an Unhospitalized rate. Adding  the individuals who transitions from H to I, which is given by the product among the transition rate from I to H and the survival rate of a hospitalized case.\\
 
-Equation \ref{eqn:SD7} describes the changes on the Funeralized compartment, which solely depends on the rate of duration of a traditional funeral.\\
+Equation \ref{eqn:SD7} describes the changes on the Dead compartment, which solely depends on the rate of duration of a traditional funeral.\\
 
 
 
@@ -129,7 +129,7 @@ We validated our calibration in Figure \ref{fig:Cumulative _Death}, which shows 
 \begin{figure}[h]
   \centering
   \includegraphics[width=1\textwidth]{ValidationPlot.pdf}
-  \caption{Validation of calibration. Dots represent cumulative death data and the lines represent simulation based on mean posterior parameters. (Blue) - pre intervention and (red) - post treatment.}
+  \caption{Validation of calibration. Dots represent cumulative death data and the lines represent simulation based on mean posterior parameters. (Blue) - pre intervention and (red) - post intervention.}
 \label{fig:Cumulative _Death}
 \end{figure}
 
@@ -137,15 +137,15 @@ We validated our calibration in Figure \ref{fig:Cumulative _Death}, which shows 
 
 
 \subsection{Simulation}
- Insight Maker is a powerful online tool used to model and simulate complex systems. It utilizes different approaches, such as System Dynamics, Agent-Based Modeling and imperative programming. Insight Maker permits  construction of a graphical model to forecast the system response \cite{FortmannRoe}. We used the InsightMaker platform to prototype our model and simulate stepping forward through time. More details about the platform and its functionality can be found in Fortmann-Roe's review \cite{FortmannRoe}. The platform uses a fourth-order Runge-Kutta differential equation solver for the system dynamics model and  first order Euler approximation for the Agent-Based model.\\
+ Insight Maker is a powerful online tool used to model and simulate complex systems. It utilizes different approaches, such as System Dynamics, Agent-Based Modeling and imperative programming. Insight Maker permits  construction of a graphical model to forecast the system response \cite{FortmannRoe}. We used the InsightMaker platform to prototype our model and simulate stepping forward through time. More details about the platform and its functionality can be found in Fortmann-Roe's review \cite{FortmannRoe}. The platform uses a fourth-order Runge-Kutta differential equation solver for the system dynamics model and  first-order Euler approximation for the Agent-Based model.\\
 
-\noindent The compartment S was initialized with a value of 999999, and the compartment I with 1, meaning that there is an infected individual per every million of individuals, the rest of the compartments were set to zero as an initial condition. The flow between the compartments is given in the equations and all the other parameters were initialized as shown in Tables   \ref{tab:knownParameters} and \ref{tab:calibratedParameters}.  As mention at the beggining of the section, the parameters were calibrated in two stages, before and after the international intervention. According with the time frame proposed, the change in the parameters was also implemented on Insight Maker. The links to the online models can be found on \cite{IM_AI} and  \cite{IM_BI}.\\ 
+\noindent The compartment S was initialized with a value of 999999, and the compartment I with 1, meaning that there is one infected individual per every million individuals; the rest of the compartments were set to zero as an initial condition. The flows between the compartments are given in the equations and all the other parameters were initialized as shown in Tables   \ref{tab:knownParameters} and \ref{tab:calibratedParameters}.  As mention at the beginning of the section, the parameters were calibrated in two stages, before and after the international intervention. According with the time frame proposed, the change in the parameters was also implemented on Insight Maker. The links to the online models can be found on \cite{IM_AI} and  \cite{IM_BI}.\\ 
 
 
 % RESULTS AND DISCUSSION
 %
 %No intervention
-\noindent After modeling the system with the parameters before the intervention, it can be observed in Figure \ref{fig:LB_IM_NoIn} how the total population decreases to 46.46\%  if there is no intervention and the each of the parameters continue to be the same. The number of susceptible individuals exponentially decays, converging to 7\% of the population, while exposed, infected, hospitalized and funeral comparments converges to zero; finally, after the system stabilizes, the final proportion of deaths would be 53.53\% \\
+\noindent After modeling the system with the parameters before the intervention, it can be observed in Figure \ref{fig:LB_IM_NoIn} how the total population decreases to 46.46\%  if there is no intervention and the each of the parameters continue to be the same. The number of susceptible individuals decays  exponentially, converging to 7\% of the population, while exposed, infected, hospitalized and funeral comparments converges to zero; finally, after the system stabilizes, the final proportion of deaths would be 53.53\%. \\
 
 \begin{figure}[!h]
   \centering
@@ -155,8 +155,7 @@ We validated our calibration in Figure \ref{fig:Cumulative _Death}, which shows 
 \end{figure}
 
 %Intervention 
-\noindent As mentioned before, five parameters were calibrated for the second stage of the Ebola Outbreak, namely, community contact rate ($\beta_I$), hospital contact rate ($\beta_H$), funeral contact rate ($\beta_F$), time until hospitalization ($\gamma_H$) and probability a case is hospitalized ($\theta$). Figure \ref{fig:LB_IM_In} A. shows that there is not much change in the Total population and susceptible compartment, meaning that the virus was controlled;  Figure \ref{fig:LB_IM_In} B focuses on E, I, R, H , F and D compartments, showing that the international intervention causes a dramatic change in the behavior of such compartments.
-
+\noindent As mentioned before, five parameters were calibrated for the second stage of the Ebola outbreak, namely, community contact rate ($\beta_I$), hospital contact rate ($\beta_H$), funeral contact rate ($\beta_F$), time until hospitalization ($\gamma_H$) and probability a case is hospitalized ($\theta$). Figure \ref{fig:LB_IM_In} focuses on E, I, R, H , F and D compartments, showing that the international intervention causes a dramatic change in the behavior of such compartments, meaning that the virus was controlled.
 
 \begin{figure}[h!]
   \centering
@@ -171,7 +170,7 @@ We validated our calibration in Figure \ref{fig:Cumulative _Death}, which shows 
 
 %Comparing with WHO data
 
-\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures \ref{fig:LB_IM_WHO} and \ref{fig:LB_IM_WHO2}. As depicted in Figure \ref{fig:LB_IM_WHO}, there is a good fitting of our model with the data reported by WHO. Figure \ref{fig:LB_IM_WHO2} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately.
+\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures \ref{fig:LB_IM_WHO} and \ref{fig:LB_IM_WHO2}. As depicted in Figure \ref{fig:LB_IM_WHO}, there is a good fit of our model with the data reported by WHO. Figure \ref{fig:LB_IM_WHO2} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately.
 
 
 
