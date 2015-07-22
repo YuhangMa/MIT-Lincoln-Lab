@@ -116,7 +116,9 @@ Probability a Case is Hospitalized ($\theta$) & 0.248 (0.142) & 0.233 (0.145) \\
 Calibration results are shown in Table \ref{tab:calibratedParameters}. By observing the posterior mean of the two calibrations, we conclude that our calibration reasonably predicts decreased transmission rates ($\beta_I$, $\beta_H$, $\beta_F$) post-intervention. See Figure \ref{fig:BetaStepFunction} for the differences of these parameters; the step function pictured is used when running the systems model. The parameters for time until hospitalization ($\gamma_H$) and the probability a case hospitalized ($\theta$) were calibrated to have the same approximate value pre- and post-intervention. This may be reasonable if, for example, the hospital capacity  insufficient to handle the increasing number of cases. It also tells shows that the system dynamics are more sensitive to the changes in {$\beta_I$, $\beta_H$, $\beta_F$} compared to the changes in {$\gamma_H$, $\theta$}.
 
 
-We validated our calibration in Figure \ref{fig:Cumulative _Death}, which shows a good fit between the used cumulative death data and the systems model using the calculated parameter means.
+We validated our calibration in Figure \ref{fig:Cumulative _Death}, which shows a good fit between the used cumulative death data and the systems model using the calculated parameter means. This figure, shows a comparison between the proposed model and World Health Organization reported data, the results of our model pre and post intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately.
+
+
 
 
 \begin{figure}[!h]
@@ -169,23 +171,20 @@ We validated our calibration in Figure \ref{fig:Cumulative _Death}, which shows 
 
 
 
-%Comparing with WHO data
 
-\noindent Finally, a comparison between the proposed model and World Health Organization data is shown in Figures  \ref{fig:Cumulative _Death} and \ref{fig:LB_IM_WHO}. As depicted in Figure \ref{fig:LB_IM_WHO}, there is a good fit of our model with the data reported by WHO. Figure \ref{Cumulative _Death} shows  the reported WHO data before and after intervention, the results of our model before and after intervention and the forecast for the coming months, predicting that after the system reaches an equilibrium, the proportion of deaths in Liberia product of the EVD would be 5.07\% approximately.
-
-
-
-\begin{figure}[h!]
- \centering 
- \begin{subfigure}[b]{0.38\textwidth}
-  \includegraphics[width=\textwidth]{LB_BI_SD_WHO_IM} \caption{BI: Before Intervention Parameters (March 2014  to Sept 2014)} \label{fig:LB_BI_SD_WHO_IM} \end{subfigure}
- %
- \hspace{.1cm}
-\begin{subfigure}[b]{0.38\textwidth}
- \includegraphics[width=\textwidth]{LB_AI_SD_WHO_IM} \caption{AI: After Intervention Parameters  ( Sept 2014 to July 2015).} \label{fig:LB_AI_SD_WHO_IM} \end{subfigure} 
-\caption{Comparison between World Health Organization (WHO) data and Insight Maker (IM) results for cumulative deaths (D)}
-\label{fig:LB_IM_WHO} 
-\end{figure}
+%
+%
+%\begin{figure}[h!]
+% \centering 
+% \begin{subfigure}[b]{0.38\textwidth}
+%  \includegraphics[width=\textwidth]{LB_BI_SD_WHO_IM} \caption{BI: Before Intervention Parameters (March 2014  to Sept 2014)} \label{fig:LB_BI_SD_WHO_IM} \end{subfigure}
+% %
+% \hspace{.1cm}
+%\begin{subfigure}[b]{0.38\textwidth}
+% \includegraphics[width=\textwidth]{LB_AI_SD_WHO_IM} \caption{AI: After Intervention Parameters  ( Sept 2014 to July 2015).} \label{fig:LB_AI_SD_WHO_IM} \end{subfigure} 
+%\caption{Comparison between World Health Organization (WHO) data and Insight Maker (IM) results for cumulative deaths (D)}
+%\label{fig:LB_IM_WHO} 
+%\end{figure}
 
 
 %
